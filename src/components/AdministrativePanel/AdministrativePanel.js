@@ -37,10 +37,9 @@ const AdministrativePanel = ({changeAuthType}) => {
     const checkAuth = (list, type) => {
         list.forEach((item)=>{
             if(item.login == login && item.password == password){
-                setIsAuthored(true);
+                setIsAuthored(type);
                 changeAuthType(type, {name: item.name});
                 console.log("200");
-                <Navigate to = "/employee" replace = {true} />
             }
                 
         })
@@ -92,7 +91,7 @@ const AdministrativePanel = ({changeAuthType}) => {
                 </form>
             </div>
             
-            {isAuthored ? <Navigate to = "/employee" replace = {true} /> : null}
+            {isAuthored ? <Navigate to = {`/${isAuthored}`} replace = {true} /> : null}
 
         </div>
     )

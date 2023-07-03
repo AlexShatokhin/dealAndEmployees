@@ -12,23 +12,23 @@
         border: 1px solid #000000;
         background-color: #FFFFFF;
         transform: translateY(-50%);
-
+    
         &__title{
-
+    
             font-size: 35px;
             text-align: center;
         }
-
+    
         hr{
             margin: 25px;
         }
-
+    
         &__form{
-
+    
             &-wrapper{
                 position: relative;
             }
-
+    
             label{
                 position: absolute;
                 top: 0px;
@@ -36,7 +36,7 @@
                 padding: 0 10px;
                 background-color: #FFFFFF;
             }
-
+    
             input{
                 padding-left: 15px;
                 width: 100%;
@@ -44,12 +44,12 @@
                 margin: 15px 0;
                 border: 1px solid #000000;
             }
-
+    
             .btn{
                 background-color: #FFFFFF;
                 color: #000000;
             }
-
+    
             .spinner-border{
                 margin-left: 20px;
             }
@@ -62,3 +62,4 @@
         font-size: 22px;
     }
 }
+

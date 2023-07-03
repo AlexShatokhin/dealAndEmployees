@@ -6,16 +6,30 @@
       "name": "Admin Admin"
     }
   ],
-
   "employees": [
     {
       "login": "user",
       "password": "user",
       "name": "User User"
+    },
+    {
+      "login": "AlexShat",
+      "password": "123",
+      "name": "Саша Шатохин"
     }
   ],
-  
   "deals": [
-
+    {
+      "title": "sad",
+      "moreInfo": "asd",
+      "employee": "nobody",
+      "id": 1
+    },
+    {
+      "title": "sad",
+      "moreInfo": "dsasad",
+      "employee": "AlexShat",
+      "id": 2
+    }
   ]
 }
