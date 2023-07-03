@@ -7,32 +7,18 @@ import useData from "../../../services/getData"
 
 import "./AddTask.scss"
 
-const AddTask = () => {
 
-    const [showModal, setShowModal] = useState(false);
-
-    const changeShowModal = () => {
-        setShowModal(!showModal);
-    }
-
-    return ( 
-        <>
-            <button onClick={changeShowModal}>Добавить задание...</button>
-            {showModal ? <Modal changeShowModal = {changeShowModal} /> : null}
-        </>
-
-    )
-
-}
 
 const Modal = ({changeShowModal}) => {
 
+    const [checkValue, setCheckValue] = useState(null);
     const [title, setTitle] = useState("");
     const [moreInfo, setMoreInfo] = useState("");
     const [employee, setEmployee] = useState("nobody");
 
     const [employeesList, setEmployeesList] = useState([]);
     const {getEmployees, loading, error, setDeal} = useData();
+
 
     useEffect(()=>{
         getEmployees()
@@ -48,7 +34,13 @@ const Modal = ({changeShowModal}) => {
     }
 
     const submitData = () => {
-        setDeal({title, moreInfo, employee});
+        if(title == "" && moreInfo == ""){
+            setCheckValue(false);
+        } else {
+            changeShowModal();
+            setDeal({title, moreInfo, employee})
+        }
+
     }
 
     const onEmployeesLoaded = (res) => {
@@ -62,6 +54,8 @@ const Modal = ({changeShowModal}) => {
     }
 
     const OptionList = employeesList.length ? renderOptions() : null;
+    const msg = checkValue === false ? <p style = {{color: "red", textAlign: "center"}}>Заполните все поля</p> : null; 
+
     return (
         <div onClick={(e)=>{return e.target.classList.contains("popup")? changeShowModal() : null}} className="popup">
             <div className="popup_content">
@@ -91,10 +85,40 @@ const Modal = ({changeShowModal}) => {
                     <Button onClick={submitData} className="button_task" disabled = {loading}>Создать!</Button>
 
                 </form>
+                {msg}
             </div>
 
         </div>
     )
+}
+
+const showMsg = ({changeShowModal}) => {
+
+
+    return (
+        <div style={{backgroundColor: "#FFFFFF", borderRadius: "5px", padding: "10px", margin: "40vh auto"}}>
+            <div onClick={changeShowModal} className="close_btn">&#10010;</div>
+            <p>Задание создано!</p>
+        </div>
+    )
+}
+
+const AddTask = () => {
+
+    const [showModal, setShowModal] = useState(false);
+
+    const changeShowModal = () => {
+        setShowModal(!showModal);
+    }
+
+    return ( 
+        <>
+            <Button variant="primary" className="btn_add" onClick={changeShowModal}>Добавить задание...</Button>
+            {showModal ? <Modal changeShowModal = {changeShowModal} /> : null}
+        </>
+
+    )
+
 }
 
 export default AddTask;

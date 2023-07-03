@@ -1,27 +1,40 @@
 .navigation_menu{
-    width: 100%;
-    min-height: 50px;
-    border: 1px solid #000000;
+    min-height: 70px;
+    border: 2px solid rgba(39, 18, 108, 0.6);
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 5px 20px;
-
+    margin: 0 10px;
+    background-color: rgba(18, 18, 95, 0.8);
+    box-shadow: rgba(0, 0, 0, 0.75) 0px 5px 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    font-size: 19px;
+    
     &-items{
         list-style-type: none;
         width: 300px;
         display: flex;
         margin-bottom: 0;
         li{
-            margin-left: 10px;
+            margin-left: 30px;
+            a{
+                text-decoration: none;
+                color: #FFFFFF;
+            }
         }
     }
 
     .emp_info{
         display: flex;
         justify-content: space-between;
-        width: 200px;
+        width: 270px;
         margin-bottom: 0;
         align-items: center;
+        .emp_name{
+            margin-right: 30px;
+            color: #FFFFFF;
+        }
     }
 }

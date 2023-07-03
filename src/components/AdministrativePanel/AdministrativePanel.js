@@ -39,7 +39,6 @@ const AdministrativePanel = ({changeAuthType}) => {
             if(item.login == login && item.password == password){
                 setIsAuthored(type);
                 changeAuthType(type, {name: item.name});
-                console.log("200");
             }
                 
         })

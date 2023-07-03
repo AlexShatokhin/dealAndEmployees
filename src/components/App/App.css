@@ -1,0 +1,13 @@
+.employer_main{
+    padding-top: 10px;
+    height: 100vh;
+    background: url("../../resources/img/background_admin.jpg") center center / cover no-repeat;
+
+
+}
+
+
+.btn_add{
+    width: 200px;
+    margin-left: 10px;
+}
