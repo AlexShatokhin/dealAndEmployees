@@ -1,25 +1,24 @@
-import { useState } from "react";
-import { Link, Navigate } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 import AddTask from "../EmployerComponents/AddTask/AddTask.js"
 
 import "./NavigationMenu.scss"
 
-const NavigationMenu = ({data, changeAuthType, changeTaskAdded}) => {
+const NavigationMenu = ({data, changeAuthType, changeTaskAdded, changeShowDeals}) => {
 
-    const [isExit, setIsExit] = useState(false);
+    const navigate = useNavigate();
 
     const exitFromProfile = () => {
-        setIsExit(true);
+        navigate("/");
         changeAuthType("none", {});
     }
 
     return (
         <nav className="navigation_menu">
             <ul className="navigation_menu-items">
-                <li className="navigation_menu-item"> <Link to={"/employer/tasks"}> Задания </Link> </li>
-                <li className="navigation_menu-item"> <Link to={"/employer/employees"}> Работники </Link> </li>
+                <li onClick={()=>{changeShowDeals("deal")}} className="navigation_menu-item"> Задания  </li>
+                <li onClick={()=>{changeShowDeals("employees")}} className="navigation_menu-item"> Работники  </li>
                 <li className="navigation_menu-item"> <AddTask changeTaskAdded = {changeTaskAdded} /> </li>
             </ul>
             <div className="emp_info">
@@ -27,7 +26,6 @@ const NavigationMenu = ({data, changeAuthType, changeTaskAdded}) => {
                 <Button onClick={exitFromProfile} variant="primary" className="emp_exit">Выйти</Button>
             </div>
 
-            {isExit ? <Navigate to="/"/> : null}
         </nav>
     )
 }
