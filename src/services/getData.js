@@ -15,6 +15,10 @@ const useData = () => {
         return employees;
     }
 
+    const setEmployees = async (body) => {
+        return await httpRequest("http://localhost:3000/employees", "POST", JSON.stringify(body));
+    }
+
     const getDeals = async () => {
         const deals = await httpRequest("http://localhost:3000/deals");
         return deals;
@@ -29,7 +33,7 @@ const useData = () => {
         console.log(res);
     }
 
-    return {loading, error, getEmployers, getEmployees, getDeals, setDeal, deleteDeal};
+    return {loading, error, getEmployers, getEmployees, getDeals, setDeal, deleteDeal, setEmployees};
 
 }
 

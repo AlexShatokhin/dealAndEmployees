@@ -43,6 +43,8 @@ const TasksList = ({taskAdded}) => {
         return deals.map((item, i)=>{
             return (
               <div key = {item.id} className="deals_item">
+
+
                     <div className="deals_item-title">{item.title}</div>
                     <div className="deals_item-perfomer">{item.name}</div>
                     <div className="deals_item-buttons">

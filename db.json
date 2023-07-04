@@ -3,20 +3,52 @@
     {
       "login": "admin",
       "password": "admin",
-      "name": "Admin Admin"
+      "name": "Admin Admin",
+      "id": 1
     }
   ],
   "employees": [
     {
       "login": "user",
       "password": "user",
-      "name": "User User"
+      "name": "User User",
+      "id": 1
     },
     {
       "login": "AlexShat",
       "password": "123",
-      "name": "Саша Шатохин"
+      "name": "Саша Шатохин",
+      "id": 2
     }
   ],
-  "deals": []
+  "deals": [
+    {
+      "title": "Тест",
+      "moreInfo": "Тест Тест Тест Тест",
+      "employee": "user",
+      "name": "User User",
+      "id": 2
+    },
+    {
+      "title": "Второе задание",
+      "moreInfo": "Второе задание Второе задание",
+      "employee": "AlexShat",
+      "name": "Саша Шатохин",
+      "id": 3
+    },
+    {
+      "title": "ssssssssssssssssssssssssssssssssssssssss",
+      "moreInfo": "",
+      "employee": "nobody",
+      "name": "Никто",
+      "id": 4
+    },
+    {
+      "title": "ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss",
+      "moreInfo": "",
+      "employee": "AlexShat",
+      "name": "Саша Шатохин",
+      "id": 6
+    }
+  ]
 }

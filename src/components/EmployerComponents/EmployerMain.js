@@ -5,6 +5,7 @@ import EmployerMenu from "./EmployerMenu/EmployerMenu"
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
 import TasksList from "../TasksList/TasksList"
 import Test from "../test/Test"
+import EmployeesList from "../EmployeesList/EmployeesList"
 
 const EmployerMain = ({data, changeAuthType}) => {
 
@@ -31,7 +32,7 @@ const EmployerMain = ({data, changeAuthType}) => {
                 return <EmployerMenu changeTaskAdded={changeTaskAdded} changeShowDeals={changeShowDeals}/>
             }}/>
 
-            {showDeals === "deal" ? <TasksList taskAdded = {taskAdded}/> : <Test />}
+            {showDeals === "deal" ? <TasksList taskAdded = {taskAdded}/> : <EmployeesList />}
 
         </section>
     )

@@ -70,7 +70,7 @@ const Modal = ({changeShowModal, changeTaskAdded}) => {
 
                     <div className="popup__content-wrapper">
                         <label htmlFor="title">Название задания</label>
-                        <input value={title} onChange={changeValue} required className="add_task_form" type="text" id="title" />
+                        <input maxLength={60} value={title} onChange={changeValue} required className="add_task_form" type="text" id="title" />
                     </div>
 
                     <div className="popup__content-wrapper">

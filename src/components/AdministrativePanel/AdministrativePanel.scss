@@ -4,6 +4,7 @@
     padding-top: 40vh;
 
     .admin_window{
+        position: relative;
         display: block;
         width: 400px;
         min-height: 200px;
@@ -12,6 +13,15 @@
         border: 1px solid #000000;
         background-color: #FFFFFF;
         transform: translateY(-50%);
+
+        .create_account{
+            position: absolute;
+            bottom: -40px;
+            left: 15px;
+            text-decoration: underline;
+            cursor: pointer;
+            color: #000000;
+        }
     
         &__title{
     

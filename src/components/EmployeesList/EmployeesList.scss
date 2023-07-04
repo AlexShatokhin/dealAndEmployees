@@ -1,7 +1,7 @@
-.deals{
+.employees_list{
     margin-top: 60px;
 
-    &_item{
+    &-item{
         border: none;
         border-radius: 5px;
         background-color: rgba(20, 28, 115, 0.2);
@@ -16,22 +16,14 @@
             transition: .2s all;
         }
 
-        &-title{
+        &-name{
             width: 30%;
             color: #FFFFFF;
         }
-        &-perfomer{
-            width: 15%;
-            color: #FFFFFF;
-        }
-        &-buttons{
-            width: 30%;
-            display: flex;
-            justify-content: space-around;
-            button{
-                font-size: 17px;
-                width: 130px;
-            }
+
+        button{
+            font-size: 17px;
+            width: 130px;
         }
     }
 }
