@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 
 import Button from 'react-bootstrap/Button';
-import Spinner from 'react-bootstrap/Spinner';
 
 import useData from "../../../services/getData"
 
@@ -54,7 +53,6 @@ const Modal = ({changeShowModal, changeTaskAdded}) => {
 
 
     const renderOptions = () => {
-
         return [<option value="nobody">Никто</option>, employeesList.map((item, i)=><option key={i} value={item.login}>{item.name}</option>)]
     }
 
