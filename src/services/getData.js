@@ -21,7 +21,7 @@ const useData = () => {
     }
 
     const setDeal = async (body) => {
-        const response = await httpRequest("http://localhost:3000/deals", "POST", JSON.stringify(body));
+        return await httpRequest("http://localhost:3000/deals", "POST", JSON.stringify(body));
     }
 
     return {loading, error, getEmployers, getEmployees, getDeals, setDeal};

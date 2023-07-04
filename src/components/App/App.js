@@ -25,7 +25,7 @@ function App() {
 
 				<Routes>
 					<Route path='/' element = {<AdministrativePanel changeAuthType = {changeAuthType} />}/>
-					<Route path='/employer' element = {<EmployerMain data = {dataOfEmp} />}/>
+					<Route path='/employer' element = {authType == "employer" ?<EmployerMain changeAuthType = {changeAuthType} data = {dataOfEmp} />  : <Test />}/>
 					<Route path='/employee' element = {<Test />}/>
 					<Route path='*' element = {<Test />}/>
 				</Routes>

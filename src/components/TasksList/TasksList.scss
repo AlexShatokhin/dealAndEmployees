@@ -1,0 +1,29 @@
+.deals{
+    margin-top: 60px;
+
+    &_item{
+        border: 1px solid #000000;
+        border-radius: 5px;
+        background-color: #FFFFFF;
+        margin: 10px 15px;
+        padding: 10px 25px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        &-title{
+            width: 35%;
+        }
+        &-perfomer{
+            width: 15%;
+        }
+        &-buttons{
+            width: 20%;
+            display: flex;
+            justify-content: space-around;
+            button{
+                width: 150px;
+            }
+        }
+    }
+}
+

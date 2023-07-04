@@ -9,7 +9,7 @@ import "./AddTask.scss"
 
 
 
-const Modal = ({changeShowModal}) => {
+const Modal = ({changeShowModal, changeTaskAdded}) => {
 
     const [checkValue, setCheckValue] = useState(null);
     const [title, setTitle] = useState("");
@@ -37,8 +37,13 @@ const Modal = ({changeShowModal}) => {
         if(title == "" && moreInfo == ""){
             setCheckValue(false);
         } else {
+            const dataToSend = {
+                title, moreInfo, employee,
+                name: employeesList.filter(item => item.login == employee)[0] === undefined ? "Никто" : employeesList.filter(item => item.login == employee)[0].name
+            }
             changeShowModal();
-            setDeal({title, moreInfo, employee})
+            setDeal(dataToSend);
+            changeTaskAdded();
         }
 
     }
@@ -103,7 +108,7 @@ const showMsg = ({changeShowModal}) => {
     )
 }
 
-const AddTask = () => {
+const AddTask = ({changeTaskAdded}) => {
 
     const [showModal, setShowModal] = useState(false);
 
@@ -114,7 +119,7 @@ const AddTask = () => {
     return ( 
         <>
             <Button variant="primary" className="btn_add" onClick={changeShowModal}>Добавить задание...</Button>
-            {showModal ? <Modal changeShowModal = {changeShowModal} /> : null}
+            {showModal ? <Modal changeTaskAdded = {changeTaskAdded} changeShowModal = {changeShowModal} /> : null}
         </>
 
     )
