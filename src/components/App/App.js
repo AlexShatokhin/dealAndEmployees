@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import AdministrativePanel from '../AdministrativePanel/AdministrativePanel';
 import EmployerMain from '../EmployerComponents/EmployerMain';
+import EmployeeMain from '../EmployeeComponents/EmployeeMain';
 import Test from '../test/Test';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -26,7 +27,7 @@ function App() {
 				<Routes>
 					<Route path='/' element = {<AdministrativePanel changeAuthType = {changeAuthType} />}/>
 					<Route path='/employer' element = {authType == "employer" ?<EmployerMain changeAuthType = {changeAuthType} data = {dataOfEmp} />  : <Test />}/>
-					<Route path='/employee' element = {<Test />}/>
+					<Route path='/employee' element = {authType == "employee" ?<EmployeeMain changeAuthType = {changeAuthType} data = {dataOfEmp} />  : <Test />}/>
 					<Route path='*' element = {<Test />}/>
 				</Routes>
 

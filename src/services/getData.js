@@ -24,7 +24,12 @@ const useData = () => {
         return await httpRequest("http://localhost:3000/deals", "POST", JSON.stringify(body));
     }
 
-    return {loading, error, getEmployers, getEmployees, getDeals, setDeal};
+    const deleteDeal = async (id) => {
+        const res = await httpRequest(`http://localhost:3000/deals/${id}`, "DELETE");
+        console.log(res);
+    }
+
+    return {loading, error, getEmployers, getEmployees, getDeals, setDeal, deleteDeal};
 
 }
 

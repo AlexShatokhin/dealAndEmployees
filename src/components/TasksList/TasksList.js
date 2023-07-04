@@ -10,12 +10,16 @@ const TasksList = ({taskAdded}) => {
     const [isShowModal, setIsShowModal] = useState(false);
     const [currDeal, setCurrDeal] = useState(null);
     const [deals, setDeals] = useState([]);
-    const {loading, error, getDeals} = useData();
+    const {loading, error, getDeals, deleteDeal} = useData();
 
     useEffect(()=>{
+        updateDeals();
+    }, [taskAdded])
+
+    function updateDeals(){
         getDeals()
         .then(onDealsLoaded)
-    }, [taskAdded])
+    }
 
     function onDealsLoaded(deals){
         setDeals(deals);
@@ -30,6 +34,11 @@ const TasksList = ({taskAdded}) => {
         setCurrDeal(deals[ind]);
     }
 
+    function onDeleteDeal(ind){
+        deleteDeal(ind)
+        .then(updateDeals)
+    }
+
     function renderDeals(){
         return deals.map((item, i)=>{
             return (
@@ -39,7 +48,7 @@ const TasksList = ({taskAdded}) => {
                     <div className="deals_item-buttons">
                         <Button onClick={()=>{toggleModal(); changeCurrDeal(i)}} variant="primary">Подробнее</Button>
                         <Button variant="primary">Изменить</Button>
-                        <Button variant="danger">Удалить</Button>
+                        <Button onClick={()=>onDeleteDeal(item.id)} variant="danger">Удалить</Button>
                     </div>
               </div>  
             ) 
@@ -49,6 +58,7 @@ const TasksList = ({taskAdded}) => {
 
     const isLoading = loading ? <Spinner style = {{display: "block", width: "100px", height: "100px", margin: "50px auto"}} animation="border" variant="danger"/> : null;
     const isContent = deals.length ? renderDeals() : null;
+    const isEmpty = !loading && !deals.length ? <p style = {{color: "#FFFFFF", margin: "0 auto", fontWeight: 600, textAlign: "center", fontSize: 35}}>Заданий пока нет!</p> : null;
     const modal = isShowModal ? (
         <div onClick={(e)=>{return e.target.classList.contains("popup")? toggleModal() : null}} className="popup">
             <div className="popup_content">
@@ -64,6 +74,7 @@ const TasksList = ({taskAdded}) => {
         <div className="deals">
             {isLoading}
             {isContent}
+            {isEmpty}
             {modal}
         </div>
     )
