@@ -3,6 +3,7 @@ import { Spinner, Button } from "react-bootstrap";
 
 import useData from "../../services/getData"
 import useModal from "../../hooks/useModal";
+import useEmployees from "../../hooks/EditEmployees";
 import TasksModal from "../EmployeeComponents/TasksModal/TasksModal";
 import CountOfTasks from "../EmployeeComponents/CountOfTasks/CountOfTasks";
 
@@ -10,26 +11,17 @@ import "./EmployeesList.scss"
 
 const EmployeesList = ({employeeAdded}) => {
 
-    const [employeesList, setEmployeesList] = useState([]);
     const [dealsList, setDealsList] = useState([]);
 
     const {loading, error, getEmployees, getDeals, deleteEmployees, deleteDeal} = useData();
-    const{isShowModal, toggleModal, Modal} = useModal()
+    const {isShowModal, toggleModal, Modal} = useModal();
+    const {employeesList, updateEmployees} = useEmployees();
 
 
     useEffect(()=>{
         updateEmployees();
     }, [employeeAdded])
 
-
-    function updateEmployees(){
-        getEmployees()
-        .then(onEmployeesLoaded)
-    }
-
-    function onEmployeesLoaded(list){
-        setEmployeesList(list);
-    }
 
     function showDeals(login){
         getDeals()

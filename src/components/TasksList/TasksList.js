@@ -1,70 +1,72 @@
 import { useEffect, useState } from "react"
-import { Spinner, Button, Modal } from "react-bootstrap";
+import { Spinner } from "react-bootstrap";
+
+import DealsItem from "../DealsItem/DealsItem";
 
 import useModal from "../../hooks/useModal";
 import useData from "../../services/getData"
+import useDeals from "../../hooks/EditDeals";
 
 import "./TasksList.scss"
 
 const TasksList = ({taskAdded}) => {
 
     const [currDeal, setCurrDeal] = useState(null);
-    const [deals, setDeals] = useState([]);
 
-    const {loading, error, getDeals, deleteDeal} = useData();
+    const {loading, error} = useData();
     const{Modal, toggleModal, isShowModal} = useModal();
+    const {deals, onDeleteDeal, updateDeals} = useDeals()
 
     useEffect(()=>{
         updateDeals();
     }, [taskAdded])
-
-    function updateDeals(){
-        getDeals()
-        .then(onDealsLoaded)
-    }
-
-    function onDealsLoaded(deals){
-        setDeals(deals);
-    }
 
 
     function changeCurrDeal(ind){
         setCurrDeal(deals[ind]);
     }
 
-    function onDeleteDeal(ind){
-        deleteDeal(ind)
-        .then(updateDeals)
-    }
-
     function renderDeals(){
         return deals.map((item, i)=>{
             return (
-              <div key = {item.id} className="deals_item">
-
-
-                    <div className="deals_item-title">{item.title}</div>
-                    <div className="deals_item-perfomer">{item.name}</div>
-                    <div className="deals_item-buttons">
-                        <Button onClick={()=>{toggleModal(); changeCurrDeal(i)}} variant="primary">Подробнее</Button>
-                        <Button variant="primary">Изменить</Button>
-                        <Button onClick={()=>onDeleteDeal(item.id)} variant="danger">Удалить</Button>
-                    </div>
-              </div>  
+                <DealsItem 
+                deal={item} 
+                changeCurrDeal = {()=>changeCurrDeal(i)}
+                toggleModal = {toggleModal}
+                onDeleteDeal = {onDeleteDeal} />
             ) 
         })
     }
 
 
-    const isLoading = loading ? <Spinner style = {{display: "block", width: "100px", height: "100px", margin: "50px auto"}} animation="border" variant="danger"/> : null;
-    const isContent = deals.length && !loading ? renderDeals() : null;
-    const isEmpty = !loading && !deals.length ? <p style = {{color: "#FFFFFF", margin: "0 auto", fontWeight: 600, textAlign: "center", fontSize: 35}}>Заданий пока нет!</p> : null;
+    const isLoading = loading ? 
+    <Spinner style = {{
+                        display: "block", 
+                        width: "100px", 
+                        height: "100px", 
+                        margin: "50px auto"
+                    }} 
+            animation="border" 
+            variant="danger"/> : null;
+
+    const isContent = (deals.length && !loading) ? renderDeals() : null;
+    const isEmpty = (!loading && !deals.length) ? 
+    <p style = {{color: "#FFFFFF", 
+                margin: "0 auto", 
+                fontWeight: 600, 
+                textAlign: "center", 
+                fontSize: 35}}>
+    Заданий пока нет!
+    </p> : null;
+
     const modal = isShowModal ? 
     <Modal>
         <div className="popup_title"> <span>Название: </span> {currDeal.title}</div>
         <div className="popup_info"> <span>Подробная информация:</span> {currDeal.moreInfo}</div>
         <div className="popup_employee"> <span>Работник:</span> {currDeal.name}</div>
     </Modal> : null;
+
+
     return (
         <div className="deals">
             {isLoading}

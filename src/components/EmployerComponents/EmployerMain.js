@@ -32,10 +32,15 @@ const EmployerMain = ({data, changeAuthType}) => {
             <NavigationMenu
             data = {data}
             renderProps={()=>{
-                return <EmployerMenu  changeEmployeeAdded = {changeEmployeeAdded} changeTaskAdded={changeTaskAdded} changeShowDeals={changeShowDeals}/>
+                return <EmployerMenu 
+                changeEmployeeAdded = {changeEmployeeAdded} 
+                changeTaskAdded={changeTaskAdded} 
+                changeShowDeals={changeShowDeals}/>
             }}/>
 
-            {showDeals === "deal" ? <TasksList taskAdded = {taskAdded}/> : <EmployeesList employeeAdded = {employeeAdded} />}
+            {showDeals === "deal" ? 
+            <TasksList taskAdded = {taskAdded}/> : 
+            <EmployeesList employeeAdded = {employeeAdded} />}
 
         </section>
     )
