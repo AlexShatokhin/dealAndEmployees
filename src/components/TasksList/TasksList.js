@@ -59,7 +59,7 @@ const TasksList = ({taskAdded}) => {
 
 
     const isLoading = loading ? <Spinner style = {{display: "block", width: "100px", height: "100px", margin: "50px auto"}} animation="border" variant="danger"/> : null;
-    const isContent = deals.length ? renderDeals() : null;
+    const isContent = deals.length && !loading ? renderDeals() : null;
     const isEmpty = !loading && !deals.length ? <p style = {{color: "#FFFFFF", margin: "0 auto", fontWeight: 600, textAlign: "center", fontSize: 35}}>Заданий пока нет!</p> : null;
     const modal = isShowModal ? (
         <div onClick={(e)=>{return e.target.classList.contains("popup")? toggleModal() : null}} className="popup">

@@ -10,11 +10,17 @@ import EmployeesList from "../EmployeesList/EmployeesList"
 const EmployerMain = ({data, changeAuthType}) => {
 
     const [taskAdded, setTaskAdded] = useState(false);
+    const [employeeAdded, setEmployeeAdded] = useState(false);
     const [showDeals, setShowDeals] = useState("deal");
 
     const changeTaskAdded = () => {
         setTaskAdded(!taskAdded);
     }
+
+    const changeEmployeeAdded = () => {
+        setEmployeeAdded(!employeeAdded);
+    }
+
 
     const changeShowDeals = (type) => {
         setShowDeals(type)
@@ -24,15 +30,12 @@ const EmployerMain = ({data, changeAuthType}) => {
         <section className="employer_main">
             
             <NavigationMenu
-            changeShowDeals = {changeShowDeals} 
-            changeTaskAdded = {changeTaskAdded} 
-            changeAuthType = {changeAuthType} 
             data = {data}
             renderProps={()=>{
-                return <EmployerMenu changeTaskAdded={changeTaskAdded} changeShowDeals={changeShowDeals}/>
+                return <EmployerMenu  changeEmployeeAdded = {changeEmployeeAdded} changeTaskAdded={changeTaskAdded} changeShowDeals={changeShowDeals}/>
             }}/>
 
-            {showDeals === "deal" ? <TasksList taskAdded = {taskAdded}/> : <EmployeesList />}
+            {showDeals === "deal" ? <TasksList taskAdded = {taskAdded}/> : <EmployeesList employeeAdded = {employeeAdded} />}
 
         </section>
     )
