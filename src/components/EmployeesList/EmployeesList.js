@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Spinner, Button } from "react-bootstrap";
 
 import useData from "../../services/getData"
+import useModal from "../../hooks/useModal";
 import TasksModal from "../EmployeeComponents/TasksModal/TasksModal";
 import CountOfTasks from "../EmployeeComponents/CountOfTasks/CountOfTasks";
 
@@ -9,19 +10,17 @@ import "./EmployeesList.scss"
 
 const EmployeesList = ({employeeAdded}) => {
 
-    const [showModal, setShowModal] = useState(false);
     const [employeesList, setEmployeesList] = useState([]);
     const [dealsList, setDealsList] = useState([]);
+
     const {loading, error, getEmployees, getDeals, deleteEmployees, deleteDeal} = useData();
+    const{isShowModal, toggleModal, Modal} = useModal()
 
 
     useEffect(()=>{
         updateEmployees();
     }, [employeeAdded])
 
-    function changeShowModal(){
-        setShowModal(!showModal)
-    }
 
     function updateEmployees(){
         getEmployees()
@@ -39,7 +38,7 @@ const EmployeesList = ({employeeAdded}) => {
 
     function onDealsLoaded(list, login){
         setDealsList(list.filter(item => item.employee == login));
-        changeShowModal();
+        toggleModal();
     }
 
     function onDeleteEmployee(emp){
@@ -84,14 +83,10 @@ const EmployeesList = ({employeeAdded}) => {
 
     const isLoading = loading ? <Spinner style = {{display: "block", width: "100px", height: "100px", margin: "50px auto"}} animation="border" variant="danger"/> : null;
     const isContent = employeesList.length != 0 && !loading ? renderEmployees() : null;
-    const modal = showModal ? (
-                <div onClick={(e)=>{return e.target.classList.contains("popup")? changeShowModal() : null}} className="popup">
-                    <div className="popup_content">
-                        <div onClick={changeShowModal} className="close_btn">&#10010;</div>
-                        {renderDeals()}
-                    </div>
-                </div>
-    )  : null;
+    const modal = isShowModal ? 
+        <Modal>
+            {renderDeals()}
+        </Modal>  : null;
 
 
     return (

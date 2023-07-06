@@ -2,13 +2,14 @@ import { useEffect, useState } from "react"
 
 import Button from 'react-bootstrap/Button';
 
+import useModal from "../../../hooks/useModal";
 import useData from "../../../services/getData"
 
 import "./AddTask.scss"
 
 
 
-const Modal = ({changeShowModal, changeTaskAdded}) => {
+const AddModal = ({changeShowModal, changeTaskAdded, Modal}) => {
 
     const [checkValue, setCheckValue] = useState(null);
     const [title, setTitle] = useState("");
@@ -57,12 +58,9 @@ const Modal = ({changeShowModal, changeTaskAdded}) => {
     }
 
     const OptionList = employeesList.length ? renderOptions() : null;
-    const msg = checkValue === false ? <p style = {{color: "red", textAlign: "center"}}>Заполните все поля</p> : null; 
 
     return (
-        <div onClick={(e)=>{return e.target.classList.contains("popup")? changeShowModal() : null}} className="popup">
-            <div className="popup_content">
-                <div onClick={changeShowModal} className="close_btn">&#10010;</div>
+        <Modal>
                 <div className="popup__title">Добавить задание</div>
                 <hr />
 
@@ -88,36 +86,20 @@ const Modal = ({changeShowModal, changeTaskAdded}) => {
                     <Button onClick={submitData} className="button_task" disabled = {loading}>Создать!</Button>
 
                 </form>
-                {msg}
-            </div>
 
-        </div>
-    )
-}
-
-const showMsg = ({changeShowModal}) => {
-
-
-    return (
-        <div style={{backgroundColor: "#FFFFFF", borderRadius: "5px", padding: "10px", margin: "40vh auto"}}>
-            <div onClick={changeShowModal} className="close_btn">&#10010;</div>
-            <p>Задание создано!</p>
-        </div>
+        </Modal>
     )
 }
 
 const AddTask = ({changeTaskAdded}) => {
 
-    const [showModal, setShowModal] = useState(false);
+    const{isShowModal, toggleModal, Modal} = useModal();
 
-    const changeShowModal = () => {
-        setShowModal(!showModal);
-    }
 
     return ( 
         <>
-            <Button variant="primary" className="btn_add" onClick={changeShowModal}>Добавить задание...</Button>
-            {showModal ? <Modal changeTaskAdded = {changeTaskAdded} changeShowModal = {changeShowModal} /> : null}
+            <Button variant="primary" className="btn_add" onClick={toggleModal}>Добавить задание...</Button>
+            {isShowModal ? <AddModal Modal = {Modal} changeTaskAdded = {changeTaskAdded} changeShowModal = {toggleModal} /> : null}
         </>
 
     )
