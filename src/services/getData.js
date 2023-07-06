@@ -29,14 +29,18 @@ const useData = () => {
     }
 
     const setDeal = async (body) => {
-        return await httpRequest("http://localhost:3000/deals", "POST", JSON.stringify(body));
+        return await httpRequest(`http://localhost:3000/deals/`, "POST", JSON.stringify(body));
+    }
+
+    const editDeal = async (body, id) => {
+        return await httpRequest(`http://localhost:3000/deals/${id}`, "PUT", JSON.stringify(body));
     }
 
     const deleteDeal = async (id) => {
         return await httpRequest(`http://localhost:3000/deals/${id}`, "DELETE");
     }
 
-    return {loading, error, getEmployers, getEmployees, getDeals, setDeal, deleteDeal, setEmployees, deleteEmployees};
+    return {loading, error, getEmployers, getEmployees, getDeals, setDeal, deleteDeal, setEmployees, deleteEmployees, editDeal};
 
 }
 

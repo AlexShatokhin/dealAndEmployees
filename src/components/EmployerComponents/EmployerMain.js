@@ -39,7 +39,7 @@ const EmployerMain = ({data, changeAuthType}) => {
             }}/>
 
             {showDeals === "deal" ? 
-            <TasksList taskAdded = {taskAdded}/> : 
+            <TasksList changeTaskAdded={changeTaskAdded} taskAdded = {taskAdded}/> : 
             <EmployeesList employeeAdded = {employeeAdded} />}
 
         </section>
