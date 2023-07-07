@@ -28,12 +28,20 @@
     .emp_info{
         display: flex;
         justify-content: space-between;
-        width: 270px;
+        width: 250px;
         margin-bottom: 0;
+        margin-right: 30px;
         align-items: center;
         .emp_name{
             margin-right: 30px;
             color: #FFFFFF;
+        }
+
+        .emp_exit{
+            background-color: none;
+            font-size: 25px;
+            color: #FFFFFF;
+            cursor: pointer;
         }
     }
 }

@@ -1,15 +1,10 @@
 
-import AddTask from "../AddTask/AddTask"
-import AddEmployee from "../AddEmployee/AddEmployee"
-
-const EmployerMenu = ({changeShowDeals, changeTaskAdded, changeEmployeeAdded}) => {
+const EmployerMenu = ({changeShowComponents}) => {
     return (
         <ul className="navigation_menu-items">
-        <li onClick={()=>{changeShowDeals("deal")}} className="navigation_menu-item"> Задания  </li>
-        <li onClick={()=>{changeShowDeals("employees")}} className="navigation_menu-item"> Работники  </li>
-        <li className="navigation_menu-item"> <AddTask changeTaskAdded = {changeTaskAdded} /> </li>
-        <li className="navigation_menu-item"> <AddEmployee changeEmployeeAdded = {changeEmployeeAdded} /> </li>
-    </ul>
+            <li onClick={()=>{changeShowComponents("deal")}} className="navigation_menu-item">Задания</li>
+            <li onClick={()=>{changeShowComponents("employees")}} className="navigation_menu-item">Работники</li>
+        </ul>
     )
 }
 

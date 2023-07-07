@@ -1,0 +1,41 @@
+.employer_main{
+    padding-top: 10px;
+    min-height: 100vh;
+    background: url("../../resources/img/background_admin.jpg") center center / cover no-repeat;
+}
+
+.employee_main{
+    padding-top: 10px;
+    height: 100vh;
+    background: url("../../resources/img/background_admin.jpg") center center / cover no-repeat;
+
+    .employee_wrapper{
+        margin: 50px 20px;
+        min-height: 800px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &-my-tasks{
+        border: 3px solid #856738;
+        width: 49%;
+    }
+
+    &-all-tasks{
+        border: 3px solid #8503ff;
+        width: 49%;
+    }
+
+    .employee-tasks_title{
+        text-align: center;
+        font-size: 45px;
+        font-weight: 600;
+        color: #FFFFFF;
+        margin: 15px 0;
+    }
+}
+
+.btn_add{
+    width: 200px;
+    margin-left: 10px;
+}

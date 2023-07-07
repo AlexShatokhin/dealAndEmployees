@@ -29,7 +29,10 @@ const useData = () => {
     }
 
     const setDeal = async (body) => {
-        return await httpRequest(`http://localhost:3000/deals/`, "POST", JSON.stringify(body));
+        const dataToSend = {
+            ...body, employee: "nobody", status: "new"
+        }
+        return await httpRequest(`http://localhost:3000/deals/`, "POST", JSON.stringify(dataToSend));
     }
 
     const editDeal = async (body, id) => {

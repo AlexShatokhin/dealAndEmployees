@@ -1,5 +1,4 @@
 import { useNavigate  } from "react-router-dom";
-import { Button } from "react-bootstrap";
 
 import "./NavigationMenu.scss"
 
@@ -17,7 +16,7 @@ const NavigationMenu = ({data, changeAuthType, renderProps}) => {
            {renderProps()}
             <div className="emp_info">
                 <div className="emp_name">{data.name}</div>
-                <Button onClick={exitFromProfile} variant="primary" className="emp_exit">Выйти</Button>
+                <div onClick={exitFromProfile} variant="primary" className="emp_exit"><i className ="fa-solid fa-right-from-bracket"></i></div>
             </div>
 
         </nav>

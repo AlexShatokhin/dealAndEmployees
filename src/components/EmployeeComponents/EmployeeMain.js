@@ -1,4 +1,6 @@
 
+import { Button } from "react-bootstrap"
+
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
 import TasksList from "../TasksList/TasksList"
 
@@ -9,14 +11,28 @@ const EmployeeMain = ({data, changeAuthType}) => {
             <NavigationMenu 
             data = {data} 
             changeAuthType={changeAuthType}
-            renderProps={()=>"Hello!"}/>
+            renderProps={()=><div></div>}/>
 
-            <TasksList 
-            renderProps = {()=>{
-                return (
-                    <h1>Hello!</h1>
-                )
-            }}/>
+            <div className="employee_wrapper">
+                <div className="employee_main-my-tasks">
+                    <div className="employee-tasks_title">{data.name}</div>
+                </div>
+
+                <div className="employee_main-all-tasks">
+                    <div className="employee-tasks_title">Список заданий</div>
+                    <TasksList 
+                    renderProps = {()=>{
+                        return (
+                            <Button>Выбрать!</Button>
+                        )
+                    }}/>
+                </div>
+            </div>
+
+
+
+
+
 
         </div>
     )

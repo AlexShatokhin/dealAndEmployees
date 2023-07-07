@@ -8,7 +8,7 @@ import EmployeeMain from '../EmployeeComponents/EmployeeMain';
 import Test from '../test/Test';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './App.scss';
 
 function App() {
 	

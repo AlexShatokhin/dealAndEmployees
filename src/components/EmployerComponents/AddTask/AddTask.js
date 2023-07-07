@@ -1,28 +1,36 @@
-
+import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 
-import TaskModal from '../../TaskModal/TaskModal';
-import useModal from "../../../hooks/useModal";
+import useData from '../../../services/getData';
 
 import "./AddTask.scss"
 
-
-
-
-
 const AddTask = ({changeTaskAdded}) => {
 
-    const{isShowModal, toggleModal, Modal} = useModal();
+    const [taskValue, setTaskValue] = useState("");
+    const {setDeal} = useData()
 
+    function addTask(){
+        setDeal({title: taskValue});
+        setTaskValue("");
+        changeTaskAdded();
+    }
+
+    function changeTaskValue(e){
+        setTaskValue(e.target.value);
+    }
 
     return ( 
-        <>
-            <Button variant="primary" className="btn_add" onClick={toggleModal}>Добавить задание...</Button>
-            {isShowModal ? <TaskModal 
-            Modal = {Modal} 
-            changeTaskAdded = {changeTaskAdded} 
-            changeShowModal = {toggleModal} /> : null}
-        </>
+        <div className="add_new_task">
+            <input 
+            placeholder="Введите задание..." 
+            value={taskValue} 
+            onChange={changeTaskValue} 
+            type="text" 
+            className="add_new_task-input" />
+            
+            <Button onClick={addTask} className="add_new_task-button">Создать!</Button>
+        </div>
 
     )
 

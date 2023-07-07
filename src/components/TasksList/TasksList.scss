@@ -16,10 +16,15 @@
             transition: .2s all;
         }
 
-        &-title{
-            width: 30%;
+        &-text{
+            display: flex;
             color: #FFFFFF;
         }
+
+        &-title{
+            margin-left: 10px;
+        }
+
         &-perfomer{
             width: 15%;
             color: #FFFFFF;

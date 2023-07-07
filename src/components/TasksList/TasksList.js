@@ -21,6 +21,7 @@ const TasksList = ({changeTaskAdded, taskAdded, renderProps}) => {
             return (
                 <DealsItem 
                 deal={item} 
+                index = {i}
                 renderProps = {renderProps ? renderProps : ()=>{
                     return (
                         <DealsButtons 
