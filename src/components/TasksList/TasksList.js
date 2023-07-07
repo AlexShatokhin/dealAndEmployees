@@ -1,46 +1,39 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
 import { Spinner } from "react-bootstrap";
 
 import DealsItem from "../DealsItem/DealsItem";
-import TaskModal from "../TaskModal/TaskModal";
+import DealsButtons from "../EmployerComponents/DealsButtons/DealsButtons";
 
-import useModal from "../../hooks/useModal";
 import useData from "../../services/getData"
 import useDeals from "../../hooks/EditDeals";
 
 import "./TasksList.scss"
 
-const TasksList = ({changeTaskAdded, taskAdded}) => {
+const TasksList = ({changeTaskAdded, taskAdded, renderProps}) => {
 
-    const [currDeal, setCurrDeal] = useState(null);
-    const [editedMode, setEditedMode] = useState(false);
-
-    const { loading, error} = useData();
-    const { Modal, toggleModal, isShowModal} = useModal();
-    const { deals, onDeleteDeal, updateDeals} = useDeals()
+    const {loading} = useData();
+    const {deals, updateDeals} = useDeals()
 
     useEffect(updateDeals, [taskAdded])
-
-    function changeCurrDeal(ind){
-        setCurrDeal(deals[ind]);
-    }
-
-    function changeEditedMode(value = true){
-        setEditedMode(value)
-    }
 
     function renderDeals(){
         return deals.map((item, i)=>{
             return (
                 <DealsItem 
                 deal={item} 
-                changeCurrDeal = {()=>changeCurrDeal(i)}
-                toggleModal = {toggleModal}
-                changeEditedMode = {changeEditedMode}
-                onDeleteDeal = {onDeleteDeal} />
+                renderProps = {renderProps ? renderProps : ()=>{
+                    return (
+                        <DealsButtons 
+                        index = {i}
+                        taskAdded = {taskAdded} 
+                        changeTaskAdded={changeTaskAdded} 
+                        dealID={item.id}/>
+                    )
+                }}/>
             ) 
         })
     }
+
 
 
     const isLoading = loading ? 
@@ -54,6 +47,7 @@ const TasksList = ({changeTaskAdded, taskAdded}) => {
             variant="danger"/> : null;
 
     const isContent = (deals.length && !loading) ? renderDeals() : null;
+
     const isEmpty = (!loading && !deals.length) ? 
     <p style = {{color: "#FFFFFF", 
                 margin: "0 auto", 
@@ -63,24 +57,6 @@ const TasksList = ({changeTaskAdded, taskAdded}) => {
     Заданий пока нет!
     </p> : null;
 
-    const modal = isShowModal && !editedMode ? 
-    <Modal>
-        <div className="popup_title"> <span>Название: </span> {currDeal.title}</div>
-        <div className="popup_info"> <span>Подробная информация:</span> {currDeal.moreInfo}</div>
-        <div className="popup_employee"> <span>Работник:</span> {currDeal.name}</div>
-    </Modal> : isShowModal && editedMode ? 
-    <>
-        <TaskModal 
-        changeShowModal={toggleModal} 
-        Modal = {Modal} 
-        isEdit = {true} 
-        initTitle={currDeal.title}
-        initMoreInfo={currDeal.moreInfo}
-        initEmployee={currDeal.employee}
-        id = {currDeal.id}
-        changeTaskAdded={changeTaskAdded}/>
-    </>
-        : null;
 
 
     return (
@@ -88,7 +64,6 @@ const TasksList = ({changeTaskAdded, taskAdded}) => {
             {isLoading}
             {isContent}
             {isEmpty}
-            {modal}
         </div>
     )
 

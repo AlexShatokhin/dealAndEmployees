@@ -1,5 +1,6 @@
 
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
+import TasksList from "../TasksList/TasksList"
 
 const EmployeeMain = ({data, changeAuthType}) => {
 
@@ -8,7 +9,15 @@ const EmployeeMain = ({data, changeAuthType}) => {
             <NavigationMenu 
             data = {data} 
             changeAuthType={changeAuthType}
-            renderProps={()=>5}/>
+            renderProps={()=>"Hello!"}/>
+
+            <TasksList 
+            renderProps = {()=>{
+                return (
+                    <h1>Hello!</h1>
+                )
+            }}/>
+
         </div>
     )
 }
