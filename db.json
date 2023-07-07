@@ -37,26 +37,32 @@
       "login": "viktor",
       "password": "123",
       "id": 5
+    },
+    {
+      "name": "Костя",
+      "login": "147",
+      "password": "147",
+      "id": 6
     }
   ],
   "deals": [
     {
       "title": "Добавление задания",
-      "employee": "789",
+      "employee": "123",
       "status": "new",
       "id": 6
     },
     {
-      "title": "Задание номер семь",
-      "employee": "slavik",
-      "status": "new",
-      "id": 7
-    },
-    {
       "title": "Задание для Славика",
-      "employee": "slavik",
+      "employee": "123",
       "status": "new",
       "id": 8
+    },
+    {
+      "title": "Тест",
+      "employee": "123",
+      "status": "new",
+      "id": 9
     }
   ]
 }

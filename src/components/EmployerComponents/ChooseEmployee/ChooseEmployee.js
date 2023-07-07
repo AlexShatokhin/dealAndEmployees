@@ -17,8 +17,8 @@ const ChooseEmployee = ({toggleModal, index, changeCurrDeal, initEmp}) => {
     function renderEmployees(){
         return employeesList.map(employee => {
             return (    
-                <div className="employee_to_choose-item">
-                    <div onClick={()=>changeChosenEmp(employee)} style={chosenEmp == employee.login ? {color: "green"} : null} className="employee-name">{employee.name}</div>
+                <div style={chosenEmp == employee.login ? {backgroundColor: "rgba(17, 0, 255, 0.2)"} : null} className="employee_to_choose-item">
+                    <div onClick={()=>changeChosenEmp(employee)}  className="employee-name">{employee.name}</div>
                 </div>
             ) 
         })

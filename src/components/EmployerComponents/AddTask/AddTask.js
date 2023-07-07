@@ -29,7 +29,7 @@ const AddTask = ({changeTaskAdded}) => {
             type="text" 
             className="add_new_task-input" />
             
-            <Button onClick={addTask} className="add_new_task-button">Создать!</Button>
+            <Button onClick={addTask} className="add_new_task-button">Добавить задание!</Button>
         </div>
 
     )

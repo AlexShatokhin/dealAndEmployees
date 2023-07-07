@@ -17,12 +17,16 @@
     }
 
     &-my-tasks{
-        border: 3px solid #856738;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(20, 28, 115, 0.2);
         width: 49%;
     }
 
     &-all-tasks{
-        border: 3px solid #8503ff;
+        border: none;
+        border-radius: 5px;
+        background-color: rgba(20, 28, 115, 0.2);
         width: 49%;
     }
 

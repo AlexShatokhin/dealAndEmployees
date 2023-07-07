@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { Spinner } from "react-bootstrap";
 
+import DealsItem from "../../DealsItem/DealsItem";
 import useData from "../../../services/getData"
 import useModal from "../../../hooks/useModal";
 import useEmployees from "../../../hooks/EditEmployees";

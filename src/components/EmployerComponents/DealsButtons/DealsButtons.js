@@ -7,6 +7,8 @@ import useData from "../../../services/getData";
 import useModal from "../../../hooks/useModal";
 import useDeals from "../../../hooks/EditDeals";
 
+import "./DealsButtons.scss"
+
 const DealsButtons = ({dealID, changeTaskAdded, taskAdded, index}) => {
 
 
@@ -26,10 +28,10 @@ const DealsButtons = ({dealID, changeTaskAdded, taskAdded, index}) => {
     </Modal> : null;
 
     return (
-        <div className="deals_item-buttons">
+        <div className="deals_item-buttons">    
             {modal}
         <Button onClick={toggleModal} variant="primary">Назначить</Button>
-        <Button onClick={()=> {onDeleteDeal(dealID); changeTaskAdded()} } variant="danger"><i className="fa-solid fa-trash"></i></Button>
+        <div onClick={()=> {onDeleteDeal(dealID); changeTaskAdded()} }><i className="fa-solid fa-trash"></i></div>
     </div>
     )
 }
