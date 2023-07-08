@@ -41,7 +41,7 @@ const AdministrativePanel = ({changeAuthType}) => {
         list.forEach((item)=>{
             if(item.login == login && item.password == password){
                 setIsAuthored(type);
-                changeAuthType(type, {name: item.name});
+                changeAuthType(type, {name: item.name, login: item.login, password: item.password});
             }
                 
         })

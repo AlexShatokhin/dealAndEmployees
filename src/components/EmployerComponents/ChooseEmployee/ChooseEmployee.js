@@ -27,7 +27,7 @@ const ChooseEmployee = ({toggleModal, index, changeCurrDeal, initEmp}) => {
     return (
         <div className="employeers_to_choose">
             {renderEmployees()}
-            <Button onClick={()=>{changeCurrDeal(index, chosenEmp); toggleModal() }}>Выбрать!</Button>
+            <Button onClick={()=>{changeCurrDeal(index, chosenEmp); toggleModal(); }}>Выбрать!</Button>
         </div>
     )
 }

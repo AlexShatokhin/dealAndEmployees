@@ -20,11 +20,16 @@ const DealsButtons = ({dealID, changeTaskAdded, taskAdded, index}) => {
 
     function changeCurrDeal(ind, chosenEmp){
         editDeal({...deals[ind], employee: chosenEmp}, dealID);
+        changeTaskAdded();
     }
 
     const modal = isShowModal ? 
     <Modal>
-        <ChooseEmployee initEmp={deals[index].employee} toggleModal={toggleModal} index={index} changeCurrDeal={changeCurrDeal} />
+        <ChooseEmployee 
+        initEmp={deals[index].employee} 
+        toggleModal={toggleModal} 
+        index={index} 
+        changeCurrDeal={changeCurrDeal} />
     </Modal> : null;
 
     return (
