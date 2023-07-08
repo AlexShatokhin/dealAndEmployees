@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { Spinner } from "react-bootstrap";
 
-import DealsItem from "../../DealsItem/DealsItem";
 import useData from "../../../services/getData"
 import useModal from "../../../hooks/useModal";
-import useEmployees from "../../../hooks/EditEmployees";
 import CountOfTasks from "../CountOfTasks/CountOfTasks";
 
 import EmployeeModal from "../../EmployeeModal/EmployeeModal";
@@ -12,37 +10,23 @@ import EmployeesTasks from "../EmployeesTasks/EmployeesTasks";
 
 import "./EmployeesList.scss"
 
-const EmployeesList = ({employeeAdded, changeEmployeeAdded}) => {
+const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded}) => {
 
-    const [dealsList, setDealsList] = useState([]);
     const [currEmployee, setCurrEmployee] = useState({});
     const [showTasks, setShowTasks] = useState(false);
 
-    const {loading, error, getDeals} = useData();
+    const {loading, error} = useData();
     const {isShowModal, toggleModal, Modal} = useModal();
-    const {employeesList, updateEmployees} = useEmployees();
-
-
-    useEffect(()=>{
-        updateEmployees();
-    }, [employeeAdded])
 
 
     function showDeals(employee){
-        getDeals()
-        .then(res => {onDealsLoaded(res, employee.login)})
         setCurrEmployee(employee);
-    }
-
-    function onDealsLoaded(list, login){
-        setDealsList(list.filter(item => item.employee == login));
         setShowTasks(true);
     }
 
 
-
     function renderEmployees(){
-        return employeesList.map((item, i)=>{
+        return dataEmp.map((item, i)=>{
             return (
                 <div onClick={()=>showDeals(item)} className="employees_list-item">
                     <div className="employees_list-item-name">{item.name}</div>
@@ -55,9 +39,9 @@ const EmployeesList = ({employeeAdded, changeEmployeeAdded}) => {
 
 
     const isLoading = loading ? <Spinner style = {{display: "block", width: "100px", height: "100px", margin: "50px auto"}} animation="border" variant="danger"/> : null;
-    const isContent = employeesList.length != 0 ? renderEmployees() : null;
+    const isContent = dataEmp.length != 0 ? renderEmployees() : null;
     const modal = isShowModal ? <EmployeeModal Modal={Modal} toggleModal = {toggleModal} changeEmployeeAdded = {changeEmployeeAdded}/>  : null;
-    const isShowTasks = showTasks && !loading ? <EmployeesTasks emmployeeDeal={dealsList} employee={currEmployee}/> : !showTasks && !loading ? <h3>Выберите сотрудника</h3> : null;
+    const isShowTasks = showTasks && !loading ? <EmployeesTasks changeTaskAdded = {changeTaskAdded} emmployeeDeal={dataTasks.filter((item)=>item.employee == currEmployee.login)} employee={dataEmp.filter((item)=>item.login == currEmployee.login)[0]}/> : !showTasks && !loading ? <h3>Выберите сотрудника</h3> : null;
 
     return (
         <section className="employees">

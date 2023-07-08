@@ -9,15 +9,12 @@ import useDeals from "../../hooks/EditDeals";
 
 import "./TasksList.scss"
 
-const TasksList = ({changeTaskAdded, taskAdded, renderProps}) => {
+const TasksList = ({data, changeTaskAdded, taskAdded, renderProps}) => {
 
     const {loading} = useData();
-    const {deals, updateDeals} = useDeals()
-
-    useEffect(updateDeals, [taskAdded])
 
     function renderDeals(){
-        return deals.map((item, i)=>{
+        return data.map((item, i)=>{
             return (
                 <DealsItem 
                 deal={item} 
@@ -25,6 +22,7 @@ const TasksList = ({changeTaskAdded, taskAdded, renderProps}) => {
                 renderProps = {renderProps ? renderProps : ()=>{
                     return (
                         <DealsButtons 
+                        data = {data}
                         index = {i}
                         taskAdded = {taskAdded} 
                         changeTaskAdded={changeTaskAdded} 
@@ -47,9 +45,9 @@ const TasksList = ({changeTaskAdded, taskAdded, renderProps}) => {
             animation="border" 
             variant="danger"/> : null;
 
-    const isContent = (deals.length && !loading) ? renderDeals() : null;
+    const isContent = (data.length && !loading) ? renderDeals() : null;
 
-    const isEmpty = (!loading && !deals.length) ? 
+    const isEmpty = (!loading && !data.length) ? 
     <p style = {{color: "#FFFFFF", 
                 margin: "0 auto", 
                 fontWeight: 600, 

@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 import EmployerMenu from "./EmployerMenu/EmployerMenu"
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
@@ -6,11 +6,30 @@ import TasksList from "../TasksList/TasksList"
 import EmployeesList from "./EmployeesList/EmployeesList"
 import AddTask from "./AddTask/AddTask"
 
+import useData from "../../services/getData"
+
 const EmployerMain = ({data, changeAuthType}) => {
 
+    const [deals, setDeals] = useState([]);
+    const [employees, setEmployees] = useState([]);
+    
     const [taskAdded, setTaskAdded] = useState(false);
     const [employeeAdded, setEmployeeAdded] = useState(false);
     const [showComponents, setShowComponents] = useState("deal");
+
+    const {getDeals, getEmployees, load} = useData();
+
+    useEffect(()=>{
+        
+        getEmployees()
+        .then(setEmployees)
+
+    }, [employeeAdded])
+
+    useEffect(()=>{
+        getDeals()
+        .then(setDeals)
+    }, [taskAdded])
 
     const changeTaskAdded = () => {
         setTaskAdded(!taskAdded);
@@ -40,11 +59,15 @@ const EmployerMain = ({data, changeAuthType}) => {
             <>
                 <AddTask changeTaskAdded={changeTaskAdded} />
                 <TasksList 
+                data = {deals}
                 changeTaskAdded={changeTaskAdded} 
                 taskAdded = {taskAdded}/>
             </> :
 
-            <EmployeesList 
+            <EmployeesList
+            dataTasks = {deals} 
+            dataEmp = {employees}
+            changeTaskAdded={changeTaskAdded} 
             changeEmployeeAdded = {changeEmployeeAdded}  
             employeeAdded = {employeeAdded} />}
 

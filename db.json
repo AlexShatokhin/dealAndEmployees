@@ -54,39 +54,39 @@
     },
     {
       "title": "Задание для Славика",
-      "employee": "123",
+      "employee": "slavik",
       "status": "new",
       "id": 8
     },
     {
-      "title": "Тест",
-      "employee": "123",
-      "status": "new",
-      "id": 9
-    },
-    {
-      "title": "чек",
-      "employee": "123",
-      "status": "new",
-      "id": 10
-    },
-    {
       "title": "задание не для Игоря",
-      "employee": "nobody",
+      "employee": "147",
       "status": "new",
       "id": 11
     },
     {
       "title": "Задание для Васи",
-      "employee": "viktor",
+      "employee": "456",
       "status": "new",
       "id": 12
     },
     {
-      "title": "еще одно проверочное задание",
-      "employee": "147",
+      "title": "Задание для проверки",
+      "employee": "viktor",
       "status": "new",
-      "id": 13
+      "id": 14
+    },
+    {
+      "title": "Задание без назначения",
+      "employee": "nobody",
+      "status": "new",
+      "id": 15
+    },
+    {
+      "title": "Тест для Костика",
+      "employee": "nobody",
+      "status": "new",
+      "id": 16
     }
   ]
 }

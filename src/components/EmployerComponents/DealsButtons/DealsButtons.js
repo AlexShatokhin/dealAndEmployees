@@ -9,24 +9,22 @@ import useDeals from "../../../hooks/EditDeals";
 
 import "./DealsButtons.scss"
 
-const DealsButtons = ({dealID, changeTaskAdded, taskAdded, index}) => {
+const DealsButtons = ({data, dealID, changeTaskAdded, taskAdded, index}) => {
 
 
     const { Modal, toggleModal, isShowModal} = useModal();
-    const { deals, onDeleteDeal, updateDeals} = useDeals()
+    const {onDeleteDeal} = useDeals()
     const {editDeal} = useData();
 
-    useEffect(updateDeals, [taskAdded])
-
     function changeCurrDeal(ind, chosenEmp){
-        editDeal({...deals[ind], employee: chosenEmp}, dealID);
+        editDeal({...data[ind], employee: chosenEmp}, dealID);
         changeTaskAdded();
     }
 
     const modal = isShowModal ? 
     <Modal>
         <ChooseEmployee 
-        initEmp={deals[index].employee} 
+        initEmp={data[index].employee} 
         toggleModal={toggleModal} 
         index={index} 
         changeCurrDeal={changeCurrDeal} />

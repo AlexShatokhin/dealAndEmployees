@@ -33,13 +33,13 @@ const EmployeeMain = ({data, changeAuthType}) => {
             <div className="employee_wrapper">
                 <div className="employee_main-my-tasks">
                     <div className="employee-tasks_title">Мои задания</div>
-                    <EmployeerTasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == data.login)} employee = {data}/>
+                    <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == data.login)} employee = {data}/>
 
                 </div>
 
                 <div className="employee_main-all-tasks">
                     <div className="employee-tasks_title">Список заданий</div>
-                    <EmployeerTasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == "nobody")} employee = {data}/>
+                    <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == "nobody")} employee = {data}/>
                 </div>
             </div>
 
