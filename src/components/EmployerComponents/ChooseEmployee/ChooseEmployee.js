@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 
 import useEmployees from "../../../hooks/EditEmployees";
 
 const ChooseEmployee = ({toggleModal, index, changeCurrDeal, initEmp}) => {
 
     const [chosenEmp, setChosenEmp] = useState(initEmp);
-    const {employeesList, updateEmployees}  = useEmployees();
+    const {employeesList, updateEmployees, loading}  = useEmployees();
 
     useEffect(updateEmployees, []);
 
@@ -26,7 +26,7 @@ const ChooseEmployee = ({toggleModal, index, changeCurrDeal, initEmp}) => {
 
     return (
         <div className="employeers_to_choose">
-            {renderEmployees()}
+            {loading ? <Spinner style = {{display: "block", width: "100px", height: "100px", margin: "50px auto"}} animation="border" variant="primary"/> : renderEmployees()}
             <Button onClick={()=>{changeCurrDeal(index, chosenEmp); toggleModal(); }}>Выбрать!</Button>
         </div>
     )

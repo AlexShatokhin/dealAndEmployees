@@ -7,9 +7,11 @@ import DealsButtons from "../EmployerComponents/DealsButtons/DealsButtons";
 import useData from "../../services/getData"
 import useDeals from "../../hooks/EditDeals";
 
+import ChooseTask from "../EmployeeComponents/ChooseTask/ChooseTask";
+
 import "./TasksList.scss"
 
-const TasksList = ({data, changeTaskAdded, taskAdded, renderProps}) => {
+const TasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee}) => {
 
     const {loading} = useData();
 
@@ -19,7 +21,7 @@ const TasksList = ({data, changeTaskAdded, taskAdded, renderProps}) => {
                 <DealsItem 
                 deal={item} 
                 index = {i}
-                renderProps = {renderProps ? renderProps : ()=>{
+                renderProps = {renderProps ? () => renderProps({changeTaskAdded, dealID: item.id, deal: item, employee}) : ()=>{
                     return (
                         <DealsButtons 
                         data = {data}

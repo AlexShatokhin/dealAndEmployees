@@ -1,15 +1,19 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import useDeals from "../../../hooks/EditDeals";
+const CountOfTasks = ({data, employee}) => {
 
-const CountOfTasks = ({employee}) => {
+    const [employeeDeals, setEmployeeDeals] = useState([]);
 
-    const {updateDeals, deals} = useDeals();
+    useEffect(()=>{
+        setEmployeeDeals(data.filter(item => item.employee == employee.login));
+    }, [data])
 
-    useEffect(updateDeals, [])
+    function getCompleteTasks(){
+        return employeeDeals.filter((item)=>item.status == "complete");
+    }
 
     return (
-        <div style={{color:"#FFFFFF"}} className="count_of_tasks">Заданий: {deals.filter(item => item.employee == employee.login).length}</div>
+        <div style={{color:"#FFFFFF"}} className="count_of_tasks"><i style = {{color: "#00FF15"}} className ="fa-solid fa-check"></i> <span style = {{color: "#00FF15"}}>{getCompleteTasks().length}</span>  / <span style = {{fontWeight: 600}}>{employeeDeals.length}</span> </div>
     )
 }
 

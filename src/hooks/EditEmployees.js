@@ -6,7 +6,7 @@ const useEmployees = () => {
 
     const [employeesList, setEmployeesList] = useState([]);
 
-    const {getEmployees, deleteEmployees} = useData();
+    const {getEmployees, deleteEmployees, loading} = useData();
 
 
     function updateEmployees(){
@@ -26,7 +26,7 @@ const useEmployees = () => {
     }
 
 
-    return {employeesList, updateEmployees, onDeleteEmployee}
+    return {employeesList, updateEmployees, onDeleteEmployee, loading}
 
 }
 

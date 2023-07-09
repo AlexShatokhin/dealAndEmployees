@@ -1,11 +1,11 @@
 import useData from "../../../services/getData";
 
-const EmployeesTasks = ({employee, emmployeeDeal, changeTaskAdded}) => {
+const EmployeesTasks = ({employee, emmployeeDeal, changeTaskAdded, changeEmployeeAdded}) => {
 
     const {editDeal} = useData()
 
     function changeDeal(deal){
-        editDeal({...deal, employee: "nobody"}, deal.id)
+        editDeal({...deal, employee: "nobody", status: "new"}, deal.id)
     }
 
     function renderDeals(){
@@ -15,8 +15,8 @@ const EmployeesTasks = ({employee, emmployeeDeal, changeTaskAdded}) => {
                 <div className="task">
                     <div className="task_title"> <span>{i+1}. </span>{item.title}</div>
                     <div className="task_buttons">
-                        <div className="task_is_complete"></div>
-                        <div onClick={()=>{changeDeal(item); changeTaskAdded()}} className="task_delete"> <i class="fa-solid fa-trash"></i></div>
+                        <div className="task_is_complete">{item.status == "complete" ?<i style = {{color: "#00FF15"}} className ="fa-solid fa-check"></i> : null}</div>
+                        <div onClick={()=>{changeDeal(item); changeTaskAdded(); changeEmployeeAdded()}} className="task_delete"> <i class="fa-solid fa-trash"></i></div>
                     </div>
                 </div>
             )

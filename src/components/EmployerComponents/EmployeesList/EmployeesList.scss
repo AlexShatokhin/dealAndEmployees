@@ -42,6 +42,12 @@
             .task_delete{
                 cursor: pointer;
             }
+
+            &_buttons{
+                display: flex;
+                width: 60px;
+                justify-content: space-between;
+            }
         }
     }
 }

@@ -43,50 +43,38 @@
       "login": "147",
       "password": "147",
       "id": 6
+    },
+    {
+      "name": "Петр",
+      "login": "petr",
+      "password": "petr",
+      "id": 7
     }
   ],
   "deals": [
     {
-      "title": "Добавление задания",
-      "employee": "123",
-      "status": "new",
-      "id": 6
-    },
-    {
-      "title": "Задание для Славика",
-      "employee": "slavik",
-      "status": "new",
-      "id": 8
-    },
-    {
-      "title": "задание не для Игоря",
+      "title": "Почистить картошку",
       "employee": "147",
       "status": "new",
-      "id": 11
+      "id": 1
     },
     {
-      "title": "Задание для Васи",
-      "employee": "456",
+      "title": "Помыть пол",
+      "employee": "123",
       "status": "new",
-      "id": 12
+      "id": 2
     },
     {
-      "title": "Задание для проверки",
-      "employee": "viktor",
-      "status": "new",
-      "id": 14
-    },
-    {
-      "title": "Задание без назначения",
+      "title": "Купить мороженое :)",
       "employee": "nobody",
       "status": "new",
-      "id": 15
+      "id": 3
     },
     {
-      "title": "Тест для Костика",
+      "title": "Погладить",
       "employee": "nobody",
       "status": "new",
-      "id": 16
+      "id": 4
     }
   ]
 }

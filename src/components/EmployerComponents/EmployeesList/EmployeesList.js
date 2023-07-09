@@ -26,11 +26,12 @@ const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded
 
 
     function renderEmployees(){
+        console.log(dataTasks)
         return dataEmp.map((item, i)=>{
             return (
                 <div onClick={()=>showDeals(item)} className="employees_list-item">
                     <div className="employees_list-item-name">{item.name}</div>
-                    <CountOfTasks employee={item}/>
+                    <CountOfTasks employee = {item} data={dataTasks}/>
                 </div>
             )
         })
@@ -41,7 +42,7 @@ const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded
     const isLoading = loading ? <Spinner style = {{display: "block", width: "100px", height: "100px", margin: "50px auto"}} animation="border" variant="danger"/> : null;
     const isContent = dataEmp.length != 0 ? renderEmployees() : null;
     const modal = isShowModal ? <EmployeeModal Modal={Modal} toggleModal = {toggleModal} changeEmployeeAdded = {changeEmployeeAdded}/>  : null;
-    const isShowTasks = showTasks && !loading ? <EmployeesTasks changeTaskAdded = {changeTaskAdded} emmployeeDeal={dataTasks.filter((item)=>item.employee == currEmployee.login)} employee={dataEmp.filter((item)=>item.login == currEmployee.login)[0]}/> : !showTasks && !loading ? <h3>Выберите сотрудника</h3> : null;
+    const isShowTasks = showTasks && !loading ? <EmployeesTasks changeEmployeeAdded = {changeEmployeeAdded} changeTaskAdded = {changeTaskAdded} emmployeeDeal={dataTasks.filter((item)=>item.employee == currEmployee.login)} employee={dataEmp.filter((item)=>item.login == currEmployee.login)[0]}/> : !showTasks && !loading ? <h3>Выберите сотрудника</h3> : null;
 
     return (
         <section className="employees">

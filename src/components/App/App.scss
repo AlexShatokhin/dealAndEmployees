@@ -11,7 +11,7 @@
 
     .employee_wrapper{
         margin: 50px 20px;
-        min-height: 800px;
+        min-height: 700px;
         display: flex;
         justify-content: space-between;
     }
@@ -42,4 +42,8 @@
 .btn_add{
     width: 200px;
     margin-left: 10px;
+}
+
+hr{
+    border: 2px solid #FFFFFF;
 }
