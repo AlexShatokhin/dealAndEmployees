@@ -1,0 +1,200 @@
+#Clouds {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  height: 100%;
+  overflow: hidden;
+  animation: FadeIn 3.1s ease-out;
+  user-select: none;
+}
+@keyframes FadeIn {
+  from {
+    opacity: 0;
+ }
+  to {
+    opacity: 1;
+ }
+}
+.Cloud {
+  position: absolute;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  height: 70px;
+  animation-duration: 120s;
+  animation-iteration-count: infinite;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  animation-name: Float, FadeFloat;
+  z-index: 1;
+}
+.Cloud.Foreground {
+  height: 10%;
+  min-height: 20px;
+  z-index: 3;
+}
+.Cloud.Background {
+  height: 9.0909090909091%;
+  min-height: 8px;
+  animation-duration: 210s;
+}
+@keyframes Float {
+  from {
+    transform: translateX(100%) translateZ(0);
+ }
+  to {
+    transform: translateX(-15%) translateZ(0);
+ }
+}
+@keyframes Float {
+  from {
+    transform: translateX(100%) translateY(-100%) translateZ(0);
+ }
+  50% {
+    transform: translateX(55%) translateY(0) translateZ(0);
+ }
+  to {
+    transform: translateX(-5%) translateY(-100%) translateZ(0);
+ }
+}
+@keyframes FadeFloat {
+  0%, 100% {
+    opacity: 0;
+ }
+  5%, 90% {
+    opacity: 1;
+ }
+}
+.Cloud:nth-child(10) {
+  animation-delay: -184.61538461538s;
+  top: 60%;
+}
+.Cloud.Foreground:nth-child(10) {
+  animation-duration: 80s;
+  height: 35%;
+}
+.Cloud.Background:nth-child(10) {
+  animation-duration: 20s;
+  height: 3.4090909090909%;
+}
+.Cloud:nth-child(9) {
+  animation-delay: -166.15384615385s;
+  top: 74%;
+}
+.Cloud.Foreground:nth-child(9) {
+  animation-duration: 84s;
+  height: 32.5%;
+}
+.Cloud.Background:nth-child(9) {
+  animation-duration: 40s;
+  height: 8.1590909090909%;
+}
+.Cloud:nth-child(8) {
+  animation-delay: -147.69230769231s;
+  top: 48%;
+}
+.Cloud.Foreground:nth-child(8) {
+  animation-duration: 30s;
+  height: 10%;
+}
+.Cloud.Background:nth-child(8) {
+  animation-duration: 88s;
+  height: -0.90909090909091%;
+}
+.Cloud:nth-child(7) {
+  animation-delay: -129.23076923077s;
+  top: 42%;
+}
+.Cloud.Foreground:nth-child(7) {
+  animation-duration: 92s;
+  height: 27.5%;
+}
+.Cloud.Background:nth-child(7) {
+  animation-duration: 80s;
+  height: 4.34090909090909%;
+}
+.Cloud:nth-child(6) {
+  animation-delay: -110.76923076923s;
+  top: 36%;
+}
+.Cloud.Foreground:nth-child(6) {
+  animation-duration: 96s;
+  height: 25%;
+}
+.Cloud.Background:nth-child(6) {
+  animation-duration: 126s;
+  height: 2.5909090909091%;
+}
+.Cloud:nth-child(5) {
+  animation-delay: -92.307692307692s;
+  top: 75%;
+}
+.Cloud.Foreground:nth-child(5) {
+  animation-duration: 30s;
+  height: 13%;
+}
+.Cloud.Background:nth-child(5) {
+  animation-duration: 130s;
+  height: 2.8409090909091%;
+}
+.Cloud:nth-child(4) {
+  animation-delay: -73.846153846154s;
+  top: 24%;
+}
+.Cloud.Foreground:nth-child(4) {
+  animation-duration: 104s;
+  height: 20%;
+}
+.Cloud.Background:nth-child(4) {
+  animation-duration: 134s;
+  height: 4.0909090909091%;
+}
+.Cloud:nth-child(3) {
+  animation-delay: -55.384615384615s;
+  top: 25%;
+}
+.Cloud.Foreground:nth-child(3) {
+  animation-duration: 70s;
+  height: 10.5%;
+}
+.Cloud.Background:nth-child(3) {
+  animation-duration: 138s;
+  height: 5.3409090909091%;
+}
+.Cloud:nth-child(2) {
+  animation-delay: -36.923076923077s;
+  top: 12%;
+}
+.Cloud.Foreground:nth-child(2) {
+  animation-duration: 112s;
+  height: 15%;
+}
+.Cloud.Background:nth-child(2) {
+  animation-duration: 20s;
+  height: 6.5909090909091%;
+}
+.Cloud:nth-child(1) {
+  animation-delay: -18.461538461538s;
+  top: 6%;
+}
+.Cloud.Foreground:nth-child(1) {
+  animation-duration: 116s;
+  height: 6.5%;
+}
+.Cloud.Background:nth-child(1) {
+  animation-duration: 146s;
+  height: 7.8409090909091%;
+}
+.Cloud {
+  background-image: url("../../resources/img/cloud1.svg");
+}
+.Cloud.Background {
+  background-image: url("../../resources/img/cloud1.png");
+}
+.admin_panel {
+  height: 100vh;
+  background-image: radial-gradient(circle,#4169E1 0%,rgb(50, 54, 169) 70%,#2b4695 100%);
+}

@@ -66,15 +66,21 @@
     },
     {
       "title": "Купить мороженое :)",
-      "employee": "nobody",
-      "status": "new",
+      "employee": "147",
+      "status": "complete",
       "id": 3
     },
     {
       "title": "Погладить",
-      "employee": "nobody",
+      "employee": "456",
       "status": "new",
       "id": 4
+    },
+    {
+      "title": "Решить задачу",
+      "employee": "147",
+      "status": "complete",
+      "id": 5
     }
   ]
 }

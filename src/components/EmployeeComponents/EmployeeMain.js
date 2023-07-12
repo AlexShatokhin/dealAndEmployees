@@ -28,6 +28,12 @@ const EmployeeMain = ({data, changeAuthType}) => {
 
     return (
         <div className="employee_main">
+            <div className="back">
+                <div id='stars'></div>
+                <div id='stars2'></div>
+                <div id='stars3'></div>
+            </div>
+
             <NavigationMenu 
             data = {data} 
             changeAuthType={changeAuthType}

@@ -8,6 +8,7 @@ import AddTask from "./AddTask/AddTask"
 
 import useData from "../../services/getData"
 
+
 const EmployerMain = ({data, changeAuthType}) => {
 
     const [deals, setDeals] = useState([]);
@@ -47,6 +48,12 @@ const EmployerMain = ({data, changeAuthType}) => {
     return (
         <section className="employer_main">
             
+            <div className="back">
+                <div id='stars'></div>
+                <div id='stars2'></div>
+                <div id='stars3'></div>
+            </div>
+
             <NavigationMenu
             data = {data}
             changeAuthType = {changeAuthType}
