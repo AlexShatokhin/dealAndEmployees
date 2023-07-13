@@ -42,24 +42,23 @@ const EmployeeMain = ({data, changeAuthType}) => {
             changeAuthType={changeAuthType}
             renderProps={()=><div></div>}/>
 
+
             <ErrorBoundary>
-                <div className="employee_wrapper">
-                    <div className="employee_main-my-tasks">
-                        <div className="employee-tasks_title">Мои задания</div>
-                        <hr />
-                        <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == data.login)} employee = {user} renderProps={(props)=><CompleteTask {...props} />}/>
+            <div className="employee_wrapper">
+                <div className="employee_main-my-tasks">
+                    <div className="employee-tasks_title">Мои задания</div>
+                    <hr />
+                    <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == data.login)} employee = {user} renderProps={(props)=><CompleteTask {...props} />}/>
 
-                    </div>
-
-                    <div className="employee_main-all-tasks">
-                        <div className="employee-tasks_title">Список заданий</div>
-                        <hr />
-                        <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == null)} employee = {user} renderProps={(props)=><ChooseTask {...props} />}/>
-                    </div>
                 </div>
-            </ErrorBoundary>
 
-
+                <div className="employee_main-all-tasks">
+                    <div className="employee-tasks_title">Список заданий</div>
+                    <hr />
+                    <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == null)} employee = {user} renderProps={(props)=><ChooseTask {...props} />}/>
+                </div>
+            </div>
+        </ErrorBoundary>
 
 
         </div>

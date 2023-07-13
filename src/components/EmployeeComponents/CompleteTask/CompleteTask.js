@@ -1,4 +1,3 @@
-
 import { Button } from "react-bootstrap"
 
 import useData from "../../../services/getData"
@@ -14,7 +13,7 @@ const CompleteTask = ({changeTaskAdded, dealID, employee, deal}) => {
     }
 
     return (
-        <Button onClick={changeTaskEmployee} variant={deal.status == "new" ? "primary" : "success"} disabled = {deal.status == "complete"} >{deal.status == "new" ? "Выполнить!" : "Выполнено!"}</Button>
+        <Button onClick={changeTaskEmployee} variant={deal.status == "work" ? "primary" : "success"} disabled = {deal.status == "complete"} >{deal.status == "work" ? "Выполнить!" : "Выполнено!"}</Button>
     )
 }
 

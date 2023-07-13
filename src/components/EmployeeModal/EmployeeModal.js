@@ -11,7 +11,7 @@ const EmployeeModal = ({changeEmployeeAdded, toggleModal, Modal}) => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
 
-    const{loading, setEmployees} = useData();
+    const{setEmployees} = useData();
 
     const changeStateValue = (e) => {
         const elem = e.target;
@@ -31,7 +31,6 @@ const EmployeeModal = ({changeEmployeeAdded, toggleModal, Modal}) => {
         setEmployees(dataToSend)
         .then(changeEmployeeAdded)
         
-
     }
 
 

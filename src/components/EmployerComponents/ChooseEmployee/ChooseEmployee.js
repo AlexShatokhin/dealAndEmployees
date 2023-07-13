@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { Button, Spinner } from "react-bootstrap";
+import { useState } from "react";
+import { Button } from "react-bootstrap";
 
 const ChooseEmployee = ({dataEmp, toggleModal, index, changeCurrDeal, initEmp}) => {
 

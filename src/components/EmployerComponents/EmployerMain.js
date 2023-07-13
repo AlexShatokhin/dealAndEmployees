@@ -19,7 +19,7 @@ const EmployerMain = ({data, changeAuthType}) => {
     const [employeeAdded, setEmployeeAdded] = useState(false);
     const [showComponents, setShowComponents] = useState("deal");
 
-    const {getDeals, getEmployees, loading} = useData();
+    const {getDeals, getEmployees} = useData();
 
     useEffect(()=>{
 
@@ -64,24 +64,24 @@ const EmployerMain = ({data, changeAuthType}) => {
                 changeShowComponents={changeShowComponents}/>
             }}/>
 
-            <ErrorBoundary>
-                {showComponents === "deal" ? 
-                <>
-                    <AddTask changeTaskAdded={changeTaskAdded} />
-                    <TasksList 
-                    dataEmp = {employees}
-                    data = {deals}
-                    changeTaskAdded={changeTaskAdded} 
-                    taskAdded = {taskAdded}/>
-                </> :
-
-                <EmployeesList
-                dataTasks = {deals} 
+        <ErrorBoundary>
+            {showComponents === "deal" ? 
+            <>
+                <AddTask changeTaskAdded={changeTaskAdded} />
+                <TasksList 
                 dataEmp = {employees}
+                data = {deals}
                 changeTaskAdded={changeTaskAdded} 
-                changeEmployeeAdded = {changeEmployeeAdded}  
-                employeeAdded = {employeeAdded} />}
-            </ErrorBoundary>
+                taskAdded = {taskAdded}/>
+            </> :
+
+            <EmployeesList
+            dataTasks = {deals} 
+            dataEmp = {employees}
+            changeTaskAdded={changeTaskAdded} 
+            changeEmployeeAdded = {changeEmployeeAdded}  
+            employeeAdded = {employeeAdded} />}
+        </ErrorBoundary>
 
 
         </section>

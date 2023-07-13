@@ -1,7 +1,5 @@
 import { useState } from "react"
-import { Spinner } from "react-bootstrap";
 
-import useData from "../../../services/getData"
 import useModal from "../../../hooks/useModal";
 import CountOfTasks from "../CountOfTasks/CountOfTasks";
 
@@ -15,7 +13,6 @@ const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded
     const [currEmployee, setCurrEmployee] = useState({});
     const [showTasks, setShowTasks] = useState(false);
 
-    const {loading, error} = useData();
     const {isShowModal, toggleModal, Modal} = useModal();
 
 
@@ -38,10 +35,9 @@ const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded
 
 
 
-    const isLoading = loading ? <Spinner style = {{display: "block", width: "100px", height: "100px", margin: "50px auto"}} animation="border" variant="danger"/> : null;
     const isContent = dataEmp.length != 0 ? renderEmployees() : null;
     const modal = isShowModal ? <EmployeeModal Modal={Modal} toggleModal = {toggleModal} changeEmployeeAdded = {changeEmployeeAdded}/>  : null;
-    const isShowTasks = showTasks && !loading ? <EmployeesTasks changeEmployeeAdded = {changeEmployeeAdded} changeTaskAdded = {changeTaskAdded} emmployeeDeal={dataTasks.filter((item)=>item.employee == currEmployee.login)} employee={dataEmp.filter((item)=>item.login == currEmployee.login)[0]}/> : !showTasks && !loading ? <h3>Выберите сотрудника</h3> : null;
+    const isShowTasks = showTasks ? <EmployeesTasks changeEmployeeAdded = {changeEmployeeAdded} changeTaskAdded = {changeTaskAdded} emmployeeDeal={dataTasks.filter((item)=>item.employee == currEmployee.login)} employee={dataEmp.filter((item)=>item.login == currEmployee.login)[0]}/> : !showTasks ? <h3>Выберите сотрудника</h3> : null;
 
     return (
         <section className="employees">
@@ -55,7 +51,6 @@ const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded
             </div>
 
             <div className="tasks_wrapper">
-                {isLoading}
                 {isShowTasks}
             </div>
         </section>

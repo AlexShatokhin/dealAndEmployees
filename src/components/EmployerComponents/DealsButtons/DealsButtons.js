@@ -4,7 +4,6 @@ import ChooseEmployee from "./../ChooseEmployee/ChooseEmployee";
 
 import useData from "../../../services/getData";
 import useModal from "../../../hooks/useModal";
-import useDeals from "../../../hooks/EditDeals";
 
 import "./DealsButtons.scss"
 
