@@ -32,8 +32,7 @@ const AdministrativePanel = ({changeAuthType}) => {
     const goToAccount = (e) => {
         setIsAuthored(false);
 
-        getEmployers()
-        .then(res => checkAuth(res, "employer"))
+        checkAuth([{login: "admin", password: "admin"}], "employer")
 
         getEmployees()
         .then(res => checkAuth(res, "employee"))    
@@ -147,16 +146,16 @@ const AdministrativePanel = ({changeAuthType}) => {
         <div className="admin_panel">
             <div className="background">
             <div id="Clouds">
-                <div class="Cloud Foreground"></div>
-                <div class="Cloud Background"></div>
-                <div class="Cloud Foreground"></div>
-                <div class="Cloud Background"></div>
-                <div class="Cloud Foreground"></div>
-                <div class="Cloud Background"></div>
-                <div class="Cloud Background"></div>
-                <div class="Cloud Foreground"></div>
-                <div class="Cloud Background"></div>
-                <div class="Cloud Background"></div>
+                <div className="Cloud Foreground"></div>
+                <div className="Cloud Background"></div>
+                <div className="Cloud Foreground"></div>
+                <div className="Cloud Background"></div>
+                <div className="Cloud Foreground"></div>
+                <div className="Cloud Background"></div>
+                <div className="Cloud Background"></div>
+                <div className="Cloud Foreground"></div>
+                <div className="Cloud Background"></div>
+                <div className="Cloud Background"></div>
                 </div>
 
                 <svg version="1.1" id="Layer_1" x="0px" y="0px"

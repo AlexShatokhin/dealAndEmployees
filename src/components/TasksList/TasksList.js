@@ -1,17 +1,13 @@
-import { useEffect } from "react"
 import { Spinner } from "react-bootstrap";
 
 import DealsItem from "../DealsItem/DealsItem";
 import DealsButtons from "../EmployerComponents/DealsButtons/DealsButtons";
 
 import useData from "../../services/getData"
-import useDeals from "../../hooks/EditDeals";
-
-import ChooseTask from "../EmployeeComponents/ChooseTask/ChooseTask";
 
 import "./TasksList.scss"
 
-const TasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee}) => {
+const TasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee, dataEmp}) => {
 
     const {loading} = useData();
 
@@ -23,8 +19,9 @@ const TasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee}) =>
                 index = {i}
                 renderProps = {renderProps ? () => renderProps({changeTaskAdded, dealID: item.id, deal: item, employee}) : ()=>{
                     return (
-                        <DealsButtons 
-                        data = {data}
+                        <DealsButtons
+                        dataEmp = {dataEmp}
+                        dataDeals = {data}
                         index = {i}
                         taskAdded = {taskAdded} 
                         changeTaskAdded={changeTaskAdded} 

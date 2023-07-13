@@ -18,18 +18,19 @@ const EmployerMain = ({data, changeAuthType}) => {
     const [employeeAdded, setEmployeeAdded] = useState(false);
     const [showComponents, setShowComponents] = useState("deal");
 
-    const {getDeals, getEmployees, load} = useData();
+    const {getDeals, getEmployees, loading} = useData();
 
     useEffect(()=>{
-        
+
         getEmployees()
-        .then(setEmployees)
+        .then((res)=>{setEmployees(res)})
 
     }, [employeeAdded])
 
     useEffect(()=>{
+
         getDeals()
-        .then(setDeals)
+        .then((res)=>{setDeals(res)})
     }, [taskAdded])
 
     const changeTaskAdded = () => {
@@ -62,10 +63,12 @@ const EmployerMain = ({data, changeAuthType}) => {
                 changeShowComponents={changeShowComponents}/>
             }}/>
 
+            
             {showComponents === "deal" ? 
             <>
                 <AddTask changeTaskAdded={changeTaskAdded} />
                 <TasksList 
+                dataEmp = {employees}
                 data = {deals}
                 changeTaskAdded={changeTaskAdded} 
                 taskAdded = {taskAdded}/>

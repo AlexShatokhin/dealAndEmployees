@@ -8,8 +8,9 @@ const ChooseTask = ({changeTaskAdded, dealID, employee, deal}) => {
     const{editDeal} = useData()
 
     function changeTaskEmployee(){
-        editDeal({...deal, employee: employee.login}, dealID);
-        changeTaskAdded();
+        editDeal({status: deal.status, title: deal.title, employeeID: employee.id}, dealID)
+        .then(changeTaskAdded)
+        
     }
 
     return (

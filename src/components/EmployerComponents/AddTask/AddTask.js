@@ -11,9 +11,8 @@ const AddTask = ({changeTaskAdded}) => {
     const {setDeal} = useData()
 
     function addTask(){
-        setDeal({title: taskValue});
+        setDeal({title: taskValue}).then(changeTaskAdded)
         setTaskValue("");
-        changeTaskAdded();
     }
 
     function changeTaskValue(e){
@@ -29,7 +28,7 @@ const AddTask = ({changeTaskAdded}) => {
             type="text" 
             className="add_new_task-input" />
             
-            <Button onClick={addTask} className="add_new_task-button">Добавить задание!</Button>
+            <Button disabled = {taskValue == ""} onClick={addTask} className="add_new_task-button">Добавить задание!</Button>
         </div>
 
     )

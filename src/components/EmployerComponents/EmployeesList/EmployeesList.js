@@ -26,7 +26,6 @@ const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded
 
 
     function renderEmployees(){
-        console.log(dataTasks)
         return dataEmp.map((item, i)=>{
             return (
                 <div onClick={()=>showDeals(item)} className="employees_list-item">

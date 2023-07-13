@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 
 import ChooseEmployee from "./../ChooseEmployee/ChooseEmployee";
@@ -9,22 +8,29 @@ import useDeals from "../../../hooks/EditDeals";
 
 import "./DealsButtons.scss"
 
-const DealsButtons = ({data, dealID, changeTaskAdded, taskAdded, index}) => {
+const DealsButtons = ({dataDeals, dealID, changeTaskAdded, taskAdded, index, dataEmp}) => {
 
 
     const { Modal, toggleModal, isShowModal} = useModal();
-    const {onDeleteDeal} = useDeals()
-    const {editDeal} = useData();
+    const {editDeal, deleteDeal} = useData();
 
     function changeCurrDeal(ind, chosenEmp){
-        editDeal({...data[ind], employee: chosenEmp}, dealID);
-        changeTaskAdded();
+        editDeal({status: "work", title: dataDeals[ind].title, employeeID: chosenEmp.id}, dealID)
+        .then(changeTaskAdded)
+        
+    }
+
+    function onDeleteDeal(){
+        deleteDeal(dealID)
+        .then(changeTaskAdded);
     }
 
     const modal = isShowModal ? 
     <Modal>
         <ChooseEmployee 
-        initEmp={data[index].employee} 
+        dataEmp = {dataEmp}
+        data = {dataDeals}
+        initEmp={dataEmp.filter(item => item.id == dataDeals[index].employeeID)[0]} 
         toggleModal={toggleModal} 
         index={index} 
         changeCurrDeal={changeCurrDeal} />
@@ -34,7 +40,7 @@ const DealsButtons = ({data, dealID, changeTaskAdded, taskAdded, index}) => {
         <div className="deals_item-buttons">    
             {modal}
         <Button onClick={toggleModal} variant="primary">Назначить</Button>
-        <div onClick={()=> {onDeleteDeal(dealID); changeTaskAdded()} }><i className="fa-solid fa-trash"></i></div>
+        <div onClick={onDeleteDeal}><i className="fa-solid fa-trash"></i></div>
     </div>
     )
 }

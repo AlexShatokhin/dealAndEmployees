@@ -5,7 +5,11 @@ const EmployeesTasks = ({employee, emmployeeDeal, changeTaskAdded, changeEmploye
     const {editDeal} = useData()
 
     function changeDeal(deal){
-        editDeal({...deal, employee: "nobody", status: "new"}, deal.id)
+        editDeal({title: deal.title, employeeID: "nobody", status: "new"}, deal.id)
+        .then(()=>{
+            changeTaskAdded(); 
+            changeEmployeeAdded();
+        })
     }
 
     function renderDeals(){
@@ -16,7 +20,7 @@ const EmployeesTasks = ({employee, emmployeeDeal, changeTaskAdded, changeEmploye
                     <div className="task_title"> <span>{i+1}. </span>{item.title}</div>
                     <div className="task_buttons">
                         <div className="task_is_complete">{item.status == "complete" ?<i style = {{color: "#00FF15"}} className ="fa-solid fa-check"></i> : null}</div>
-                        <div onClick={()=>{changeDeal(item); changeTaskAdded(); changeEmployeeAdded()}} className="task_delete"> <i class="fa-solid fa-trash"></i></div>
+                        <div onClick={()=>{changeDeal(item)}} className="task_delete"> <i class="fa-solid fa-trash"></i></div>
                     </div>
                 </div>
             )
