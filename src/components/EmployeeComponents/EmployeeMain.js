@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react"
-import { Button } from "react-bootstrap"
 
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
 import TasksList from "../TasksList/TasksList"
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary"
 import useData from "../../services/getData"
 
 import ChooseTask from "./ChooseTask/ChooseTask"
@@ -42,20 +42,24 @@ const EmployeeMain = ({data, changeAuthType}) => {
             changeAuthType={changeAuthType}
             renderProps={()=><div></div>}/>
 
-            <div className="employee_wrapper">
-                <div className="employee_main-my-tasks">
-                    <div className="employee-tasks_title">Мои задания</div>
-                    <hr />
-                    <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == data.login)} employee = {user} renderProps={(props)=><CompleteTask {...props} />}/>
+            <ErrorBoundary>
+                <div className="employee_wrapper">
+                    <div className="employee_main-my-tasks">
+                        <div className="employee-tasks_title">Мои задания</div>
+                        <hr />
+                        <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == data.login)} employee = {user} renderProps={(props)=><CompleteTask {...props} />}/>
 
-                </div>
+                    </div>
 
-                <div className="employee_main-all-tasks">
-                    <div className="employee-tasks_title">Список заданий</div>
-                    <hr />
-                    <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == null)} employee = {user} renderProps={(props)=><ChooseTask {...props} />}/>
+                    <div className="employee_main-all-tasks">
+                        <div className="employee-tasks_title">Список заданий</div>
+                        <hr />
+                        <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == null)} employee = {user} renderProps={(props)=><ChooseTask {...props} />}/>
+                    </div>
                 </div>
-            </div>
+            </ErrorBoundary>
+
+
 
 
         </div>

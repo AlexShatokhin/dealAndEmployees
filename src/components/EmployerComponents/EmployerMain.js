@@ -5,6 +5,7 @@ import NavigationMenu from "../NavigationMenu/NavigationMenu"
 import TasksList from "../TasksList/TasksList"
 import EmployeesList from "./EmployeesList/EmployeesList"
 import AddTask from "./AddTask/AddTask"
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary"
 
 import useData from "../../services/getData"
 
@@ -63,23 +64,25 @@ const EmployerMain = ({data, changeAuthType}) => {
                 changeShowComponents={changeShowComponents}/>
             }}/>
 
-            
-            {showComponents === "deal" ? 
-            <>
-                <AddTask changeTaskAdded={changeTaskAdded} />
-                <TasksList 
-                dataEmp = {employees}
-                data = {deals}
-                changeTaskAdded={changeTaskAdded} 
-                taskAdded = {taskAdded}/>
-            </> :
+            <ErrorBoundary>
+                {showComponents === "deal" ? 
+                <>
+                    <AddTask changeTaskAdded={changeTaskAdded} />
+                    <TasksList 
+                    dataEmp = {employees}
+                    data = {deals}
+                    changeTaskAdded={changeTaskAdded} 
+                    taskAdded = {taskAdded}/>
+                </> :
 
-            <EmployeesList
-            dataTasks = {deals} 
-            dataEmp = {employees}
-            changeTaskAdded={changeTaskAdded} 
-            changeEmployeeAdded = {changeEmployeeAdded}  
-            employeeAdded = {employeeAdded} />}
+                <EmployeesList
+                dataTasks = {deals} 
+                dataEmp = {employees}
+                changeTaskAdded={changeTaskAdded} 
+                changeEmployeeAdded = {changeEmployeeAdded}  
+                employeeAdded = {employeeAdded} />}
+            </ErrorBoundary>
+
 
         </section>
     )
