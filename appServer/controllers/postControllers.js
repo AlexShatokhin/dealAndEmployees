@@ -38,7 +38,7 @@ class Post {
     
     
     async getAllDeals(req, res, next){
-        const sql = "SELECT status, title, login as 'employee', tasks.id as 'id', employeeID FROM tasks LEFT JOIN emps ON emps.id = employeeID;";
+        const sql = "SELECT status, title, login as 'employee', tasks.id as 'id', employeeID, information FROM tasks LEFT JOIN emps ON emps.id = employeeID;";
         const [response, _] = await db.query(sql);
     
         res.send(response);
@@ -48,8 +48,8 @@ class Post {
         const {body} = req;
     
         const sql = 
-        `INSERT INTO tasks (title, status)
-         VALUES('${body.title}', 'new');`
+        `INSERT INTO tasks (title, status, information)
+         VALUES('${body.title}', 'new', '${body.information}');`
     
         const dataToSend = await db.query(sql);
     

@@ -12,7 +12,7 @@ const useModal = () => {
     function Modal(props){
         return (
             <div onClick={(e)=>{return e.target.classList.contains("popup")? toggleModal() : null}} className="popup">
-            <div className="popup_content">
+            <div {...props} className="popup_content">
                 <div onClick={toggleModal} className="close_btn">&#10010;</div>
     
                 {props.children}
