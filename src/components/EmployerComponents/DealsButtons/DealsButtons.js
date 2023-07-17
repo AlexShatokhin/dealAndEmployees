@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button } from "react-bootstrap";
 
 import ChooseEmployee from "./../ChooseEmployee/ChooseEmployee";
-import TaskInformation from "../TaskInformation/TaskInformation";
+import TaskInformation from "../../TaskInformation/TaskInformation";
 
 import useData from "../../../services/getData";
 import useModal from "../../../hooks/useModal";

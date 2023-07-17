@@ -12,12 +12,11 @@ import "./Clouds.css"
 
 const AdministrativePanel = ({changeAuthType}) => {
 
-    const [createdMode, setCreatedMode] = useState(false);
     const [name, setName] = useState("");
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [isAuthored, setIsAuthored] = useState(null);
-    const {loading, error, getEmployers, getEmployees, setEmployees} = useData();
+    const {loading, getEmployees} = useData();
 
     const changeStateValue = (e) => {
         setIsAuthored(null);
@@ -48,99 +47,10 @@ const AdministrativePanel = ({changeAuthType}) => {
         })
     }
 
-    const onChangeMode = () => {
-        setCreatedMode(!createdMode);
-    }
 
-    const createAccount = () => {
-        if(name === "" || login === "" || password === "")
-            setIsAuthored(false);
-        else {
-            setEmployees({name, login, password})
-            onChangeMode();
-        }
-
-    }
 
     const isLoading = loading ? <Spinner animation="border" variant="primary" /> : null;
     const isWrongAuth = isAuthored === false && !loading ? <p className="auth_error">Неверный логин или пароль!</p> : null;
-    const panelForm = createdMode ? 
-
-    <form action="#" className="admin_window__form">
-
-        <div className="admin_window__form-wrapper">
-            <input 
-            value={name} 
-            onChange={changeStateValue} 
-            id="name" 
-            type="text" 
-            className="admin__form-name" 
-            placeholder="Имя"/>                        
-        </div>
-
-        <div className="admin_window__form-wrapper">
-            <input 
-            value={login} 
-            onChange={changeStateValue} 
-            id="login" 
-            type="text" 
-            className="admin__form-login" 
-            placeholder="Логин"/>                        
-        </div>
-
-
-
-        <div className="admin_window__form-wrapper">
-            <input 
-            value={password} 
-            onChange={changeStateValue} 
-            id="password" 
-            type="password" 
-            className="admin__form-password" 
-            placeholder="Пароль"/>                        
-        </div>
-
-    
-        <Button onClick={createAccount} className="admin__form-submit" variant="primary" size="lg">
-            Создать аккаунт
-        </Button>
-        
-        {isLoading}
-    </form>
-
-    : (
-        <form action="#" className="admin_window__form">
-            <div className="admin_window__form-wrapper">
-                <input 
-                value={login} 
-                onChange={changeStateValue} 
-                id="login" 
-                type="text" 
-                className="admin__form-login" 
-                placeholder="Логин"/>                        
-            </div>
-
-
-
-            <div className="admin_window__form-wrapper">
-                <input 
-                value={password} 
-                onChange={changeStateValue} 
-                id="password" 
-                type="password" 
-                className="admin__form-password" 
-                placeholder="Пароль"/>                        
-            </div>
-
-
-            
-            <Button onClick={goToAccount} className="admin__form-submit" variant="primary" size="lg">
-                Войти!
-            </Button>
-            
-            {isLoading}
-        </form>
-    )
 
     return (
         <div className="admin_panel">
@@ -171,12 +81,41 @@ const AdministrativePanel = ({changeAuthType}) => {
             </div>
             
             <div className="admin_window">
-                <p onClick={onChangeMode} className="create_account">{createdMode ? "Войти в аккаунт" : "Создать аккаунт"}</p>
                 <div className="admin_window__title">Авторизация</div>
                 <hr />
 
                 {isWrongAuth}
-                {panelForm}
+                <form action="#" className="admin_window__form">
+                    <div className="admin_window__form-wrapper">
+                        <input 
+                        value={login} 
+                        onChange={changeStateValue} 
+                        id="login" 
+                        type="text" 
+                        className="admin__form-login" 
+                        placeholder="Логин"/>                        
+                    </div>
+
+
+
+                    <div className="admin_window__form-wrapper">
+                        <input 
+                        value={password} 
+                        onChange={changeStateValue} 
+                        id="password" 
+                        type="password" 
+                        className="admin__form-password" 
+                        placeholder="Пароль"/>                        
+                    </div>
+
+
+                    
+                    <Button onClick={goToAccount} className="admin__form-submit" variant="primary" size="lg">
+                        Войти!
+                    </Button>
+                    
+                    {isLoading}
+                </form>
             </div>
             
             {isAuthored ? <Navigate to = {`/${isAuthored}`} replace = {true} /> : null}
