@@ -39,9 +39,9 @@ class Post {
     
     async getAllDeals(req, res, next){
         
-        // SELECT emps.id as 'employeeID', name, login, tasks.id as 'taskID', tasks.status, tasks.title, tasks.information FROM emps LEFT JOIN tasks ON emps.id = tasks.employeeID;
+        // SELECT emps.id as 'employeeID', name, login as 'employee', tasks.id as 'id', tasks.status, tasks.title, tasks.information FROM emps  JOIN tasks ON emps.id = tasks.employeeID;
 
-        const sql = "SELECT emps.id as 'employeeID', name, login as 'employee', tasks.id as 'id', tasks.status, tasks.title, tasks.information FROM emps  JOIN tasks ON emps.id = tasks.employeeID;";
+        const sql = "SELECT status, title, login as 'employee', tasks.id as 'id', employeeID, information FROM tasks LEFT JOIN emps ON emps.id = employeeID;";
         const [response, _] = await db.query(sql);
     
         res.send(response);
