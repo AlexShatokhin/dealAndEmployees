@@ -1,24 +1,24 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import useData from "../../../services/getData";
 
-const EmployeesTasks = ({employee, emmployeeDeal, changeTaskAdded, changeEmployeeAdded}) => {
-
+const EmployeesTasks = ({emmployeeData, changeTaskAdded, changeEmployeeAdded}) => {
     function renderDeals(){
 
-        return emmployeeDeal.length ? emmployeeDeal.map((item, i)=>{
+        return emmployeeData.tasks.length ? emmployeeData.tasks.map((item, i)=>{
             return (
                 <DealItem 
                 changeTaskAdded = {changeTaskAdded} 
                 changeEmployeeAdded = {changeEmployeeAdded}
                 deal = {item}
-                ind = {i+1}/>
+                ind = {i+1}
+                employeeData = {emmployeeData}/>
             )
         }) : <p>Заданий пока нет!</p>
     }
 
     return (
         <section className="employee_block">
-            <div className="employee_name">{employee.name}</div>
+            <div className="employee_name">{emmployeeData.personalData.name}</div>
             <hr />
             {renderDeals()}
         </section>
@@ -26,13 +26,15 @@ const EmployeesTasks = ({employee, emmployeeDeal, changeTaskAdded, changeEmploye
 }
 
 
-const DealItem = ({deal, ind, changeTaskAdded, changeEmployeeAdded}) => {
+const DealItem = ({deal, ind, changeTaskAdded, changeEmployeeAdded, employeeData}) => {
     
     const [isShowInfo, setIsShowInfo] = useState(false);
     const {editDeal} = useData();
 
+    useEffect(()=>setIsShowInfo(false), [deal])
+
     function changeDeal(deal){
-        editDeal({title: deal.title, employeeID: "nobody", status: "new"}, deal.id)
+        editDeal({employeeID: "nobody", status: "new"}, deal.taskID)
         .then(()=>{
             changeTaskAdded(); 
             changeEmployeeAdded();
@@ -40,6 +42,7 @@ const DealItem = ({deal, ind, changeTaskAdded, changeEmployeeAdded}) => {
     }
 
     function changeInfoMode(){
+        console.log(employeeData);
         setIsShowInfo(!isShowInfo)
     }
     return (

@@ -17,7 +17,7 @@ const TasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee, dat
                 <DealsItem 
                 deal={item} 
                 index = {i}
-                renderProps = {renderProps ? () => renderProps({changeTaskAdded, dealID: item.id, deal: item, employee}) : ()=>{
+                renderProps = {renderProps ? () => renderProps({changeTaskAdded, dealID: item.taskID, deal: item, employee}) : ()=>{
                     return (
                         <DealsButtons
                         dataEmp = {dataEmp}

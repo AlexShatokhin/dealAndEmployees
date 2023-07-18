@@ -14,12 +14,12 @@ const DealsButtons = ({dataDeals, dealID, changeTaskAdded, taskAdded, index, dat
 
 
     const [isChooseEmp, setIsChooseEmp] = useState(false);
-
     const { Modal, toggleModal, isShowModal} = useModal();
-    const {editDeal, deleteDeal} = useData();
+    const {editDeal, deleteDeal, getDeal} = useData();
+
 
     function changeCurrDeal(ind, chosenEmp){
-        editDeal({status: "work", title: dataDeals[ind].title, employeeID: chosenEmp.id}, dealID)
+        editDeal({status: chosenEmp.length ? "work" : "new", employeeID: chosenEmp.map(item => item.id)}, dealID)
         .then(changeTaskAdded)
         
     }
@@ -38,13 +38,12 @@ const DealsButtons = ({dataDeals, dealID, changeTaskAdded, taskAdded, index, dat
         toggleModal();
         setIsChooseEmp(false);
     }
-
     const content = isChooseEmp ? 
     <>
         <ChooseEmployee 
         dataEmp = {dataEmp}
-        data = {dataDeals}
-        initEmp={dataEmp.filter(item => item.id == dataDeals[index].employeeID)[0]} 
+        dataDeals = {dataDeals}
+        initEmp={dataEmp.filter(item => item.id == dataDeals[index].employeeID)} 
         toggleModal={toggleModal} 
         index={index} 
         changeCurrDeal={changeCurrDeal} />

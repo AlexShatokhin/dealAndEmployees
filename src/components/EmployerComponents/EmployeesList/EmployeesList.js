@@ -6,6 +6,8 @@ import CountOfTasks from "../CountOfTasks/CountOfTasks";
 import EmployeeModal from "../../EmployeeModal/EmployeeModal";
 import EmployeesTasks from "../EmployeesTasks/EmployeesTasks";
 
+import EmployeeItem from "../EmployeeItem/EmployeeItem";
+
 import "./EmployeesList.scss"
 
 const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded}) => {
@@ -25,10 +27,7 @@ const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded
     function renderEmployees(){
         return dataEmp.map((item, i)=>{
             return (
-                <div onClick={()=>showDeals(item)} className="employees_list-item">
-                    <div className="employees_list-item-name">{item.name}</div>
-                    <CountOfTasks employee = {item} data={dataTasks}/>
-                </div>
+                <EmployeeItem showDeals = {showDeals} employee={item}/>
             )
         })
     }
@@ -37,7 +36,7 @@ const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded
 
     const isContent = dataEmp.length != 0 ? renderEmployees() : null;
     const modal = isShowModal ? <EmployeeModal Modal={Modal} toggleModal = {toggleModal} changeEmployeeAdded = {changeEmployeeAdded}/>  : null;
-    const isShowTasks = showTasks ? <EmployeesTasks changeEmployeeAdded = {changeEmployeeAdded} changeTaskAdded = {changeTaskAdded} emmployeeDeal={dataTasks.filter((item)=>item.employee == currEmployee.login)} employee={dataEmp.filter((item)=>item.login == currEmployee.login)[0]}/> : !showTasks ? <h3>Выберите сотрудника</h3> : null;
+    const isShowTasks = showTasks ? <EmployeesTasks changeEmployeeAdded = {changeEmployeeAdded} changeTaskAdded = {changeTaskAdded} emmployeeData={currEmployee}/> : !showTasks ? <h3>Выберите сотрудника</h3> : null;
 
     return (
         <section className="employees">

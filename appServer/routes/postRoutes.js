@@ -10,6 +10,7 @@ router.route("/employees/")
 
 
 router.route("/employees/:id")
+    .get(postControllers.getEmployee)
     .delete(postControllers.deleteEmployee);
 
 
@@ -20,6 +21,7 @@ router.route("/deals/")
     .post(postControllers.setDeal)
 
 router.route("/deals/:id")
+    .get(postControllers.getDeal)
     .put(postControllers.editDeal)
     .delete(postControllers.deleteDeal)
 

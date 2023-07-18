@@ -2,7 +2,6 @@
 import "./TaskInformation.scss"
 
 const TaskInformation = ({deal}) => {
-
     return (
         <div className="task_information-wrapper">
             <div className="task_info-title">{deal.title}</div>

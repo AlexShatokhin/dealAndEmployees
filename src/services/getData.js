@@ -5,9 +5,9 @@ const useData = () => {
 
     const {httpRequest, loading, error} = useHttp();
 
-    const getEmployers = async () => {
-        const employers = await httpRequest("http://localhost:3000/employers");
-        return employers;
+    const getEmployee = async (id) => {
+        const employees = await httpRequest(`http://localhost:3000/employees/${id}`);
+        return employees;
     }
 
     const getEmployees = async () => {
@@ -28,6 +28,11 @@ const useData = () => {
         return deals;
     }
 
+    const getDeal = async (id) => {
+        const deals = await httpRequest(`http://localhost:3000/deals/${id}`);
+        return deals;
+    }
+
     const setDeal = async (body) => {
         const dataToSend = {
             ...body, employee: "nobody", status: "new"
@@ -43,7 +48,7 @@ const useData = () => {
         return await httpRequest(`http://localhost:3000/deals/${id}`, "DELETE");
     }
 
-    return {loading, error, getEmployers, getEmployees, getDeals, setDeal, deleteDeal, setEmployees, deleteEmployees, editDeal};
+    return {loading, error, getEmployee, getEmployees, getDeals, getDeal, setDeal, deleteDeal, setEmployees, deleteEmployees, editDeal};
 
 }
 
