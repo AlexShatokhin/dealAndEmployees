@@ -2,41 +2,32 @@ import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 
 import useData from "../../../services/getData";
+import "./ChooseEmployee.scss"
 
-const ChooseEmployee = ({dataEmp, toggleModal, index, changeCurrDeal, initEmp, dataDeals}) => {
+const ChooseEmployee = ({dataEmp, changeChosenEmp, getChosenEmps}) => {
 
-    const [chosenEmp, setChosenEmp] = useState([]);
-    const {getDeal} = useData();
-
-    useEffect(()=>{
-        getDeal(dataDeals[index].id)
-        .then(res => setChosenEmp(res.map(item => ({id:item.id, login: item.login}))));
-    }, [])
-
-    function changeChosenEmp(emp){
-        if(chosenEmp.indexOf(emp) == -1){
-            setChosenEmp([...chosenEmp, emp]); 
-        } else {
-            setChosenEmp(chosenEmp.filter(item => item.id != emp.id));
-        }
-        
+    function isChosenEmp(emp){
+        return getChosenEmps().filter(item => item.id == emp.id).length;
     }
 
     function renderEmployees(){
         return dataEmp.map(employee => {
             return (    
-                <div style={chosenEmp.filter(item => item.id == employee.id).length ? {backgroundColor: "rgba(17, 0, 255, 0.2)"} : null} className="employee_to_choose-item">
-                    <div onClick={()=>changeChosenEmp(employee)}  className="employee-name">{employee.name}</div>
+                <div  onClick={()=>changeChosenEmp(employee)}  style={ isChosenEmp(employee) ? {backgroundColor: "#938fff", transition: ".3s all"} : null} className="employee_to_choose-item">
+                    <div className="employee-name">{employee.name}</div>
                 </div>
             ) 
         })
     }
 
     return (
-        <div className="employeers_to_choose">
-            {renderEmployees()}
-            <Button onClick={()=>{changeCurrDeal(index, chosenEmp); toggleModal(); }}>Выбрать!</Button>
-        </div>
+        <>
+            <hr style={{width: "100%"}}/>
+            <div className="employeers_to_choose">
+                {renderEmployees()}
+            </div>
+        </>
+
     )
 }
 

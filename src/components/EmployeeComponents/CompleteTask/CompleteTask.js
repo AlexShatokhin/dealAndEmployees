@@ -10,8 +10,9 @@ const CompleteTask = ({changeTaskAdded, dealID, employee, deal}) => {
     const {isShowModal, toggleModal, Modal} = useModal();
     const {editDeal} = useData();
 
+
     function changeTaskEmployee(){
-        editDeal({status: "complete", title: deal.title, employeeID: employee.id}, dealID)
+        editDeal({status: "complete", employeeID: employee[0].id}, deal.taskID)
         .then(changeTaskAdded)
         
     }

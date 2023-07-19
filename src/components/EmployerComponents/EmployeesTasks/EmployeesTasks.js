@@ -1,7 +1,25 @@
 import { useEffect, useState } from "react";
 import useData from "../../../services/getData";
 
-const EmployeesTasks = ({emmployeeData, changeTaskAdded, changeEmployeeAdded}) => {
+const EmployeesTasks = ({emmployeeData, changeTaskAdded, changeEmployeeAdded, taskAdded, showDeals}) => {
+
+    const {getEmployee} = useData();
+
+    useEffect(()=>{
+        getEmployee(emmployeeData.personalData.id)
+        .then(res => {
+            const empData = {
+                personalData: res.responseName[0], 
+                tasks: res.response, 
+                countAll: res.responseCountAll[0].countAll, 
+                countComplete: res.responseCountComplete[0].countComplete
+            };
+            showDeals(empData);
+        })
+    }, [taskAdded]);
+        
+
+
     function renderDeals(){
 
         return emmployeeData.tasks.length ? emmployeeData.tasks.map((item, i)=>{
@@ -34,7 +52,7 @@ const DealItem = ({deal, ind, changeTaskAdded, changeEmployeeAdded, employeeData
     useEffect(()=>setIsShowInfo(false), [deal])
 
     function changeDeal(deal){
-        editDeal({employeeID: "nobody", status: "new"}, deal.taskID)
+        editDeal({employeeID: employeeData.personalData.id, status: "new", action: "DEL_EMP"}, deal.taskID)
         .then(()=>{
             changeTaskAdded(); 
             changeEmployeeAdded();
@@ -42,7 +60,6 @@ const DealItem = ({deal, ind, changeTaskAdded, changeEmployeeAdded, employeeData
     }
 
     function changeInfoMode(){
-        console.log(employeeData);
         setIsShowInfo(!isShowInfo)
     }
     return (

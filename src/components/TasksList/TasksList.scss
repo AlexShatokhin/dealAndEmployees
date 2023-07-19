@@ -11,6 +11,7 @@
         justify-content: space-between;
         align-items: center;
         font-size: 21px;
+        flex-wrap: wrap;
         &:hover{
             background-color: rgba(20, 28, 115, 0.5);
             transition: .2s all;

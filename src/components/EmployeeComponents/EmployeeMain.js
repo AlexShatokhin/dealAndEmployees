@@ -12,7 +12,7 @@ const EmployeeMain = ({data, changeAuthType}) => {
 
     const [deals, setDeals] = useState([]);
     const [user, setUser] = useState({});
-    const {getDeals, getEmployees} = useData();
+    const {getDeals, getEmployees, getEmployee} = useData();
     const [taskAdded, setTaskAdded] = useState(false);
 
     useEffect(()=>{
@@ -20,7 +20,9 @@ const EmployeeMain = ({data, changeAuthType}) => {
         .then(setDeals)
 
         getEmployees()
-        .then(res => setUser(res.filter(emp => emp.login === data.login)[0]))
+        .then(res => res.filter(item => item.login == data.login)[0].id)
+        .then(getEmployee)
+        .then(res => {setUser(res); console.log(res)})
     }, [taskAdded])
 
     
@@ -29,6 +31,22 @@ const EmployeeMain = ({data, changeAuthType}) => {
         setTaskAdded(!taskAdded);
     }
 
+    const content = user.responseName ? 
+        <div className="employee_wrapper">
+            <div className="employee_main-my-tasks">
+                <div className="employee-tasks_title">Мои задания</div>
+                <hr />
+                <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {user.response} employee = {user.responseName} renderProps={(props)=><CompleteTask {...props} />}/>
+
+            </div>
+
+            <div className="employee_main-all-tasks">
+                <div className="employee-tasks_title">Список заданий</div>
+                <hr />
+                <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(deal => deal.status == "new")} employee = {user.responseName} renderProps={(props)=><ChooseTask {...props} />}/>
+            </div>
+        </div>
+        : console.log(user);
     return (
         <div className="employee_main">
             <div className="back">
@@ -42,23 +60,7 @@ const EmployeeMain = ({data, changeAuthType}) => {
             changeAuthType={changeAuthType}
             renderProps={()=><div></div>}/>
 
-
-            <ErrorBoundary>
-            <div className="employee_wrapper">
-                <div className="employee_main-my-tasks">
-                    <div className="employee-tasks_title">Мои задания</div>
-                    <hr />
-                    <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == data.login)} employee = {user} renderProps={(props)=><CompleteTask {...props} />}/>
-
-                </div>
-
-                <div className="employee_main-all-tasks">
-                    <div className="employee-tasks_title">Список заданий</div>
-                    <hr />
-                    <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(item => item.employee == null)} employee = {user} renderProps={(props)=><ChooseTask {...props} />}/>
-                </div>
-            </div>
-        </ErrorBoundary>
+            {content}
 
 
         </div>

@@ -2,16 +2,24 @@ import { useEffect, useState } from "react";
 
 import useData from "../../../services/getData"
 
-const EmployeeItem = ({employee, showDeals}) => {
+const EmployeeItem = ({employee, showDeals, employeeAdded}) => {
 
     const [employeeData, setEmployeeData] = useState({});
     const {getEmployee} = useData();
 
     useEffect(()=>{
         getEmployee(employee.id)
-        .then(res => setEmployeeData({personalData: res.responseName[0], tasks: res.response, countAll: res.responseCountAll[0].countAll, countComplete: res.responseCountComplete[0].countComplete}))
-    }, [])
-    
+        .then(res => {
+            const empData = {
+                personalData: res.responseName[0], 
+                tasks: res.response, 
+                countAll: res.responseCountAll[0].countAll, 
+                countComplete: res.responseCountComplete[0].countComplete
+            };
+            setEmployeeData(empData);
+        });
+    }, [employeeAdded])
+
 
     return (
         <div onClick={()=>showDeals(employeeData)} className="employees_list-item">

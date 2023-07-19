@@ -106,7 +106,7 @@ class Post {
     async editDeal(req, res, next){
         const {body} = req
         const dealID = req.params.id;
-    
+
         const sql = 
         `UPDATE tasks 
          SET status = '${body.status}' 
@@ -114,24 +114,57 @@ class Post {
          `;
     
         const dataToSend = await db.query(sql);
-        if(!body.employeeID.length){
-            await db.query(       
-            ` DELETE FROM tasks_to_emps WHERE taskID = ${dealID}; `
-            );
-        } else {
-            body.employeeID.forEach(async id => {
-                await  await db.query(
+
+        switch(body.action){
+            case "DEL_EMP": 
+                await db.query(`
+                DELETE FROM tasks_to_emps WHERE employeeID = ${body.employeeID} AND taskID = ${dealID};
+                `);
+                break;
+            case "RECHOOSE_EMP": 
+                // if(!body.employeeID.length){
+                //     await db.query(       
+                //     ` DELETE FROM tasks_to_emps WHERE taskID = ${dealID}; `
+                //     );
+                    let [resPrev,_] = await db.query(
+                        `SELECT employeeID FROM tasks_to_emps WHERE taskID = ${dealID}`);
+
+                    resPrev = resPrev.map(item => item.employeeID)
+
+                    const dataToSend = [...body.employeeID.filter(id => resPrev.indexOf(id) == -1)];
+                    const dataToDelete = [...resPrev.filter(id => body.employeeID.indexOf(id) == -1)];
+                    dataToSend.forEach(async id => {
+                            await db.query(
+                                `
+                                INSERT INTO tasks_to_emps (taskID, employeeID)
+                                VALUES (${dealID}, ${id});
+                                `
+                            ); 
+                    });
+
+                    dataToDelete.forEach(async id => {
+
+                        await db.query(
+                            `
+                            DELETE FROM tasks_to_emps
+                            WHERE employeeID = ${id} AND taskID = ${dealID};
+                            `
+                        ); 
+
+                });
+                break;
+
+            case "CHOOSE_DEAL": 
+                await db.query(
                     `
                     INSERT INTO tasks_to_emps (taskID, employeeID)
-                    VALUES (${dealID}, ${id});
+                    VALUES (${dealID}, ${body.employeeID});
                     `
-                );    
-            })
+                ); 
+                break;
+            default: break;
         }
-                
 
-
-    
         res.send(dataToSend);
     }
     

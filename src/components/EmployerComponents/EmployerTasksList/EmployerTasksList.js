@@ -1,24 +1,19 @@
 import { useState } from "react";
 import { Spinner } from "react-bootstrap";
 
-import DealsItem from "../DealsItem/DealsItem";
-import DealsButtons from "../EmployerComponents/DealsButtons/DealsButtons";
+import DealsItem from "../EmployerDealsItem/EmployerDealsItem";
+import EmployerDealsItem from "../EmployerDealsItem/EmployerDealsItem";
+import DealsButtons from "../../EmployerComponents/DealsButtons/DealsButtons";
 
-import useData from "../../services/getData"
+import useData from "../../../services/getData"
 
-import "./TasksList.scss"
+import "../../TasksList/TasksList.scss"
 
-const TasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee, dataEmp}) => {
+const EmployerTasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee, dataEmp}) => {
 
     const {loading, editDeal} = useData();
 
 
-
-    function changeCurrDeal(ind, chosenEmp){
-        editDeal({action:"RECHOOSE_EMP", status: chosenEmp.length ? "work" : "new", employeeID: chosenEmp.map(item => item.id)}, ind)
-        .then(changeTaskAdded)
-        
-    }
 
     const [chooseBlock, setChooseBlock] = useState(false);
 
@@ -30,23 +25,13 @@ const TasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee, dat
         return data.map((item, i)=>{
             
             return (
-                <DealsItem 
+                <EmployerDealsItem 
                 deal={item} 
                 index = {i}
                 dataEmp = {dataEmp}
                 dataDeals = {data}
-                changeCurrDeal = {changeCurrDeal}
-                renderProps = {renderProps ? () => renderProps({changeTaskAdded, dealID: item.id, deal: item, employee}) : ()=>{
-                    return (
-                        <DealsButtons
-                        dataEmp = {dataEmp}
-                        dataDeals = {data}
-                        index = {i}
-                        taskAdded = {taskAdded} 
-                        changeTaskAdded={changeTaskAdded} 
-                        dealID={item.id}/>
-                    )
-                }}/>
+                taskAdded = {taskAdded} 
+                changeTaskAdded={changeTaskAdded} />
             ) 
         })
     }
@@ -88,4 +73,4 @@ const TasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee, dat
 
 }
 
-export default TasksList;
+export default EmployerTasksList;

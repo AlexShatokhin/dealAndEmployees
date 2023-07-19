@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import EmployerMenu from "./EmployerMenu/EmployerMenu"
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
 import TasksList from "../TasksList/TasksList"
+import EmployerTasksList from "./EmployerTasksList/EmployerTasksList"
 import EmployeesList from "./EmployeesList/EmployeesList"
 import AddTask from "./AddTask/AddTask"
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary"
@@ -24,14 +25,14 @@ const EmployerMain = ({data, changeAuthType}) => {
     useEffect(()=>{
 
         getEmployees()
-        .then((res)=>{setEmployees(res)})
+        .then(setEmployees)
 
     }, [employeeAdded])
 
     useEffect(()=>{
 
         getDeals()
-        .then((res)=>{setDeals(res)})
+        .then(setDeals)
     }, [taskAdded])
 
     const changeTaskAdded = () => {
@@ -68,7 +69,7 @@ const EmployerMain = ({data, changeAuthType}) => {
             {showComponents === "deal" ? 
             <>
                 <AddTask changeTaskAdded={changeTaskAdded} />
-                <TasksList 
+                <EmployerTasksList 
                 dataEmp = {employees}
                 data = {deals}
                 changeTaskAdded={changeTaskAdded} 
@@ -80,7 +81,9 @@ const EmployerMain = ({data, changeAuthType}) => {
             dataEmp = {employees}
             changeTaskAdded={changeTaskAdded} 
             changeEmployeeAdded = {changeEmployeeAdded}  
-            employeeAdded = {employeeAdded} />}
+            employeeAdded = {employeeAdded}
+            taskAdded = {taskAdded}
+            />}
         </ErrorBoundary>
 
 
