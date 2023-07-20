@@ -47,7 +47,8 @@ const EmployerDealsItem = ({deal, renderProps, index, dataEmp, changeCurrDeal, i
                         changeTaskAdded={changeTaskAdded} 
                         dealID={deal.id}
                         getChosenEmps = {getChosenEmps}
-                        showChooseBlock={showChooseBlock}/>
+                        showChooseBlock={showChooseBlock}
+                        chooseBlock = {chooseBlock}/>
 
             {chooseBlock ? 
                 <ChooseEmployee                 

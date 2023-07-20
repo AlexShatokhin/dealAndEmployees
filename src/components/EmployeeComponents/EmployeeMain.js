@@ -26,6 +26,11 @@ const EmployeeMain = ({data, changeAuthType}) => {
     }, [taskAdded])
 
     
+    function getFreeDeals(){
+        const employeeDeals = user.response.map(deal => deal.taskID);
+
+        return deals.filter(item => employeeDeals.indexOf(item.id) == -1);
+    }
 
     const changeTaskAdded = () => {
         setTaskAdded(!taskAdded);
@@ -43,7 +48,7 @@ const EmployeeMain = ({data, changeAuthType}) => {
             <div className="employee_main-all-tasks">
                 <div className="employee-tasks_title">Список заданий</div>
                 <hr />
-                <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {deals.filter(deal => deal.status == "new")} employee = {user.responseName} renderProps={(props)=><ChooseTask {...props} />}/>
+                <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {getFreeDeals()} employee = {user.responseName} renderProps={(props)=><ChooseTask {...props} />}/>
             </div>
         </div>
         : console.log(user);

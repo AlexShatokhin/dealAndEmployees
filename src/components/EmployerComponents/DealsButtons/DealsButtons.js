@@ -20,7 +20,7 @@ const DealsButtons = ({dataDeals, dealID, changeTaskAdded, taskAdded, index, dat
 
 
     function changeCurrDeal(chosenEmp){
-        editDeal({action:"RECHOOSE_EMP", employeeID: getChosenEmps().map(item => item.id)}, dealID)
+        editDeal({action:"RECHOOSE_EMP", employeeID: getChosenEmps().map(item => item.id), status: "work"}, dealID)
         .then(changeTaskAdded)
         
     }
