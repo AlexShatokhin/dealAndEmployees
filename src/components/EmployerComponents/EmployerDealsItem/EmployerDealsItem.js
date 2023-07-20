@@ -4,7 +4,7 @@ import ChooseEmployee from "../../EmployerComponents/ChooseEmployee/ChooseEmploy
 import DealsButtons from "../DealsButtons/DealsButtons";
 import useData from "../../../services/getData";
 
-const EmployerDealsItem = ({deal, renderProps, index, dataEmp, changeCurrDeal, initEmp, dataDeals, taskAdded, changeTaskAdded}) => {
+const EmployerDealsItem = ({deal, index, dataEmp, dataDeals, taskAdded, changeTaskAdded}) => {
 
     const [chooseBlock, setChooseBlock] = useState(false);
     const [chosenEmp, setChosenEmp] = useState([]);

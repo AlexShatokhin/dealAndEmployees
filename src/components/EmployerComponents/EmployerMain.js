@@ -2,14 +2,12 @@ import { useEffect, useState } from "react"
 
 import EmployerMenu from "./EmployerMenu/EmployerMenu"
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
-import TasksList from "../TasksList/TasksList"
 import EmployerTasksList from "./EmployerTasksList/EmployerTasksList"
 import EmployeesList from "./EmployeesList/EmployeesList"
 import AddTask from "./AddTask/AddTask"
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary"
 
 import useData from "../../services/getData"
-
 
 const EmployerMain = ({data, changeAuthType}) => {
 

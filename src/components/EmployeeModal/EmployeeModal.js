@@ -33,7 +33,6 @@ const EmployeeModal = ({changeEmployeeAdded, toggleModal, Modal}) => {
         
     }
 
-
     return (
         <Modal>
             <form action="#" className="popup__form">

@@ -4,10 +4,7 @@ import { Button } from "react-bootstrap"
 import useData from "../../../services/getData";
 import useModal from "../../../hooks/useModal";
 
-
-
 import TaskInformation from "../../TaskInformation/TaskInformation";
-
 
 const ChooseTask = ({changeTaskAdded, dealID, employee, deal}) => {
 

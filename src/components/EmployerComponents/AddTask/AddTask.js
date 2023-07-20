@@ -45,7 +45,6 @@ const AddTask = ({changeTaskAdded}) => {
 
             </div>
 
-
             <Button disabled = {titleValue === "" || taskInformation === ""} onClick={addTask} className="add_new_task-button">Добавить задание!</Button>
         </div>
 

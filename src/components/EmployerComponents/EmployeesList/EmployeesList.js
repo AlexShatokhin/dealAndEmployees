@@ -1,7 +1,6 @@
 import { useState } from "react"
 
 import useModal from "../../../hooks/useModal";
-import CountOfTasks from "../CountOfTasks/CountOfTasks";
 
 import EmployeeModal from "../../EmployeeModal/EmployeeModal";
 import EmployeesTasks from "../EmployeesTasks/EmployeesTasks";
@@ -24,14 +23,12 @@ const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded
 
 
     function renderEmployees(){
-        return dataEmp.map((item, i)=>{
+        return dataEmp.map((item)=>{
             return (
                 <EmployeeItem employeeAdded = {employeeAdded} showDeals = {showDeals} employee={item}/>
             )
         })
     }
-
-
 
     const isContent = dataEmp.length != 0 ? renderEmployees() : null;
     const modal = isShowModal ? <EmployeeModal Modal={Modal} toggleModal = {toggleModal} changeEmployeeAdded = {changeEmployeeAdded}/>  : null;
@@ -52,8 +49,6 @@ const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded
                 {isShowTasks}
             </div>
         </section>
-
-
 
     )
 }

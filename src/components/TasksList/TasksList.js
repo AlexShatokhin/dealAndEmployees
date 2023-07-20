@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Spinner } from "react-bootstrap";
 
 import DealsItem from "../DealsItem/DealsItem";
@@ -12,20 +11,12 @@ const TasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee, dat
 
     const {loading, editDeal} = useData();
 
-
-
     function changeCurrDeal(ind, chosenEmp){
         editDeal({action:"RECHOOSE_EMP", status: chosenEmp.length ? "work" : "new", employeeID: chosenEmp.map(item => item.id)}, ind)
         .then(changeTaskAdded)
         
     }
 
-    const [chooseBlock, setChooseBlock] = useState(false);
-
-    function showChooseBlock(){
-        setChooseBlock(!chooseBlock);
-    }
-    
     function renderDeals(){
         return data.map((item, i)=>{
             
@@ -52,9 +43,6 @@ const TasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee, dat
     }
 
 
-
-
-
     const isLoading = loading ? 
     <Spinner style = {{
                         display: "block", 
@@ -75,8 +63,6 @@ const TasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee, dat
                 fontSize: 35}}>
     Заданий пока нет!
     </p> : null;
-
-
 
     return (
         <div className="deals">

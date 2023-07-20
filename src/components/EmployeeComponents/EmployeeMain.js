@@ -2,7 +2,6 @@ import { useState, useEffect } from "react"
 
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
 import TasksList from "../TasksList/TasksList"
-import ErrorBoundary from "../ErrorBoundary/ErrorBoundary"
 import useData from "../../services/getData"
 
 import ChooseTask from "./ChooseTask/ChooseTask"
@@ -22,7 +21,7 @@ const EmployeeMain = ({data, changeAuthType}) => {
         getEmployees()
         .then(res => res.filter(item => item.login == data.login)[0].id)
         .then(getEmployee)
-        .then(res => {setUser(res); console.log(res)})
+        .then(setUser)
     }, [taskAdded])
 
     
@@ -51,7 +50,7 @@ const EmployeeMain = ({data, changeAuthType}) => {
                 <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {getFreeDeals()} employee = {user.responseName} renderProps={(props)=><ChooseTask {...props} />}/>
             </div>
         </div>
-        : console.log(user);
+        : null;
     return (
         <div className="employee_main">
             <div className="back">
@@ -66,7 +65,6 @@ const EmployeeMain = ({data, changeAuthType}) => {
             renderProps={()=><div></div>}/>
 
             {content}
-
 
         </div>
     )

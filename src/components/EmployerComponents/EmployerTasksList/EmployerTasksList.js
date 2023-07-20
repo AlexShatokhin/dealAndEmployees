@@ -1,26 +1,15 @@
-import { useState } from "react";
 import { Spinner } from "react-bootstrap";
 
-import DealsItem from "../EmployerDealsItem/EmployerDealsItem";
 import EmployerDealsItem from "../EmployerDealsItem/EmployerDealsItem";
-import DealsButtons from "../../EmployerComponents/DealsButtons/DealsButtons";
 
 import useData from "../../../services/getData"
 
 import "../../TasksList/TasksList.scss"
 
-const EmployerTasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee, dataEmp}) => {
+const EmployerTasksList = ({data, changeTaskAdded, taskAdded, dataEmp}) => {
 
-    const {loading, editDeal} = useData();
-
-
-
-    const [chooseBlock, setChooseBlock] = useState(false);
-
-    function showChooseBlock(){
-        setChooseBlock(!chooseBlock);
-    }
-    
+    const {loading} = useData();
+  
     function renderDeals(){
         return data.map((item, i)=>{
             
@@ -35,10 +24,6 @@ const EmployerTasksList = ({data, changeTaskAdded, taskAdded, renderProps, emplo
             ) 
         })
     }
-
-
-
-
 
     const isLoading = loading ? 
     <Spinner style = {{
@@ -60,8 +45,6 @@ const EmployerTasksList = ({data, changeTaskAdded, taskAdded, renderProps, emplo
                 fontSize: 35}}>
     Заданий пока нет!
     </p> : null;
-
-
 
     return (
         <div className="deals">

@@ -1,11 +1,8 @@
 import { useEffect, useState } from "react";
 
-import useData from "../../../services/getData";
-
 const CountOfTasks = ({data, employee}) => {
 
     const [employeeDeals, setEmployeeDeals] = useState([]);
-    const {getDeal} = useData();
 
     console.log(employee)
     useEffect(()=>{

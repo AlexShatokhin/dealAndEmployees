@@ -5,7 +5,7 @@ import useData from "../../../services/getData"
 
 import TaskInformation from "../../TaskInformation/TaskInformation"
 
-const CompleteTask = ({changeTaskAdded, dealID, employee, deal, data}) => {
+const CompleteTask = ({changeTaskAdded, employee, deal}) => {
 
     const {isShowModal, toggleModal, Modal} = useModal();
     const {editDeal} = useData();
@@ -15,12 +15,6 @@ const CompleteTask = ({changeTaskAdded, dealID, employee, deal, data}) => {
         editDeal({status: "complete", employeeID: employee[0].id}, deal.taskID)
         .then(changeTaskAdded)
         
-    }
-
-    function isComplete(){
-
-        console.log(data, deal);
-        return true;
     }
 
     const content = isShowModal ? 

@@ -18,8 +18,6 @@ const EmployeesTasks = ({emmployeeData, changeTaskAdded, changeEmployeeAdded, ta
         })
     }, [taskAdded]);
         
-
-
     function renderDeals(){
 
         return emmployeeData.tasks.length ? emmployeeData.tasks.map((item, i)=>{
@@ -42,7 +40,6 @@ const EmployeesTasks = ({emmployeeData, changeTaskAdded, changeEmployeeAdded, ta
         </section>
     )
 }
-
 
 const DealItem = ({deal, ind, changeTaskAdded, changeEmployeeAdded, employeeData}) => {
     

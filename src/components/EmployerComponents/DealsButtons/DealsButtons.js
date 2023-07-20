@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Button } from "react-bootstrap";
 
-import ChooseEmployee from "./../ChooseEmployee/ChooseEmployee";
 import TaskInformation from "../../TaskInformation/TaskInformation";
 
 import useData from "../../../services/getData";
@@ -10,21 +8,17 @@ import useModal from "../../../hooks/useModal";
 import "./DealsButtons.scss"
 
 
-const DealsButtons = ({dataDeals, dealID, changeTaskAdded, taskAdded, index, dataEmp, showChooseBlock, getChosenEmps}) => {
-
-
-    const [isChooseEmp, setIsChooseEmp] = useState(false);
+const DealsButtons = ({dataDeals, dealID, changeTaskAdded, index, dataEmp, showChooseBlock, getChosenEmps}) => {
 
     const { Modal, toggleModal, isShowModal} = useModal();
     const {editDeal, deleteDeal} = useData();
 
 
-    function changeCurrDeal(chosenEmp){
+    function changeCurrDeal(){
         editDeal({action:"RECHOOSE_EMP", employeeID: getChosenEmps().map(item => item.id), status: "work"}, dealID)
         .then(changeTaskAdded)
         
     }
-
 
     function onDeleteDeal(){
         deleteDeal(dealID)
@@ -35,18 +29,7 @@ const DealsButtons = ({dataDeals, dealID, changeTaskAdded, taskAdded, index, dat
 
     function changeInfoMod(){
         toggleModal();
-        setIsChooseEmp(false);
     }
-    const content = isChooseEmp ? 
-    <>
-        <ChooseEmployee 
-        dataEmp = {dataEmp}
-        dataDeals = {dataDeals}
-        initEmp={dataEmp.filter(item => item.id == dataDeals[index].employeeID)} 
-        toggleModal={toggleModal} 
-        index={index} 
-        changeCurrDeal={changeCurrDeal} />
-    </> : null;
 
     const showModal = isShowModal ? 
     <Modal style = {{width: "800px"}}>
