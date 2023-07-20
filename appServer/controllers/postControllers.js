@@ -67,11 +67,7 @@ class Post {
     
     async getAllDeals(req, res, next){
         
-        // SELECT emps.id as 'employeeID', name, login as 'employee', tasks.id as 'id', tasks.status, tasks.title, tasks.information FROM emps  JOIN tasks ON emps.id = tasks.employeeID;
-
-        const sql = `
-        SELECT * FROM tasks
-        `;
+        const sql = `SELECT * FROM tasks`;
         const [response, _] = await db.query(sql);
     
         res.send(response);
@@ -106,19 +102,6 @@ class Post {
     async editDeal(req, res, next){
         const {body} = req
         const dealID = req.params.id;
-        let dataToSend;
-
-        // if(body.status && body.employeeID.length){
-        //     const sql = 
-        //     `UPDATE tasks_to_emps 
-        //      SET status = '${body.status}' 
-        //      WHERE taskID = ${dealID} AND employeeID = ${body.employeeID};
-        //      `;
-        //     dataToSend = await db.query(sql);
-        // }
-
-    
-
 
         switch(body.action){
             case "DEL_EMP": 
@@ -127,10 +110,6 @@ class Post {
                 `);
                 break;
             case "RECHOOSE_EMP": 
-                // if(!body.employeeID){
-                //     await db.query(       
-                //     ` DELETE FROM tasks_to_emps WHERE taskID = ${dealID}; `
-                //     );
                     let [resPrev,_] = await db.query(
                         `SELECT employeeID FROM tasks_to_emps WHERE taskID = ${dealID}`);
 
@@ -150,10 +129,8 @@ class Post {
                     dataToDelete.forEach(async id => {
 
                         await db.query(
-                            `
-                            DELETE FROM tasks_to_emps
-                            WHERE employeeID = ${id} AND taskID = ${dealID};
-                            `
+                            `DELETE FROM tasks_to_emps
+                            WHERE employeeID = ${id} AND taskID = ${dealID};`
                         ); 
 
                 });
@@ -162,18 +139,15 @@ class Post {
 
             case "CHOOSE_DEAL": 
                 await db.query(
-                    `
-                    INSERT INTO tasks_to_emps (taskID, employeeID, status)
-                    VALUES (${dealID}, ${body.employeeID}, '${body.status}');
-                    `
+                    `INSERT INTO tasks_to_emps (taskID, employeeID, status)
+                    VALUES (${dealID}, ${body.employeeID}, '${body.status}');`
                 ); 
                 break;
             default:
                 const sql = 
                 `UPDATE tasks_to_emps 
                  SET status = '${body.status}' 
-                 WHERE taskID = ${dealID} AND employeeID = ${body.employeeID};
-                 `;
+                 WHERE taskID = ${dealID} AND employeeID = ${body.employeeID};`;
                 await db.query(sql); 
             break;
         }
@@ -188,11 +162,7 @@ class Post {
         const sql = `DELETE FROM tasks WHERE id = ${dealID}`;
     
         const dataToSend = await db.query(sql);
-        await db.query(
-            `
-            DELETE FROM tasks_to_emps WHERE taskID = ${dealID};
-            `
-        )
+        await db.query(`DELETE FROM tasks_to_emps WHERE taskID = ${dealID};`)
     
         res.send(dataToSend);
     
