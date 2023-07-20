@@ -1,7 +1,3 @@
-import { useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
-
-import useData from "../../../services/getData";
 import "./ChooseEmployee.scss"
 
 const ChooseEmployee = ({dataEmp, changeChosenEmp, getChosenEmps}) => {

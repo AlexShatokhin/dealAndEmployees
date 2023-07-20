@@ -14,14 +14,13 @@ const DealsButtons = ({dataDeals, dealID, changeTaskAdded, taskAdded, index, dat
 
 
     const [isChooseEmp, setIsChooseEmp] = useState(false);
-    const [chooseBlock, setChooseBlock] = useState(false);
 
     const { Modal, toggleModal, isShowModal} = useModal();
-    const {editDeal, deleteDeal, getDeal} = useData();
+    const {editDeal, deleteDeal} = useData();
 
 
     function changeCurrDeal(chosenEmp){
-        editDeal({action:"RECHOOSE_EMP", status: getChosenEmps().length ? "work" : "new", employeeID: getChosenEmps().map(item => item.id)}, dealID)
+        editDeal({action:"RECHOOSE_EMP", employeeID: getChosenEmps().map(item => item.id)}, dealID)
         .then(changeTaskAdded)
         
     }

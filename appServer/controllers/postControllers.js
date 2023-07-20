@@ -106,14 +106,19 @@ class Post {
     async editDeal(req, res, next){
         const {body} = req
         const dealID = req.params.id;
+        let dataToSend;
 
-        const sql = 
-        `UPDATE tasks 
-         SET status = '${body.status}' 
-         WHERE id = ${dealID};
-         `;
+        if(body.status){
+            const sql = 
+            `UPDATE tasks 
+             SET status = '${body.status}' 
+             WHERE id = ${dealID};
+             `;
+            dataToSend = await db.query(sql);
+        }
+
     
-        const dataToSend = await db.query(sql);
+
 
         switch(body.action){
             case "DEL_EMP": 
@@ -165,7 +170,7 @@ class Post {
             default: break;
         }
 
-        res.send(dataToSend);
+        res.send({message: "ok"});
     }
     
     async deleteDeal(req, res, next){

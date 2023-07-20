@@ -52,7 +52,7 @@ const DealItem = ({deal, ind, changeTaskAdded, changeEmployeeAdded, employeeData
     useEffect(()=>setIsShowInfo(false), [deal])
 
     function changeDeal(deal){
-        editDeal({employeeID: employeeData.personalData.id, status: "new", action: "DEL_EMP"}, deal.taskID)
+        editDeal({employeeID: employeeData.personalData.id, status: deal.status, action: "DEL_EMP"}, deal.taskID)
         .then(()=>{
             changeTaskAdded(); 
             changeEmployeeAdded();
