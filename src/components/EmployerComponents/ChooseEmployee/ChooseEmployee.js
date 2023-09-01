@@ -8,11 +8,12 @@ const ChooseEmployee = ({dataEmp, changeChosenEmp, getChosenEmps}) => {
 
     function renderEmployees(){
         return dataEmp.map(employee => {
-            return (    
-                <div  onClick={()=>changeChosenEmp(employee)}  style={ isChosenEmp(employee) ? {backgroundColor: "#938fff", transition: ".3s all"} : null} className="employee_to_choose-item">
-                    <div className="employee-name">{employee.name}</div>
-                </div>
-            ) 
+            if(employee.isWork === "true")
+                return (    
+                    <div  onClick={()=>changeChosenEmp(employee)}  style={ isChosenEmp(employee) ? {backgroundColor: "#938fff", transition: ".3s all"} : null} className="employee_to_choose-item">
+                        <div className="employee-name">{employee.name}</div>
+                    </div>
+                ) 
         })
     }
 

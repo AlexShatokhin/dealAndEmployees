@@ -18,7 +18,6 @@ const EmployeeMain = ({data, changeAuthType}) => {
         getDeals()
         .then(setDeals)
 
-        console.log(data)
         getEmployee(data.id)
         .then(setUser)
 

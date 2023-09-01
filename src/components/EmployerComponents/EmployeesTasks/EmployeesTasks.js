@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
+
 import useData from "../../../services/getData";
 
 const EmployeesTasks = ({emmployeeData, changeTaskAdded, changeEmployeeAdded, taskAdded, showDeals}) => {
 
-    const {getEmployee} = useData();
+    const {getEmployee, editEmployee} = useData();
 
     useEffect(()=>{
         getEmployee(emmployeeData.personalData.id)
@@ -17,6 +19,11 @@ const EmployeesTasks = ({emmployeeData, changeTaskAdded, changeEmployeeAdded, ta
             showDeals(empData);
         })
     }, [taskAdded]);
+
+    function changeEmp(){
+        editEmployee({status: emmployeeData.personalData.isWork === "true" ? "false" : "true"}, emmployeeData.personalData.id)
+        .then(() => {changeTaskAdded(); changeEmployeeAdded()})
+    }
         
     function renderDeals(){
 
@@ -34,7 +41,10 @@ const EmployeesTasks = ({emmployeeData, changeTaskAdded, changeEmployeeAdded, ta
 
     return (
         <section className="employee_block">
-            <div className="employee_name">{emmployeeData.personalData.name}</div>
+            <div style = {{position: "relative"}} className="title">
+                <div className="employee_name">{emmployeeData.personalData.name}</div>
+                <Button onClick={changeEmp} style={{position: "absolute", right: 15, bottom: 5, opacity: 0.9}} variant={emmployeeData.personalData.isWork === "true" ? "primary" : "warning"}>{emmployeeData.personalData.isWork === "true" ? "Отключить" : "Включить"}</Button>
+            </div>
             <hr />
             {renderDeals()}
         </section>

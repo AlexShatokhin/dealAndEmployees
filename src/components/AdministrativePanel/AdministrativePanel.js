@@ -16,6 +16,7 @@ const AdministrativePanel = ({changeAuthType}) => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [isAuthored, setIsAuthored] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("Неверный логин или пароль!");
     const {loading, getEmployees, setEmployees} = useData();
 
     const changeStateValue = (e) => {
@@ -37,8 +38,9 @@ const AdministrativePanel = ({changeAuthType}) => {
         .then(res => {
             if(res.code === 100){
                 setIsAuthored("employee");
-                console.log(res)
                 changeAuthType("employee", {id: res.id, login});
+            } else if (res.code === 400){
+                setErrorMessage("Вы были отключены!")
             }
         })
     }
@@ -56,7 +58,7 @@ const AdministrativePanel = ({changeAuthType}) => {
 
 
     const isLoading = loading ? <Spinner animation="border" variant="primary" /> : null;
-    const isWrongAuth = isAuthored === false && !loading ? <p className="auth_error">Неверный логин или пароль!</p> : null;
+    const isWrongAuth = isAuthored === false && !loading ? <p className="auth_error">{errorMessage}</p> : null;
 
     return (
         <div className="admin_panel">

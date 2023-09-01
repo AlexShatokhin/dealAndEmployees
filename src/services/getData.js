@@ -17,6 +17,10 @@ const useData = () => {
         return await httpRequest("http://localhost:3000/employees", "POST", JSON.stringify(body));
     }
 
+    const editEmployee = async (body, id) => {
+        return await httpRequest(`http://localhost:3000/employees/${id}`, "PUT", JSON.stringify(body))
+    }
+
     const deleteEmployees = async (id) => {
         return await httpRequest(`http://localhost:3000/employees/${id}`, "DELETE");
     }
@@ -46,7 +50,23 @@ const useData = () => {
         return await httpRequest(`http://localhost:3000/deals/${id}`, "DELETE");
     }
 
-    return {loading, error, getEmployee, getEmployees, getDeals, getDeal, setDeal, deleteDeal, setEmployees, deleteEmployees, editDeal};
+    return {
+        loading, error, 
+
+        getEmployee, 
+        editEmployee,
+
+        getEmployees, 
+        setEmployees, 
+        deleteEmployees, 
+
+        getDeals, 
+
+        getDeal, 
+        setDeal, 
+        editDeal,
+        deleteDeal, 
+    };
 
 }
 

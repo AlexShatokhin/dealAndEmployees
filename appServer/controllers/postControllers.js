@@ -15,7 +15,7 @@ class Post {
         const empID = req.params.id;
 
         const [responseName] = await db.query(`
-        SELECT id, name, login from emps where id = ${empID};
+            SELECT id, name, login, isWork from emps where id = ${empID};
         `)
 
         const [response] = await db.query(`
@@ -64,18 +64,24 @@ class Post {
                         message: "Employee created successfully!",
                         code: 200
                     });
-
             }
         } else {
             const [response] = await db.query(`
                 SELECT * FROM emps WHERE login = '${loginHash}' AND password = '${passwordHash}';
             `);
             if(response.length === 1){
-                res.send({
-                    message: "Welcome!",
-                    id: response[0].id,
-                    code: 100
-                })
+                if(response[0].isWork === "true")
+                    res.send({
+                        message: "Welcome!",
+                        id: response[0].id,
+                        code: 100
+                    })
+                else
+                    res.send({
+                        message: "You are disable!",
+                        id: response[0].id,
+                        code: 400
+                    })
             } else {
                 res.send({
                     message: "login/password is wrong",
@@ -83,11 +89,19 @@ class Post {
                 })
             }
         }
+    }
 
+    async editEmployee (req, res, next) {
+        const {body} = req;
+        const id = req.params.id
 
+        await db.query(`
+            UPDATE emps SET isWork = '${body.status}' WHERE id = ${id};
+        `)
 
-
-   
+        res.send({
+            message: "employee edited successfully!"
+        })
     }
     
     async deleteEmployee (req, res, next){

@@ -10,6 +10,7 @@ router.route("/employees/")
 
 router.route("/employees/:id")
     .get(postControllers.getEmployee)
+    .put(postControllers.editEmployee)
     .delete(postControllers.deleteEmployee);
 
 
