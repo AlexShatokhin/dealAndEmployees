@@ -8,7 +8,6 @@ router.route("/employees/")
     .get(postControllers.getAllEmployees)
     .post(postControllers.setEmployee)
 
-
 router.route("/employees/:id")
     .get(postControllers.getEmployee)
     .delete(postControllers.deleteEmployee);

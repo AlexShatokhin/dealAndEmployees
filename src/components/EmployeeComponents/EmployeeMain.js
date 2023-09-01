@@ -11,17 +11,17 @@ const EmployeeMain = ({data, changeAuthType}) => {
 
     const [deals, setDeals] = useState([]);
     const [user, setUser] = useState({});
-    const {getDeals, getEmployees, getEmployee} = useData();
+    const {getDeals, getEmployee} = useData();
     const [taskAdded, setTaskAdded] = useState(false);
 
     useEffect(()=>{
         getDeals()
         .then(setDeals)
 
-        getEmployees()
-        .then(res => res.filter(item => item.login == data.login)[0].id)
-        .then(getEmployee)
+        console.log(data)
+        getEmployee(data.id)
         .then(setUser)
+
     }, [taskAdded])
 
     

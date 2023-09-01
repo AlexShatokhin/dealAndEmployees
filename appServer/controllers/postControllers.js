@@ -1,33 +1,35 @@
 const db = require("../config/db");
+const crypto = require("crypto");
 
 class Post {
 
     async getAllEmployees(req, res, next){
         const sql = "SELECT * FROM emps";
-        const [response, _] = await db.query(sql);
+        const [response] = await db.query(sql);
         
         res.send(response);
+
     }
 
     async getEmployee(req, res){
         const empID = req.params.id;
 
-        const [responseName, _] = await db.query(`
+        const [responseName] = await db.query(`
         SELECT id, name, login from emps where id = ${empID};
         `)
 
-        const [response, __] = await db.query(`
+        const [response] = await db.query(`
             SELECT tasks.id as "taskID", tasks.title, tasks.information, tasks_to_emps.status from tasks 
             JOIN tasks_to_emps ON taskID = tasks.id
             JOIN emps ON emps.id = employeeID
             WHERE employeeID = ${empID};
         `)
 
-        const [responseCountAll, ___] = await db.query(`
+        const [responseCountAll] = await db.query(`
             SELECT COUNT(taskID) as 'countAll' from tasks_to_emps where employeeID = ${empID};
         `)
 
-        const [responseCountComplete, ____] = await db.query(`
+        const [responseCountComplete] = await db.query(`
             SELECT COUNT(taskID) as 'countComplete' from tasks_to_emps 
             LEFT JOIN tasks ON tasks.id = taskID  
             INNER JOIN emps ON emps.id = employeeID
@@ -39,15 +41,53 @@ class Post {
     
     async setEmployee(req, res, next){
         const {body} = req;
-    
-        const sql = 
-        `INSERT INTO emps (name, login, password)
-         VALUES('${body.name}', '${body.login}', '${body.password}');`
-    
-    
-        const dataToSend = await db.query(sql);
-    
-        res.send(dataToSend);
+
+        const loginHash = crypto.createHash("sha512").update(body.login).digest("hex");
+        const passwordHash = crypto.createHash("sha512").update(body.password).digest("hex");
+
+        if(body.name){
+            const [response] = await db.query(`
+                SELECT * FROM emps WHERE login = '${loginHash}';
+            `);
+            if(response.length === 1){
+                res.send({
+                    message: "Employee with the same name already exist",
+                    code: 100
+                })
+            } else {
+                    const sql = 
+                    `INSERT INTO emps (name, login, password)
+                     VALUES('${body.name}', '${loginHash}', '${passwordHash}');`
+            
+                    await db.query(sql);
+                    res.send({
+                        message: "Employee created successfully!",
+                        code: 200
+                    });
+
+            }
+        } else {
+            const [response] = await db.query(`
+                SELECT * FROM emps WHERE login = '${loginHash}' AND password = '${passwordHash}';
+            `);
+            if(response.length === 1){
+                res.send({
+                    message: "Welcome!",
+                    id: response[0].id,
+                    code: 100
+                })
+            } else {
+                res.send({
+                    message: "login/password is wrong",
+                    code: 300
+                })
+            }
+        }
+
+
+
+
+   
     }
     
     async deleteEmployee (req, res, next){
@@ -61,6 +101,19 @@ class Post {
         res.send(dataToSend);
     
     }
+
+    async checkAuth (req, res) {
+        const {body} = req;
+        const loginHash = crypto.createHash("sha512").update(body.login);
+        const passwordHash = crypto.createHash("sha512").update(body.password);
+
+        const [response] = await db.query(`
+            SELECT * FROM emps WHERE login = ${loginHash.digest("hex")} AND password = ${passwordHash.digest("hex")}
+        `);
+
+        console.log(response);
+
+    }
     
     // DEALS
     
@@ -68,7 +121,7 @@ class Post {
     async getAllDeals(req, res, next){
         
         const sql = `SELECT * FROM tasks`;
-        const [response, _] = await db.query(sql);
+        const [response] = await db.query(sql);
     
         res.send(response);
     }
@@ -76,7 +129,7 @@ class Post {
     async getDeal(req, res){
         const dealID = req.params.id;
 
-        const [response, _] = await db.query(`
+        const [response] = await db.query(`
             SELECT tasks.id as "taskID", tasks.title, tasks.information, emps.id, emps.login from tasks_to_emps 
             LEFT JOIN tasks ON tasks.id = taskID  
             INNER JOIN emps ON emps.id = employeeID
@@ -110,13 +163,13 @@ class Post {
                 `);
                 break;
             case "RECHOOSE_EMP": 
-                    let [resPrev,_] = await db.query(
+                    let [resPrev] = await db.query(
                         `SELECT employeeID FROM tasks_to_emps WHERE taskID = ${dealID}`);
 
                     resPrev = resPrev.map(item => item.employeeID)
 
-                    const dataToSend = [...body.employeeID.filter(id => resPrev.indexOf(id) == -1)];
-                    const dataToDelete = [...resPrev.filter(id => body.employeeID.indexOf(id) == -1)];
+                    const dataToSend = [...body.employeeID.filter(id => resPrev.indexOf(id) === -1)];
+                    const dataToDelete = [...resPrev.filter(id => body.employeeID.indexOf(id) === -1)];
                     dataToSend.forEach(async id => {
                             await db.query(
                                 `

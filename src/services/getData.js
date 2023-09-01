@@ -1,8 +1,6 @@
 import useHttp from "../hooks/HttpHook"
 
-
 const useData = () => {
-
     const {httpRequest, loading, error} = useHttp();
 
     const getEmployee = async (id) => {
@@ -11,7 +9,7 @@ const useData = () => {
     }
 
     const getEmployees = async () => {
-        const employees = await httpRequest("http://localhost:3000/employees");
+        const employees = await httpRequest(`http://localhost:3000/employees`);
         return employees;
     }
 

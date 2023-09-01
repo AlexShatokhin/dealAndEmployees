@@ -10,12 +10,13 @@ const EmployeeModal = ({changeEmployeeAdded, toggleModal, Modal}) => {
     const [name, setName] = useState("");
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
+    const [isError, setIsError] = useState(false);
 
     const{setEmployees} = useData();
 
     const changeStateValue = (e) => {
         const elem = e.target;
-
+        setIsError(false);
         switch(elem.id){
             case "login": setLogin(elem.value); break;
             case "name": setName(elem.value); break;
@@ -27,12 +28,19 @@ const EmployeeModal = ({changeEmployeeAdded, toggleModal, Modal}) => {
 
         const dataToSend = { name, login, password }
 
-        toggleModal();
         setEmployees(dataToSend)
-        .then(changeEmployeeAdded)
+        .then(res => {
+            if(res.code === 200){
+                changeEmployeeAdded();
+                toggleModal();
+            }
+            else
+                setIsError(true);
+        })
         
     }
 
+    const error = isError ? <span style = {{display: "block", fontWeight: 600, color: "#800000", margin: "10px 0", textAlign: "center"}}>Сотрудник с таким логином уже существует!</span> : null
     return (
         <Modal>
             <form action="#" className="popup__form">
@@ -70,6 +78,7 @@ const EmployeeModal = ({changeEmployeeAdded, toggleModal, Modal}) => {
                 <Button onClick={submitData} className="button_task" disabled = {name == "" || login == "" || password == ""}>Создать!</Button>
 
             </form>
+            {error}
         </Modal>
     )
 }

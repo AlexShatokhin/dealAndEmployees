@@ -16,7 +16,7 @@ const AdministrativePanel = ({changeAuthType}) => {
     const [login, setLogin] = useState("");
     const [password, setPassword] = useState("");
     const [isAuthored, setIsAuthored] = useState(null);
-    const {loading, getEmployees} = useData();
+    const {loading, getEmployees, setEmployees} = useData();
 
     const changeStateValue = (e) => {
         setIsAuthored(null);
@@ -33,8 +33,14 @@ const AdministrativePanel = ({changeAuthType}) => {
 
         checkAuth([{login: "admin", password: "admin"}], "employer")
 
-        getEmployees()
-        .then(res => checkAuth(res, "employee"))    
+        setEmployees({login, password})
+        .then(res => {
+            if(res.code === 100){
+                setIsAuthored("employee");
+                console.log(res)
+                changeAuthType("employee", {id: res.id, login});
+            }
+        })
     }
 
     const checkAuth = (list, type) => {

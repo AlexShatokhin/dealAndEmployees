@@ -25,8 +25,8 @@ function App() {
 
 				<Routes>
 					<Route path='/' element = {<AdministrativePanel changeAuthType = {changeAuthType} />}/>
-					<Route path='/employer' element = {authType == "employer" ?<EmployerMain changeAuthType = {changeAuthType} data = {dataOfEmp} />  : <Navigate to="/" />}/>
-					<Route path='/employee' element = {authType == "employee" ?<EmployeeMain changeAuthType = {changeAuthType} data = {dataOfEmp} />  : <Navigate to="/" />}/>
+					<Route path='/employer' element = {authType === "employer" ?<EmployerMain changeAuthType = {changeAuthType} data = {dataOfEmp} />  : <Navigate to="/" />}/>
+					<Route path='/employee' element = {authType === "employee" ?<EmployeeMain changeAuthType = {changeAuthType} data = {dataOfEmp} />  : <Navigate to="/" />}/>
 					<Route path='*' element = {<AdministrativePanel changeAuthType = {changeAuthType} />}/>
 				</Routes>
 
