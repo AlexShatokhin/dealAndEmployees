@@ -3,6 +3,14 @@ const crypto = require("crypto");
 
 class Post {
 
+    async Coords(req, res){
+        console.log(req.body)
+        const sql = `INSERT INTO gps(data) VALUES ('${req.body.data}')`;
+        await db.query(sql);
+
+        res.send(200);
+    }
+
     async getAllEmployees(req, res, next){
         const sql = "SELECT * FROM emps";
         const [response] = await db.query(sql);
