@@ -189,10 +189,10 @@
   height: 7.8409090909091%;
 }
 .Cloud {
-  background-image: url("../../resources/img/cloud1.svg");
+  background-image: url("../../../resources/img/cloud1.svg");
 }
 .Cloud.Background {
-  background-image: url("../../resources/img/cloud1.png");
+  background-image: url("../../../resources/img/cloud1.png");
 }
 .admin_panel {
   height: 100vh;
