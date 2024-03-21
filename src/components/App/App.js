@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router';
 import { BrowserRouter } from 'react-router-dom';
 
-import AdministrativePanel from '../AdministrativePanel/AdministrativePanel';
+import AdministrativePanel from '../AdministrativePanel/components/AdministrativePanel';
 import EmployerMain from '../EmployerComponents/EmployerMain';
 import EmployeeMain from '../EmployeeComponents/EmployeeMain';
 
