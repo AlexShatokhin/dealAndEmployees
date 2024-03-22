@@ -1,4 +1,7 @@
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+
+import { changeDealsList, changeUserData, toggleTaskAdded } from "./EmployeeSlice"
 
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
 import TasksList from "../TasksList/TasksList"
@@ -7,31 +10,26 @@ import useData from "../../services/getData"
 import ChooseTask from "./ChooseTask/ChooseTask"
 import CompleteTask from "./CompleteTask/CompleteTask"
 
-const EmployeeMain = ({data, changeAuthType}) => {
+const EmployeeMain = () => {
 
-    const [deals, setDeals] = useState([]);
-    const [user, setUser] = useState({});
+    const {empData} = useSelector(state => state.app)
+    const {deals, user, taskAdded} = useSelector(state => state.employee);
     const {getDeals, getEmployee} = useData();
-    const [taskAdded, setTaskAdded] = useState(false);
+    const dispatch = useDispatch();
 
     useEffect(()=>{
         getDeals()
-        .then(setDeals)
+        .then((res) => dispatch(changeDealsList(res)))
 
-        getEmployee(data.id)
-        .then(setUser)
+        getEmployee(empData.id)
+        .then(res => dispatch(changeUserData(res)))
 
     }, [taskAdded])
 
     
     function getFreeDeals(){
         const employeeDeals = user.response.map(deal => deal.taskID);
-
-        return deals.filter(item => employeeDeals.indexOf(item.id) == -1);
-    }
-
-    const changeTaskAdded = () => {
-        setTaskAdded(!taskAdded);
+        return deals.filter(item => employeeDeals.indexOf(item.id) === -1);
     }
 
     const content = user.responseName ? 
@@ -39,14 +37,14 @@ const EmployeeMain = ({data, changeAuthType}) => {
             <div className="employee_main-my-tasks">
                 <div className="employee-tasks_title">Мои задания</div>
                 <hr />
-                <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {user.response} employee = {user.responseName} renderProps={(props)=><CompleteTask {...props} />}/>
+                <TasksList taskAdded={taskAdded} changeTaskAdded={() => dispatch(toggleTaskAdded())} data = {user.response} employee = {user.responseName} renderProps={(props)=><CompleteTask {...props} />}/>
 
             </div>
 
             <div className="employee_main-all-tasks">
                 <div className="employee-tasks_title">Список заданий</div>
                 <hr />
-                <TasksList taskAdded={taskAdded} changeTaskAdded={changeTaskAdded} data = {getFreeDeals()} employee = {user.responseName} renderProps={(props)=><ChooseTask {...props} />}/>
+                <TasksList taskAdded={taskAdded} changeTaskAdded={() => dispatch(toggleTaskAdded())} data = {getFreeDeals()} employee = {user.responseName} renderProps={(props)=><ChooseTask {...props} />}/>
             </div>
         </div>
         : null;
@@ -58,13 +56,8 @@ const EmployeeMain = ({data, changeAuthType}) => {
                 <div id='stars3'></div>
             </div>
 
-            <NavigationMenu 
-            data = {data} 
-            changeAuthType={changeAuthType}
-            renderProps={()=><div></div>}/>
-
+            <NavigationMenu renderProps={()=><div></div>}/>
             {content}
-
         </div>
     )
 }

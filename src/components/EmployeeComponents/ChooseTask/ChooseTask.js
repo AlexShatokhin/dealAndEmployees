@@ -9,9 +9,8 @@ import TaskInformation from "../../TaskInformation/TaskInformation";
 const ChooseTask = ({changeTaskAdded, dealID, employee, deal}) => {
 
     const {isShowModal, toggleModal, Modal} = useModal();
-
     const [disabled, setDisabled] = useState(false);
-    const{editDeal} = useData();
+    const { editDeal } = useData();
 
     function changeTaskEmployee(){
         setDisabled(true)

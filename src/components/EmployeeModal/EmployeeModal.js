@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { changeEmployeeData, changeError } from "./EmployeeModalSlice";
 import { Button } from "react-bootstrap";
 
 import useData from "../../services/getData";
@@ -7,27 +9,18 @@ import "./EmployeeModal.scss"
 
 const EmployeeModal = ({changeEmployeeAdded, toggleModal, Modal}) => {
 
-    const [name, setName] = useState("");
-    const [login, setLogin] = useState("");
-    const [password, setPassword] = useState("");
-    const [isError, setIsError] = useState(false);
-
-    const{setEmployees} = useData();
+    const {name, login, password, isError} = useSelector(state => state.employeeModal);
+    const dispatch = useDispatch();
+    const { setEmployees } = useData();
 
     const changeStateValue = (e) => {
         const elem = e.target;
-        setIsError(false);
-        switch(elem.id){
-            case "login": setLogin(elem.value); break;
-            case "name": setName(elem.value); break;
-            default: setPassword(elem.value); break;
-        }
+        dispatch(changeError(false))
+        dispatch(changeEmployeeData({name: elem.id, value: elem.value}));
     }
 
     const submitData = () => {
-
         const dataToSend = { name, login, password }
-
         setEmployees(dataToSend)
         .then(res => {
             if(res.code === 200){
@@ -35,9 +28,8 @@ const EmployeeModal = ({changeEmployeeAdded, toggleModal, Modal}) => {
                 toggleModal();
             }
             else
-                setIsError(true);
+                dispatch(changeError(true))
         })
-        
     }
 
     const error = isError ? <span style = {{display: "block", fontWeight: 600, color: "#800000", margin: "10px 0", textAlign: "center"}}>Сотрудник с таким логином уже существует!</span> : null
@@ -75,7 +67,10 @@ const EmployeeModal = ({changeEmployeeAdded, toggleModal, Modal}) => {
                     placeholder="Введите пароль..."/>                        
                 </div>
 
-                <Button onClick={submitData} className="button_task" disabled = {name == "" || login == "" || password == ""}>Создать!</Button>
+                <Button 
+                    onClick={submitData} 
+                    className="button_task" 
+                    disabled = {name === "" || login === "" || password === ""}>Создать!</Button>
 
             </form>
             {error}
