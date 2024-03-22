@@ -33,6 +33,8 @@ const AdministrativePanel = () => {
             if(res.code === 100){
                 dispatch(toggleAuthType("employee"));
                 dispatch(changeAuthType({type: "employee", data: {id: res.id, login}}))
+                navigate("/employee");
+                dispatch(clearPanel());
             } else if (res.code === 400){
                 dispatch(changeErrorMessage("Вы были отключены!"))
             }
