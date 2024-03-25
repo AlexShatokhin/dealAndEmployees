@@ -1,13 +1,16 @@
+import { useSelector } from "react-redux";
 import "./ChooseEmployee.scss"
 
-const ChooseEmployee = ({dataEmp, changeChosenEmp, getChosenEmps}) => {
+const ChooseEmployee = ({changeChosenEmp, chosenEmps}) => {
+
+    const {employees} = useSelector(state => state.employer);
 
     function isChosenEmp(emp){
-        return getChosenEmps().filter(item => item.id == emp.id).length;
+        return chosenEmps.filter(item => +item.id === +emp.id).length;
     }
 
     function renderEmployees(){
-        return dataEmp.map(employee => {
+        return employees.map(employee => {
             if(employee.isWork === "true")
                 return (    
                     <div  onClick={()=>changeChosenEmp(employee)}  style={ isChosenEmp(employee) ? {backgroundColor: "#938fff", transition: ".3s all"} : null} className="employee_to_choose-item">

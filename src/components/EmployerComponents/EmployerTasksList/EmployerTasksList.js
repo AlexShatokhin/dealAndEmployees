@@ -1,4 +1,5 @@
 import { Spinner } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 import EmployerDealsItem from "../EmployerDealsItem/EmployerDealsItem";
 
@@ -6,23 +7,13 @@ import useData from "../../../services/getData"
 
 import "../../TasksList/TasksList.scss"
 
-const EmployerTasksList = ({data, changeTaskAdded, taskAdded, dataEmp}) => {
+const EmployerTasksList = () => {
 
+    const {deals} = useSelector(state => state.employer);
     const {loading} = useData();
   
     function renderDeals(){
-        return data.map((item, i)=>{
-            
-            return (
-                <EmployerDealsItem 
-                deal={item} 
-                index = {i}
-                dataEmp = {dataEmp}
-                dataDeals = {data}
-                taskAdded = {taskAdded} 
-                changeTaskAdded={changeTaskAdded} />
-            ) 
-        })
+        return deals.map((item, i)=> <EmployerDealsItem deal={item} index = {i} />)
     }
 
     const isLoading = loading ? 
@@ -35,9 +26,9 @@ const EmployerTasksList = ({data, changeTaskAdded, taskAdded, dataEmp}) => {
             animation="border" 
             variant="danger"/> : null;
 
-    const isContent = (data.length && !loading) ? renderDeals() : null;
+    const isContent = (deals.length && !loading) ? renderDeals() : null;
 
-    const isEmpty = (!loading && !data.length) ? 
+    const isEmpty = (!loading && !deals.length) ? 
     <p style = {{color: "#FFFFFF", 
                 margin: "0 auto", 
                 fontWeight: 600, 
