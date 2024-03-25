@@ -1,7 +1,7 @@
 import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
-import { changeDealsList, changeUserData, toggleTaskAdded } from "./EmployeeSlice"
+import { changeDealsList, changeUserData } from "./EmployeeSlice"
 
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
 import TasksList from "../TasksList/TasksList"
@@ -37,25 +37,25 @@ const EmployeeMain = () => {
             <div className="employee_main-my-tasks">
                 <div className="employee-tasks_title">Мои задания</div>
                 <hr />
-                <TasksList taskAdded={taskAdded} changeTaskAdded={() => dispatch(toggleTaskAdded())} data = {user.response} employee = {user.responseName} renderProps={(props)=><CompleteTask {...props} />}/>
+                <TasksList 
+                    data = {user.response} 
+                    employee = {user.responseName} 
+                    renderProps={(props)=><CompleteTask {...props} />}/>
 
             </div>
 
             <div className="employee_main-all-tasks">
                 <div className="employee-tasks_title">Список заданий</div>
                 <hr />
-                <TasksList taskAdded={taskAdded} changeTaskAdded={() => dispatch(toggleTaskAdded())} data = {getFreeDeals()} employee = {user.responseName} renderProps={(props)=><ChooseTask {...props} />}/>
+                <TasksList 
+                    data = {getFreeDeals()} 
+                    employee = {user.responseName} 
+                    renderProps={(props)=><ChooseTask {...props} />}/>
             </div>
         </div>
         : null;
     return (
         <div className="employee_main">
-            <div className="back">
-                <div id='stars'></div>
-                <div id='stars2'></div>
-                <div id='stars3'></div>
-            </div>
-
             <NavigationMenu renderProps={()=><div></div>}/>
             {content}
         </div>

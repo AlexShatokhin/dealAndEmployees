@@ -7,15 +7,9 @@ import useData from "../../services/getData"
 
 import "./TasksList.scss"
 
-const TasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee, dataEmp}) => {
+const TasksList = ({data, renderProps, employee}) => {
 
-    const {loading, editDeal} = useData();
-
-    function changeCurrDeal(ind, chosenEmp){
-        editDeal({action:"RECHOOSE_EMP", status: chosenEmp.length ? "work" : "new", employeeID: chosenEmp.map(item => item.id)}, ind)
-        .then(changeTaskAdded)
-        
-    }
+    const {loading} = useData();
 
     function renderDeals(){
         return data.map((item, i)=>{
@@ -24,18 +18,9 @@ const TasksList = ({data, changeTaskAdded, taskAdded, renderProps, employee, dat
                 <DealsItem 
                 deal={item} 
                 index = {i}
-                dataEmp = {dataEmp}
-                dataDeals = {data}
-                changeCurrDeal = {changeCurrDeal}
-                renderProps = {renderProps ? () => renderProps({changeTaskAdded, dealID: item.id, deal: item, employee, data}) : ()=>{
+                renderProps = {renderProps ? () => renderProps({dealID: item.id, deal: item, employee, data}) : ()=>{
                     return (
-                        <DealsButtons
-                        dataEmp = {dataEmp}
-                        dataDeals = {data}
-                        index = {i}
-                        taskAdded = {taskAdded} 
-                        changeTaskAdded={changeTaskAdded} 
-                        dealID={item.id}/>
+                        <DealsButtons dealID={item.id}/>
                     )
                 }}/>
             ) 
