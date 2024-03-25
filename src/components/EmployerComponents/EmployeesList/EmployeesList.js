@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useSelector } from "react-redux";
 
 import useModal from "../../../hooks/useModal";
 
@@ -9,10 +10,12 @@ import EmployeeItem from "../EmployeeItem/EmployeeItem";
 
 import "./EmployeesList.scss"
 
-const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded, taskAdded, employeeAdded}) => {
+const EmployeesList = () => {
 
     const [currEmployee, setCurrEmployee] = useState({});
     const [showTasks, setShowTasks] = useState(false);
+
+    const {employees} = useSelector(state => state.employer);
     const {isShowModal, toggleModal, Modal} = useModal();
 
 
@@ -23,16 +26,18 @@ const EmployeesList = ({dataTasks, dataEmp, changeEmployeeAdded, changeTaskAdded
 
 
     function renderEmployees(){
-        return dataEmp.map((item)=>{
+        return employees.map((item)=>{
             return (
-                <EmployeeItem employeeAdded = {employeeAdded} showDeals = {showDeals} employee={item}/>
+                <EmployeeItem 
+                    showDeals = {showDeals} 
+                    employee={item}/>
             )
         })
     }
 
-    const isContent = dataEmp.length != 0 ? renderEmployees() : null;
-    const modal = isShowModal ? <EmployeeModal Modal={Modal} toggleModal = {toggleModal} changeEmployeeAdded = {changeEmployeeAdded}/>  : null;
-    const isShowTasks = showTasks ? <EmployeesTasks showDeals = {showDeals} taskAdded = {taskAdded} changeEmployeeAdded = {changeEmployeeAdded} changeTaskAdded = {changeTaskAdded} emmployeeData={currEmployee}/> : !showTasks ? <h3>Выберите сотрудника</h3> : null;
+    const isContent = employees.length !== 0 ? renderEmployees() : null;
+    const modal = isShowModal ? <EmployeeModal Modal={Modal} toggleModal = {toggleModal}/>  : null;
+    const isShowTasks = showTasks ? <EmployeesTasks showDeals = {showDeals} emmployeeData={currEmployee}/> : !showTasks ? <h3>Выберите сотрудника</h3> : null;
 
     return (
         <section className="employees">

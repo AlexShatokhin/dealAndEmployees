@@ -1,4 +1,11 @@
-import { useEffect, useState } from "react"
+import { useEffect } from "react"
+import { useSelector, useDispatch } from "react-redux"
+
+import { changeDeals, 
+    changeEmployees, 
+    changeShowComponents, 
+    toggleTaskAdded, 
+    toggleEmployeeAdded} from "./EmployerSlice"
 
 import EmployerMenu from "./EmployerMenu/EmployerMenu"
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
@@ -9,42 +16,21 @@ import ErrorBoundary from "../ErrorBoundary/ErrorBoundary"
 
 import useData from "../../services/getData"
 
-const EmployerMain = ({data, changeAuthType}) => {
+const EmployerMain = () => {
 
-    const [deals, setDeals] = useState([]);
-    const [employees, setEmployees] = useState([]);
-    
-    const [taskAdded, setTaskAdded] = useState(false);
-    const [employeeAdded, setEmployeeAdded] = useState(false);
-    const [showComponents, setShowComponents] = useState("deal");
-
+    const {deals, employees, taskAdded, employeeAdded, showComponents} = useSelector(state => state.employer);
+    const dispatch = useDispatch();
     const {getDeals, getEmployees} = useData();
 
     useEffect(()=>{
-
         getEmployees()
-        .then(setEmployees)
-
+        .then((res) => dispatch(changeEmployees(res)))
     }, [employeeAdded])
 
     useEffect(()=>{
-
         getDeals()
-        .then(setDeals)
+        .then((res) => dispatch(changeDeals(res)))
     }, [taskAdded])
-
-    const changeTaskAdded = () => {
-        setTaskAdded(!taskAdded);
-    }
-
-    const changeEmployeeAdded = () => {
-        setEmployeeAdded(!employeeAdded);
-    }
-
-
-    const changeShowComponents = (type) => {
-        setShowComponents(type)
-    }
 
     return (
         <section className="employer_main">
@@ -56,32 +42,23 @@ const EmployerMain = ({data, changeAuthType}) => {
             </div>
 
             <NavigationMenu
-            data = {data}
-            changeAuthType = {changeAuthType}
             renderProps={()=>{
                 return <EmployerMenu 
-                changeShowComponents={changeShowComponents}/>
+                changeShowComponents={(type) => dispatch(changeShowComponents(type))}/>
             }}/>
 
         <ErrorBoundary>
             {showComponents === "deal" ? 
             <>
-                <AddTask changeTaskAdded={changeTaskAdded} />
+                <AddTask changeTaskAdded={() => dispatch(toggleTaskAdded())} />
                 <EmployerTasksList 
                 dataEmp = {employees}
                 data = {deals}
-                changeTaskAdded={changeTaskAdded} 
+                changeTaskAdded={() => dispatch(toggleTaskAdded())}          
                 taskAdded = {taskAdded}/>
             </> :
 
-            <EmployeesList
-            dataTasks = {deals} 
-            dataEmp = {employees}
-            changeTaskAdded={changeTaskAdded} 
-            changeEmployeeAdded = {changeEmployeeAdded}  
-            employeeAdded = {employeeAdded}
-            taskAdded = {taskAdded}
-            />}
+            <EmployeesList />}
         </ErrorBoundary>
 
 

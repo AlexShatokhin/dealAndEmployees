@@ -4,8 +4,6 @@ const router = express.Router();
 
 // EMPLOYEES
 
-router.route("/gps/")
-    .post(postControllers.Coords)
 
 router.route("/employees/")
     .get(postControllers.getAllEmployees)
