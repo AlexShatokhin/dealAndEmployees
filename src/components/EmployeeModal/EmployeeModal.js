@@ -1,13 +1,14 @@
-import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { changeEmployeeData, changeError } from "./EmployeeModalSlice";
 import { Button } from "react-bootstrap";
+
+import { changeEmployeeData, changeError } from "./EmployeeModalSlice";
+import { toggleEmployeeAdded } from "../EmployerComponents/EmployerSlice";
 
 import useData from "../../services/getData";
 
 import "./EmployeeModal.scss"
 
-const EmployeeModal = ({changeEmployeeAdded, toggleModal, Modal}) => {
+const EmployeeModal = ({toggleModal, Modal}) => {
 
     const {name, login, password, isError} = useSelector(state => state.employeeModal);
     const dispatch = useDispatch();
@@ -24,7 +25,7 @@ const EmployeeModal = ({changeEmployeeAdded, toggleModal, Modal}) => {
         setEmployees(dataToSend)
         .then(res => {
             if(res.code === 200){
-                changeEmployeeAdded();
+                dispatch(toggleEmployeeAdded())
                 toggleModal();
             }
             else

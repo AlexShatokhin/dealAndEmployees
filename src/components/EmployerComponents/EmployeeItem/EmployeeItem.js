@@ -1,10 +1,13 @@
 import { useEffect, useState } from "react";
 
+import { useSelector } from "react-redux";
+
 import useData from "../../../services/getData"
 
-const EmployeeItem = ({employee, showDeals, employeeAdded}) => {
+const EmployeeItem = ({employee, showDeals}) => {
 
     const [employeeData, setEmployeeData] = useState({});
+    const {employeeAdded} = useSelector(state => state.employer);
     const {getEmployee, loading} = useData();
 
     useEffect(()=>{
