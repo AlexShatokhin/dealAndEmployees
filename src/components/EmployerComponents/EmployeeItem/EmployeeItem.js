@@ -8,7 +8,7 @@ const EmployeeItem = ({employee, showDeals}) => {
 
     const [employeeData, setEmployeeData] = useState({});
     const {employeeAdded} = useSelector(state => state.employer);
-    const {getEmployee, loading} = useData();
+    const {getEmployee} = useData();
 
     useEffect(()=>{
         getEmployee(employee.id)

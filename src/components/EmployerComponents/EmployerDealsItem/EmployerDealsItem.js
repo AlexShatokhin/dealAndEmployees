@@ -1,18 +1,19 @@
 import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 import ChooseEmployee from "../../EmployerComponents/ChooseEmployee/ChooseEmployee";
 
 import DealsButtons from "../DealsButtons/DealsButtons";
 import useData from "../../../services/getData";
 
-const EmployerDealsItem = ({deal, index, dataEmp, dataDeals, taskAdded, changeTaskAdded}) => {
+const EmployerDealsItem = ({deal, index}) => {
 
     const [chooseBlock, setChooseBlock] = useState(false);
     const [chosenEmp, setChosenEmp] = useState([]);
+    const {deals} = useSelector(state => state.employer);
     const {getDeal} = useData();
 
-
     useEffect(()=>{
-        getDeal(dataDeals[index].id)
+        getDeal(deals[index].id)
         .then(res => setChosenEmp(res.map(item => ({id:item.id, login: item.login}))));
     }, [])
 
@@ -20,15 +21,11 @@ const EmployerDealsItem = ({deal, index, dataEmp, dataDeals, taskAdded, changeTa
         setChooseBlock(!chooseBlock);
     }
 
-    function getChosenEmps(){
-        return chosenEmp;
-    }
-
     function changeChosenEmp(emp){
-        if(!chosenEmp.filter(employee =>  employee.id == emp.id).length){
+        if(!chosenEmp.filter(employee => +employee.id === +emp.id).length){
             setChosenEmp([...chosenEmp, emp]); 
         } else {
-            setChosenEmp(chosenEmp.filter(item => item.id != emp.id));
+            setChosenEmp(chosenEmp.filter(item => +item.id !== +emp.id));
         }
         
     }
@@ -40,24 +37,14 @@ const EmployerDealsItem = ({deal, index, dataEmp, dataDeals, taskAdded, changeTa
                 <div className="deals_item-title">{deal.title}</div>
             </div>
             <DealsButtons
-                        dataEmp = {dataEmp}
-                        dataDeals = {dataDeals}
-                        index = {index}
-                        taskAdded = {taskAdded} 
-                        changeTaskAdded={changeTaskAdded} 
-                        dealID={deal.id}
-                        getChosenEmps = {getChosenEmps}
-                        showChooseBlock={showChooseBlock}
-                        chooseBlock = {chooseBlock}/>
+                dealID={deal.id}
+                chosenEmps = {chosenEmp}
+                showChooseBlock={showChooseBlock}/>
 
             {chooseBlock ? 
                 <ChooseEmployee                 
-                deal={deal} 
-                index = {index}
-                dataEmp = {dataEmp}
-                dataDeals = {dataDeals}
-                changeChosenEmp = {changeChosenEmp}
-                getChosenEmps = {getChosenEmps}/>
+                    changeChosenEmp = {changeChosenEmp}
+                    chosenEmps = {chosenEmp}/>
              : null}
         </div>  
     ) 

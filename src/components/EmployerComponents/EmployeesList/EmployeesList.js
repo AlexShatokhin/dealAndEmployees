@@ -37,7 +37,7 @@ const EmployeesList = () => {
 
     const isContent = employees.length !== 0 ? renderEmployees() : null;
     const modal = isShowModal ? <EmployeeModal Modal={Modal} toggleModal = {toggleModal}/>  : null;
-    const isShowTasks = showTasks ? <EmployeesTasks showDeals = {showDeals} emmployeeData={currEmployee}/> : !showTasks ? <h3>Выберите сотрудника</h3> : null;
+    const isShowTasks = showTasks ? <EmployeesTasks showDeals = {showDeals} employeeData={currEmployee}/> : !showTasks ? <h3>Выберите сотрудника</h3> : null;
 
     return (
         <section className="employees">
