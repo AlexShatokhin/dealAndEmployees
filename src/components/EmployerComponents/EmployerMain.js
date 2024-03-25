@@ -4,8 +4,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { changeDeals, 
     changeEmployees, 
     changeShowComponents, 
-    toggleTaskAdded, 
-    toggleEmployeeAdded} from "./EmployerSlice"
+    toggleTaskAdded
+} from "./EmployerSlice"
 
 import EmployerMenu from "./EmployerMenu/EmployerMenu"
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
@@ -50,7 +50,7 @@ const EmployerMain = () => {
         <ErrorBoundary>
             {showComponents === "deal" ? 
             <>
-                <AddTask changeTaskAdded={() => dispatch(toggleTaskAdded())} />
+                <AddTask />
                 <EmployerTasksList 
                 dataEmp = {employees}
                 data = {deals}
