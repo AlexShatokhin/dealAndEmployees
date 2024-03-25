@@ -1,18 +1,24 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
+
+import { toggleTaskAdded } from '../EmployerSlice';
 
 import useData from '../../../services/getData';
 
 import "./AddTask.scss"
 
-const AddTask = ({changeTaskAdded}) => {
+const AddTask = () => {
 
     const [titleValue, setTitleValue] = useState("");
     const [taskInformation, setTaskInformation] = useState("");
-    const {setDeal} = useData()
+    const dispatch = useDispatch();
+    const {setDeal} = useData();
 
     function addTask(){
-        setDeal({title: titleValue, information: taskInformation}).then(changeTaskAdded)
+        setDeal({title: titleValue, information: taskInformation})
+        .then(() => dispatch(toggleTaskAdded()));
+        
         setTitleValue("");
         setTaskInformation("");
     }
@@ -45,7 +51,10 @@ const AddTask = ({changeTaskAdded}) => {
 
             </div>
 
-            <Button disabled = {titleValue === "" || taskInformation === ""} onClick={addTask} className="add_new_task-button">Добавить задание!</Button>
+            <Button 
+                disabled = {titleValue === "" || taskInformation === ""} 
+                onClick={addTask} 
+                className="add_new_task-button">Добавить задание!</Button>
         </div>
 
     )
