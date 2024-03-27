@@ -1,3 +1,4 @@
+import { useSelector } from "react-redux";
 import { Spinner } from "react-bootstrap";
 
 import DealsItem from "../DealsItem/DealsItem";
@@ -7,8 +8,9 @@ import useData from "../../services/getData"
 
 import "./TasksList.scss"
 
-const TasksList = ({data, renderProps, employee}) => {
+const TasksList = ({data, renderProps}) => {
 
+    const {user} = useSelector(state => state.employee);
     const {loading} = useData();
 
     function renderDeals(){
@@ -18,7 +20,7 @@ const TasksList = ({data, renderProps, employee}) => {
                 <DealsItem 
                 deal={item} 
                 index = {i}
-                renderProps = {renderProps ? () => renderProps({dealID: item.id, deal: item, employee, data}) : ()=>{
+                renderProps = {renderProps ? () => renderProps({dealID: item.id, deal: item, employee: user.responseName, data}) : ()=>{
                     return (
                         <DealsButtons dealID={item.id}/>
                     )

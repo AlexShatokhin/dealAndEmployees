@@ -39,7 +39,6 @@ const EmployeeMain = () => {
                 <hr />
                 <TasksList 
                     data = {user.response} 
-                    employee = {user.responseName} 
                     renderProps={(props)=><CompleteTask {...props} />}/>
 
             </div>
@@ -49,7 +48,6 @@ const EmployeeMain = () => {
                 <hr />
                 <TasksList 
                     data = {getFreeDeals()} 
-                    employee = {user.responseName} 
                     renderProps={(props)=><ChooseTask {...props} />}/>
             </div>
         </div>
