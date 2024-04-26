@@ -14,13 +14,11 @@ Web-приложение, для распределения заданий ср�
 * React
 * React-router
 * React-Bootstrap
+* Redux Toolkit
 * Express.js
 * MySQL - СУБД
 
   
 ## Demo
 
-https://github.com/AlexShatokhin/DealsAndEmployers/assets/67309300/918512ad-20c4-4318-bd53-e8956eaa3e8b
-
-## API
 
