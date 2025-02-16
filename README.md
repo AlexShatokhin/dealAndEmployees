@@ -1,4 +1,4 @@
-````markdown name=README.md
+
 # Employers app
 
 Web application for assigning tasks to employees.
