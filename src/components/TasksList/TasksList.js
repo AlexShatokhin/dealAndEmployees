@@ -8,14 +8,14 @@ import useData from "../../services/getData"
 
 import "./TasksList.scss"
 
-const TasksList = ({data, renderProps}) => {
+const TasksList = ({data, renderProps, loading}) => {
 
     const {user} = useSelector(state => state.employee);
-    const {loading} = useData();
     function renderDeals(){
         return data.map((item, i)=>{
             return (
                 <DealsItem 
+                    key={item.id}
                     deal={item} 
                     index = {i}
                     renderProps = {renderProps ? () => renderProps({dealID: item.id, deal: item, employee: user.responseName, data}) : ()=>{
@@ -31,12 +31,13 @@ const TasksList = ({data, renderProps}) => {
     const isLoading = loading ? 
     <Spinner style = {{
                         display: "block", 
-                        width: "100px", 
-                        height: "100px", 
-                        margin: "50px auto"
+                        width: "70px", 
+                        height: "70px", 
+                        margin: "50px auto",
+                        borderWidth: "7px"
                     }} 
             animation="border" 
-            variant="danger"/> : null;
+            variant="primary"/> : null;
 
     const isContent = (data.length && !loading) ? renderDeals() : null;
 

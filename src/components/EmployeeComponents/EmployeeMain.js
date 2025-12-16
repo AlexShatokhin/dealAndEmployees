@@ -14,18 +14,24 @@ const EmployeeMain = () => {
 
     const {empData} = useSelector(state => state.app)
     const {deals, user, taskAdded} = useSelector(state => state.employee);
-    const {getDeals, getEmployee} = useData();
+    const {getDeals, getEmployee, loading} = useData();
     const dispatch = useDispatch();
 
+    useEffect(() => {
+        setInterval(refreshData, 60000)
+    }, [])
+    
     useEffect(()=>{
+        refreshData()
+    }, [taskAdded])
+
+    function refreshData(){
         getDeals()
         .then((res) => dispatch(changeDealsList(res)))
 
         getEmployee(empData.id)
         .then(res => dispatch(changeUserData(res)))
-
-    }, [taskAdded])
-
+    }
     
     function getFreeDeals(){
         const employeeDeals = user.response.map(deal => deal.taskID);
@@ -38,6 +44,8 @@ const EmployeeMain = () => {
                 <div className="employee-tasks_title">Мои задания</div>
                 <hr />
                 <TasksList 
+                    loading={loading}
+                    key="1"
                     data = {user.response} 
                     renderProps={(props)=><CompleteTask {...props} />}/>
 
@@ -46,7 +54,9 @@ const EmployeeMain = () => {
             <div className="employee_main-all-tasks">
                 <div className="employee-tasks_title">Список заданий</div>
                 <hr />
-                <TasksList 
+                <TasksList
+                    loading={loading}
+                    key="2" 
                     data = {getFreeDeals()} 
                     renderProps={(props)=><ChooseTask {...props} />}/>
             </div>
