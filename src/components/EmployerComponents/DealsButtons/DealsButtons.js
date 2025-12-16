@@ -8,7 +8,7 @@ import useModal from "../../../hooks/useModal";
 
 import "./DealsButtons.scss"
 
-const DealsButtons = ({dealID, showChooseBlock, chosenEmps}) => {
+const DealsButtons = ({dealID, showChooseBlock, chosenEmps, isBlockClose}) => {
 
     const {deals} = useSelector(state => state.employer);
     const dispatch = useDispatch();
@@ -20,8 +20,9 @@ const DealsButtons = ({dealID, showChooseBlock, chosenEmps}) => {
     }
 
     function changeCurrDeal(){
-        editDeal({action:"RECHOOSE_EMP", employeeID: chosenEmps.map(item => item.id), status: "work"}, dealID)
-        .then(refreshData)
+        if(isBlockClose)
+            editDeal({action:"RECHOOSE_EMP", employeeID: chosenEmps.map(item => item.id), status: "work"}, dealID)
+            .then(refreshData)
     }
 
     function onDeleteDeal(){

@@ -1,7 +1,7 @@
 import useHttp from "../hooks/HttpHook"
 
 const HOST = "https://admin-panel-25m8.onrender.com"
-const PORT = 3030
+const PORT = 443
 
 const useData = () => {
 	const { httpRequest, loading, error } = useHttp()
@@ -12,7 +12,7 @@ const useData = () => {
 	}
 
 	const getEmployees = async () => {
-		const employees = await httpRequest(`http://${HOST}:${PORT}/employees`)
+		const employees = await httpRequest(`${HOST}:${PORT}/employees`)
 		return employees
 	}
 

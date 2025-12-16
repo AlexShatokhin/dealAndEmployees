@@ -12,15 +12,13 @@ const TasksList = ({data, renderProps}) => {
 
     const {user} = useSelector(state => state.employee);
     const {loading} = useData();
-
     function renderDeals(){
         return data.map((item, i)=>{
-            
             return (
                 <DealsItem 
-                deal={item} 
-                index = {i}
-                renderProps = {renderProps ? () => renderProps({dealID: item.id, deal: item, employee: user.responseName, data}) : ()=>{
+                    deal={item} 
+                    index = {i}
+                    renderProps = {renderProps ? () => renderProps({dealID: item.id, deal: item, employee: user.responseName, data}) : ()=>{
                     return (
                         <DealsButtons dealID={item.id}/>
                     )

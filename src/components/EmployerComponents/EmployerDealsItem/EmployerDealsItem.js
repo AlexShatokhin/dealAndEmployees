@@ -9,6 +9,7 @@ const EmployerDealsItem = ({deal, index}) => {
 
     const [chooseBlock, setChooseBlock] = useState(false);
     const [chosenEmp, setChosenEmp] = useState([]);
+    const [isBlockClosingNow, setIsBlockClosingNow] = useState(false);
     const {deals} = useSelector(state => state.employer);
     const {getDeal} = useData();
 
@@ -18,6 +19,7 @@ const EmployerDealsItem = ({deal, index}) => {
     }, [])
 
     function showChooseBlock(){
+        setIsBlockClosingNow(chooseBlock !== true)
         setChooseBlock(!chooseBlock);
     }
 
@@ -39,10 +41,11 @@ const EmployerDealsItem = ({deal, index}) => {
             <DealsButtons
                 dealID={deal.id}
                 chosenEmps = {chosenEmp}
-                showChooseBlock={showChooseBlock}/>
+                showChooseBlock={showChooseBlock}
+                isBlockClose={isBlockClosingNow}/>
 
             {chooseBlock ? 
-                <ChooseEmployee                 
+                <ChooseEmployee        
                     changeChosenEmp = {changeChosenEmp}
                     chosenEmps = {chosenEmp}/>
              : null}

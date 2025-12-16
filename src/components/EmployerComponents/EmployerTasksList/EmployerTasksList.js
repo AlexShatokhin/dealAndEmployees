@@ -7,24 +7,24 @@ import useData from "../../../services/getData"
 
 import "../../TasksList/TasksList.scss"
 
-const EmployerTasksList = () => {
+const EmployerTasksList = ({loading}) => {
 
-    const {deals} = useSelector(state => state.employer);
-    const {loading} = useData();
-  
+    const {deals} = useSelector(state => state.employer);  
     function renderDeals(){
-        return deals.map((item, i)=> <EmployerDealsItem deal={item} index = {i} />)
+        return deals.map((item, i)=> <EmployerDealsItem key={item.id} deal={item} index = {i} />)
     }
 
     const isLoading = loading ? 
     <Spinner style = {{
                         display: "block", 
-                        width: "100px", 
-                        height: "100px", 
-                        margin: "50px auto"
+                        width: "120px", 
+                        height: "120px", 
+                        margin: "50px auto",
+                        borderWidth: "10px"
                     }} 
+            size="xxl"
             animation="border" 
-            variant="danger"/> : null;
+            variant="primary"/> : null;
 
     const isContent = (deals.length && !loading) ? renderDeals() : null;
 

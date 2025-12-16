@@ -16,7 +16,7 @@ const EmployerMain = () => {
 
     const {taskAdded, employeeAdded, showComponents} = useSelector(state => state.employer);
     const dispatch = useDispatch();
-    const {getDeals, getEmployees} = useData();
+    const {getDeals, getEmployees, loading} = useData();
 
     useEffect(()=>{
         getEmployees()
@@ -36,7 +36,7 @@ const EmployerMain = () => {
             {showComponents === "deal" ? 
             <>
                 <AddTask />
-                <EmployerTasksList />
+                <EmployerTasksList loading={loading}/>
             </> : <EmployeesList />}
         </ErrorBoundary>
 

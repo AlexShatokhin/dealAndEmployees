@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux";
 
 import useModal from "../../../hooks/useModal";
@@ -9,6 +9,7 @@ import EmployeesTasks from "../EmployeesTasks/EmployeesTasks";
 import EmployeeItem from "../EmployeeItem/EmployeeItem";
 
 import "./EmployeesList.scss"
+import ErrorBoundary from "../../ErrorBoundary/ErrorBoundary";
 
 const EmployeesList = () => {
 
@@ -29,6 +30,7 @@ const EmployeesList = () => {
         return employees.map((item)=>{
             return (
                 <EmployeeItem 
+                    key={item.id}
                     showDeals = {showDeals} 
                     employee={item}/>
             )
@@ -41,18 +43,23 @@ const EmployeesList = () => {
 
     return (
         <section className="employees">
-            <div className="employees_wrapper">
-                <div onClick={toggleModal} className="add_employee_button"> <span>+</span></div>
-                    <div className="employees_list">
-                        {isContent}
-                        {modal}
-                    </div>
+            <ErrorBoundary>
+                <div className="employees_wrapper">
+                    <div onClick={toggleModal} className="add_employee_button"> <span>+</span></div>
+                        <div className="employees_list">
+                            {isContent}
+                            {modal}
+                        </div>
 
-            </div>
+                </div>
+            </ErrorBoundary>
 
-            <div className="tasks_wrapper">
-                {isShowTasks}
-            </div>
+                <div className="tasks_wrapper">
+                    <ErrorBoundary>
+                        {isShowTasks}
+                    </ErrorBoundary>
+                </div>
+
         </section>
 
     )
