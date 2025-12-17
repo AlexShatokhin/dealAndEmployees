@@ -17,7 +17,8 @@ const AddTask = () => {
 
     function addTask(){
         setDeal({title: titleValue, information: taskInformation})
-        .then(() => dispatch(toggleTaskAdded()));
+        .then(() => dispatch(toggleTaskAdded()))
+        .catch(err => console.log(err))
         
         setTitleValue("");
         setTaskInformation("");

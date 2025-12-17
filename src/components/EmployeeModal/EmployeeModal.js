@@ -31,6 +31,7 @@ const EmployeeModal = ({toggleModal, Modal}) => {
             else
                 dispatch(changeError(true))
         })
+        .catch(err => console.log(err))
     }
 
     const error = isError ? <span style = {{display: "block", fontWeight: 600, color: "#800000", margin: "10px 0", textAlign: "center"}}>Сотрудник с таким логином уже существует!</span> : null

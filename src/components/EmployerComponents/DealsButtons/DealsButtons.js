@@ -23,11 +23,13 @@ const DealsButtons = ({dealID, showChooseBlock, chosenEmps, isBlockClose}) => {
         if(isBlockClose)
             editDeal({action:"RECHOOSE_EMP", employeeID: chosenEmps.map(item => item.id), status: "work"}, dealID)
             .then(refreshData)
+            .catch(err => console.log(err))
     }
 
     function onDeleteDeal(){
         deleteDeal(dealID)
-        .then(refreshData);
+        .then(refreshData)
+        .catch(err => console.log(err));
     }
 
     const showModal = isShowModal ? 

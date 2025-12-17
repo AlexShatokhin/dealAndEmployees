@@ -9,6 +9,7 @@ import useData from "../../services/getData"
 
 import ChooseTask from "./ChooseTask/ChooseTask"
 import CompleteTask from "./CompleteTask/CompleteTask"
+import ErrorBoundary from "../ErrorBoundary/ErrorBoundary"
 
 const EmployeeMain = () => {
 
@@ -32,9 +33,11 @@ const EmployeeMain = () => {
     function refreshData(){
         getDeals()
         .then((res) => dispatch(changeDealsList(res)))
+        .catch(err => console.log(err))
 
         getEmployee(empData.id)
         .then(res => dispatch(changeUserData(res)))
+        .catch(err => console.log(err))
     }
     
     function getFreeDeals(){
@@ -47,22 +50,25 @@ const EmployeeMain = () => {
             <div className="employee_main-my-tasks">
                 <div className="employee-tasks_title">Мои задания</div>
                 <hr />
-                <TasksList 
-                    loading={loading}
-                    key="1"
-                    data = {user.response} 
-                    renderProps={(props)=><CompleteTask {...props} />}/>
-
+                <ErrorBoundary>
+                    <TasksList 
+                        loading={loading}
+                        key="1"
+                        data = {user.response} 
+                        renderProps={(props)=><CompleteTask {...props} />}/>
+                </ErrorBoundary>
             </div>
 
             <div className="employee_main-all-tasks">
                 <div className="employee-tasks_title">Список заданий</div>
                 <hr />
-                <TasksList
-                    loading={loading}
-                    key="2" 
-                    data = {getFreeDeals()} 
-                    renderProps={(props)=><ChooseTask {...props} />}/>
+                <ErrorBoundary>
+                    <TasksList
+                        loading={loading}
+                        key="2" 
+                        data = {getFreeDeals()} 
+                        renderProps={(props)=><ChooseTask {...props} />}/>
+                </ErrorBoundary>
             </div>
         </div>
         : null;

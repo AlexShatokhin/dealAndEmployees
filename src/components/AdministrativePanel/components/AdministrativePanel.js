@@ -39,6 +39,9 @@ const AdministrativePanel = () => {
                 dispatch(changeErrorMessage("Вы были отключены!"))
             }
         })
+        .catch((err) => {
+            console.log(err)
+        })
     }
 
     const checkAuth = (list, type) => {

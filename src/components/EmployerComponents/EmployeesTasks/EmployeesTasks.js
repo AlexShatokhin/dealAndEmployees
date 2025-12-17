@@ -24,6 +24,7 @@ const EmployeesTasks = ({employeeData, showDeals}) => {
             };
             showDeals(empData);
         })
+        .catch(err => console.log(err))
     }, [taskAdded]);
 
     function refreshData(){
@@ -35,6 +36,7 @@ const EmployeesTasks = ({employeeData, showDeals}) => {
         const status = employeeData.personalData.isWork === "true" ? "false" : "true";
         editEmployee({status}, employeeData.personalData.id)
         .then(() => refreshData())
+        .catch(err => console.log(err))
     }
         
     function renderDeals(){

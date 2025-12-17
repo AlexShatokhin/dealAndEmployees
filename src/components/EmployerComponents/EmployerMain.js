@@ -21,11 +21,13 @@ const EmployerMain = () => {
     useEffect(()=>{
         getEmployees()
         .then((res) => dispatch(changeEmployees(res)))
+        .catch(err => console.log(err))
     }, [employeeAdded])
 
     useEffect(()=>{
         getDeals()
         .then((res) => dispatch(changeDeals(res)))
+        .catch(err => console.log(err))
     }, [taskAdded])
 
     return (

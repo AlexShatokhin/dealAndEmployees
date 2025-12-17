@@ -11,6 +11,7 @@ const DealItem = ({deal, ind, refreshData, employeeData}) => {
     function changeDeal(deal){
         editDeal({employeeID: employeeData.personalData.id, status: deal.status, action: "DEL_EMP"}, deal.taskID)
         .then(() => refreshData())
+        .catch(err => console.log(err))
     }
 
     function changeInfoMode(){

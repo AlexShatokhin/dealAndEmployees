@@ -33,7 +33,8 @@ const EmployeeItem = ({employee, showDeals}) => {
                 countComplete: res.responseCountComplete[0].countComplete
             };
             setEmployeeData(empData);
-        });
+        })
+        .catch(err => console.log(err));
     }
 
     return (

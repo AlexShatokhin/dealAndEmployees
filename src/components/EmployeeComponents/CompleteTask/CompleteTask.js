@@ -17,6 +17,7 @@ const CompleteTask = ({employee, deal}) => {
     function changeTaskEmployee(){
         editDeal({status: "complete", employeeID: employee[0].id}, deal.taskID)
         .then(() => dispatch(toggleTaskAdded()))
+        .catch(err => console.log(err))
         
     }
 

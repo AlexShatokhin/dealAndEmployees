@@ -19,6 +19,7 @@ const ChooseTask = ({dealID, employee, deal}) => {
         setDisabled(true)
         editDeal({status: "work", employeeID: employee[0].id, action: "CHOOSE_DEAL"}, dealID)
         .then(() => dispatch(toggleTaskAdded()))
+        .catch(err => console.log(err))
         
     }
 

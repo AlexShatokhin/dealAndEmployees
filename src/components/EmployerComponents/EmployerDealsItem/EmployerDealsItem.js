@@ -15,7 +15,8 @@ const EmployerDealsItem = ({deal, index}) => {
 
     useEffect(()=>{
         getDeal(deals[index].id)
-        .then(res => setChosenEmp(res.map(item => ({id:item.id, login: item.login}))));
+        .then(res => setChosenEmp(res.map(item => ({id:item.id, login: item.login}))))
+        .catch(err => console.log(err));
     }, [])
 
     function showChooseBlock(){
