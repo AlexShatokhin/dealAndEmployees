@@ -2,9 +2,6 @@ import { Spinner } from "react-bootstrap";
 import { useSelector } from "react-redux";
 
 import EmployerDealsItem from "../EmployerDealsItem/EmployerDealsItem";
-
-import useData from "../../../services/getData"
-
 import "../../TasksList/TasksList.scss"
 
 const EmployerTasksList = ({loading}) => {
@@ -16,12 +13,12 @@ const EmployerTasksList = ({loading}) => {
 
     const isLoading = loading ? 
     <Spinner style = {{
-                        display: "block", 
-                        width: "120px", 
-                        height: "120px", 
-                        margin: "50px auto",
-                        borderWidth: "10px"
-                    }} 
+                    display: "block", 
+                    width: "120px", 
+                    height: "120px", 
+                    margin: "50px auto",
+                    borderWidth: "10px"
+                }} 
             size="xxl"
             animation="border" 
             variant="primary"/> : null;

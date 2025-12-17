@@ -15,7 +15,11 @@ const EmployeeItem = ({employee, showDeals}) => {
 
     useEffect(()=>{
         getEmployeeData();
-        setInterval(getEmployeeData, 60000)
+        const refreshInterval = setInterval(getEmployeeData, 60000);
+
+        return () => {
+            clearInterval(refreshInterval)
+        }
     }, [employeeAdded])
 
 

@@ -18,7 +18,11 @@ const EmployeeMain = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        setInterval(refreshData, 60000)
+        const refreshInterval = setInterval(refreshData, 60000);
+
+        return () => {
+            clearInterval(refreshInterval)
+        }
     }, [])
     
     useEffect(()=>{
