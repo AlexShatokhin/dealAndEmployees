@@ -39,7 +39,6 @@ const EmployeeItem = ({employee, showDeals}) => {
         <div style={{opacity: employee.isWork === "false" ? "0.5" : "1", transition: ".2s all"}} onClick={()=>showDeals(employeeData)} className="employees_list-item">
             <div className="employees_list-item-name">{employee.name}</div>
             <div style={{color:"#FFFFFF", display: "flex", justifyContent: "space-between", columnGap: 20, alignItems: "center"}} className="count_of_tasks">
-                <i style = {{color: "#00FF15"}} className ="fa-solid fa-check"></i> 
                 <div style={{display: "flex", columnGap: 5}}>
                     <span style = {{color: "#00FF15", marginLeft: 10}}>{loading ? <Skeleton width={15} style={{color: "#000000"}}/> : employeeData.countComplete}</span> 
                     <span>/</span> 
