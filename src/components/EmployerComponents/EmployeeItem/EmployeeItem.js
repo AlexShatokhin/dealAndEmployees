@@ -1,17 +1,15 @@
 import { useEffect, useState } from "react";
-
 import { useSelector } from "react-redux";
-
-import useData from "../../../services/getData"
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import "./skeleton.scss"
+import useEmployeeApi from "../../../hooks/employee-api.hook";
 
 const EmployeeItem = ({employee, showDeals}) => {
 
     const [employeeData, setEmployeeData] = useState({});
     const {employeeAdded} = useSelector(state => state.employer);
-    const {getEmployee, loading} = useData();
+    const {getEmployee, loading} = useEmployeeApi();
 
     useEffect(()=>{
         getEmployeeData();

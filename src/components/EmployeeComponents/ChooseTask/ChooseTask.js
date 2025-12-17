@@ -3,17 +3,17 @@ import { Button } from "react-bootstrap"
 import { useDispatch } from "react-redux";
 
 import { toggleTaskAdded } from "../EmployeeSlice";
-import useData from "../../../services/getData";
 import useModal from "../../../hooks/useModal";
 
 import TaskInformation from "../../TaskInformation/TaskInformation";
+import useDealApi from "../../../hooks/deal-api.hook";
 
 const ChooseTask = ({dealID, employee, deal}) => {
 
     const dispatch = useDispatch();
     const {isShowModal, toggleModal, Modal} = useModal();
     const [disabled, setDisabled] = useState(false);
-    const { editDeal } = useData();
+    const { editDeal } = useDealApi()
 
     function changeTaskEmployee(){
         setDisabled(true)

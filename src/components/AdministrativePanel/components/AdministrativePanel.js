@@ -6,17 +6,15 @@ import { changeAuthType } from "../../App/appSlice";
 
 import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
-
-import useData from "../../../services/getData";
-
 import Clouds from "./Clouds";
 import "../styles/AdministrativePanel.scss"
+import useEmployeeApi from "../../../hooks/employee-api.hook";
 
 const AdministrativePanel = () => {
 
     const {login, password, errorMessage, isAuthored} = useSelector(state => state.administrativePanel);
     const dispatch = useDispatch();
-    const {loading, setEmployees} = useData();
+    const {loading, setEmployees} = useEmployeeApi();
     const navigate = useNavigate();
 
     const changeStateValue = (e) => {

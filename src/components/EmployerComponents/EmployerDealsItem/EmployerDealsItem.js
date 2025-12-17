@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import ChooseEmployee from "../../EmployerComponents/ChooseEmployee/ChooseEmployee";
 
 import DealsButtons from "../DealsButtons/DealsButtons";
-import useData from "../../../services/getData";
+import useDealApi from "../../../hooks/deal-api.hook";
 
 const EmployerDealsItem = ({deal, index}) => {
 
@@ -11,7 +11,7 @@ const EmployerDealsItem = ({deal, index}) => {
     const [chosenEmp, setChosenEmp] = useState([]);
     const [isBlockClosingNow, setIsBlockClosingNow] = useState(false);
     const {deals} = useSelector(state => state.employer);
-    const {getDeal} = useData();
+    const {getDeal} = useDealApi();
 
     useEffect(()=>{
         getDeal(deals[index].id)

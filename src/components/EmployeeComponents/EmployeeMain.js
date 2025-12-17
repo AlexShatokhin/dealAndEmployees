@@ -5,17 +5,19 @@ import { changeDealsList, changeUserData } from "./EmployeeSlice"
 
 import NavigationMenu from "../NavigationMenu/NavigationMenu"
 import TasksList from "../TasksList/TasksList"
-import useData from "../../services/getData"
 
 import ChooseTask from "./ChooseTask/ChooseTask"
 import CompleteTask from "./CompleteTask/CompleteTask"
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary"
+import useEmployeeApi from "../../hooks/employee-api.hook"
+import useDealApi from "../../hooks/deal-api.hook"
 
 const EmployeeMain = () => {
 
     const {empData} = useSelector(state => state.app)
     const {deals, user, taskAdded} = useSelector(state => state.employee);
-    const {getDeals, getEmployee, loading} = useData();
+    const {getEmployee, loading: employeeLoading} = useEmployeeApi();
+    const {getDeals} = useDealApi
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -52,7 +54,7 @@ const EmployeeMain = () => {
                 <hr />
                 <ErrorBoundary>
                     <TasksList 
-                        loading={loading}
+                        loading={employeeLoading}
                         key="1"
                         data = {user.response} 
                         renderProps={(props)=><CompleteTask {...props} />}/>
@@ -64,7 +66,7 @@ const EmployeeMain = () => {
                 <hr />
                 <ErrorBoundary>
                     <TasksList
-                        loading={loading}
+                        loading={employeeLoading}
                         key="2" 
                         data = {getFreeDeals()} 
                         renderProps={(props)=><ChooseTask {...props} />}/>

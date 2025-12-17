@@ -9,14 +9,15 @@ import EmployerTasksList from "./EmployerTasksList/EmployerTasksList"
 import EmployeesList from "./EmployeesList/EmployeesList"
 import AddTask from "./AddTask/AddTask"
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary"
-
-import useData from "../../services/getData"
+import useEmployeeApi from "../../hooks/employee-api.hook"
+import useDealApi from "../../hooks/deal-api.hook"
 
 const EmployerMain = () => {
 
     const {taskAdded, employeeAdded, showComponents} = useSelector(state => state.employer);
     const dispatch = useDispatch();
-    const {getDeals, getEmployees, loading} = useData();
+    const {getEmployees, loading} = useEmployeeApi();
+    const {getDeals} = useDealApi()
 
     useEffect(()=>{
         getEmployees()

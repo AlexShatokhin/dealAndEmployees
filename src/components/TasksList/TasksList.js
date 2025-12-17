@@ -3,9 +3,6 @@ import { Spinner } from "react-bootstrap";
 
 import DealsItem from "../DealsItem/DealsItem";
 import DealsButtons from "../EmployerComponents/DealsButtons/DealsButtons";
-
-import useData from "../../services/getData"
-
 import "./TasksList.scss"
 
 const TasksList = ({data, renderProps, loading}) => {

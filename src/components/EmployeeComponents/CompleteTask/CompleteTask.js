@@ -3,15 +3,14 @@ import { useDispatch } from "react-redux"
 
 import { toggleTaskAdded } from "../EmployeeSlice";
 import useModal from "../../../hooks/useModal"
-import useData from "../../../services/getData"
-
 import TaskInformation from "../../TaskInformation/TaskInformation"
+import useDealApi from "../../../hooks/deal-api.hook";
 
 const CompleteTask = ({employee, deal}) => {
 
     const dispatch = useDispatch();
     const {isShowModal, toggleModal, Modal} = useModal();
-    const {editDeal} = useData();
+    const {editDeal} = useDealApi()
 
 
     function changeTaskEmployee(){

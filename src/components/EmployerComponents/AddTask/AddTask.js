@@ -3,17 +3,15 @@ import { useDispatch } from 'react-redux';
 import Button from 'react-bootstrap/Button';
 
 import { toggleTaskAdded } from '../EmployerSlice';
-
-import useData from '../../../services/getData';
-
 import "./AddTask.scss"
+import useDealApi from '../../../hooks/deal-api.hook';
 
 const AddTask = () => {
 
     const [titleValue, setTitleValue] = useState("");
     const [taskInformation, setTaskInformation] = useState("");
     const dispatch = useDispatch();
-    const {setDeal} = useData();
+    const {setDeal} = useDealApi();
 
     function addTask(){
         setDeal({title: titleValue, information: taskInformation})

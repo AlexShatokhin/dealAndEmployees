@@ -2,18 +2,17 @@ import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { toggleTaskAdded } from "../EmployerSlice";
 import TaskInformation from "../../TaskInformation/TaskInformation";
-
-import useData from "../../../services/getData";
 import useModal from "../../../hooks/useModal";
 
 import "./DealsButtons.scss"
+import useDealApi from "../../../hooks/deal-api.hook";
 
 const DealsButtons = ({dealID, showChooseBlock, chosenEmps, isBlockClose}) => {
 
     const {deals} = useSelector(state => state.employer);
     const dispatch = useDispatch();
     const {Modal, toggleModal, isShowModal} = useModal();
-    const {editDeal, deleteDeal} = useData();
+    const {editDeal, deleteDeal} = useDealApi();
 
     function refreshData(){
         dispatch(toggleTaskAdded());

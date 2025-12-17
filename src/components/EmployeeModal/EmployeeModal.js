@@ -3,16 +3,14 @@ import { Button } from "react-bootstrap";
 
 import { changeEmployeeData, changeError } from "./EmployeeModalSlice";
 import { toggleEmployeeAdded } from "../EmployerComponents/EmployerSlice";
-
-import useData from "../../services/getData";
-
 import "./EmployeeModal.scss"
+import useEmployeeApi from "../../hooks/employee-api.hook";
 
 const EmployeeModal = ({toggleModal, Modal}) => {
 
     const {name, login, password, isError} = useSelector(state => state.employeeModal);
     const dispatch = useDispatch();
-    const { setEmployees } = useData();
+    const { setEmployees } = useEmployeeApi();
 
     const changeStateValue = (e) => {
         const elem = e.target;

@@ -2,16 +2,14 @@ import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import {toggleTaskAdded, toggleEmployeeAdded} from "../EmployerSlice";
-
-import useData from "../../../services/getData";
-
 import DealItem from "../DealItem/DealItem";
+import useEmployeeApi from "../../../hooks/employee-api.hook";
 
 const EmployeesTasks = ({employeeData, showDeals}) => {
 
     const {taskAdded} = useSelector(state => state.employer)
     const dispatch = useDispatch();
-    const {getEmployee, editEmployee} = useData();
+    const {getEmployee, editEmployee} = useEmployeeApi();
 
     useEffect(()=>{
         getEmployee(employeeData.personalData.id)

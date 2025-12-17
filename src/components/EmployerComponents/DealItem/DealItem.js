@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import useData from "../../../services/getData";
+import useDealApi from "../../../hooks/deal-api.hook";
 
 const DealItem = ({deal, ind, refreshData, employeeData}) => {
     
     const [isShowInfo, setIsShowInfo] = useState(false);
-    const {editDeal} = useData();
+    const {editDeal} = useDealApi();
 
     useEffect(()=>setIsShowInfo(false), [deal])
 
