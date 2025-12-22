@@ -17,7 +17,7 @@ const EmployeeMain = () => {
     const {empData} = useSelector(state => state.app)
     const {deals, user, taskAdded} = useSelector(state => state.employee);
     const {getEmployee, loading: employeeLoading} = useEmployeeApi();
-    const {getDeals} = useDealApi
+    const {getDeals} = useDealApi();
     const dispatch = useDispatch();
 
     useEffect(() => {
